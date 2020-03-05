@@ -1,17 +1,30 @@
 import React from 'react'
+import CollectionPreview from '../Components/CollectionPreview'
 
 
-const Home = () => {
+const Home = () => { 
+    const previewStyle = {
+        marginTop: "5vw"
+    }
     return(
-        <div className="main-container">
-            <div className="container" id="main-actions-container">
+        <>
+             <div className="wrapper">
                 <button id="add-card-btn" className="btn" >Add new card</button>
-                <hr/>
-                <p className="text-center">It seems you have something to repeat. <strong>15 cards in 4 collections.</strong> <br/> Let’s start learning </p>
-                <button  className="btn" id="review-all-btn">Review all</button>
-                <p>You also could choose a collection. </p>
+                <div className="home-greetings">
+                    <div id="greeting-message" >Hello, Anastasia!</div>
+                    <div id="invitation-message" >It seems you have something to repeat. <strong>15 cards in 4 collections.</strong> <br/> Let’s start learning </div>
+                    <button  className="btn" id="quick-start-btn">Let’s start</button>
+                </div>
             </div>
-        </div>
+            <div className="previews-container" style={previewStyle} >
+                <CollectionPreview/>
+                <CollectionPreview/>
+                <CollectionPreview/>
+                <CollectionPreview/>
+                <CollectionPreview/>
+                <button className="btn" id="to-manage-btn">Manage <wbr/> collections</button>
+            </div>
+        </>
     );
 }
 
