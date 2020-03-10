@@ -1,13 +1,22 @@
 import React from 'react'
+
+
 const CollectionPreview = () => {
     return(
         <div className="preview-container">
-            <div className="preview collection-preview-main">
-                <div className="preview-title">Collection Name</div>
-                <div className="preview-details">20 cards total</div>
-                <div className="preview-details">12 cards left</div>
+            <div className="preview preview-main">
+                <header className="preview-header">
+                    <div className="preview-title">Collection name</div>
+                    <div className="actions">
+                        <i>x</i>
+                    </div>
+                </header>
+                <div className="preview-details">
+                    <div >20 cards total</div>
+                    <div >12 cards left</div>
+                </div>
             </div>
-            <div className="preview collection-preview-overlay">Let's start!</div>
+            <div className="preview border"></div>
         </div>
     )
 }

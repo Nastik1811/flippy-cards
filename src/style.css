@@ -3,13 +3,6 @@
    3. define root font-size according to the screen size 
    4. other sizes difine via rem*/
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  line-height: 1.3em;
-}
-
 @font-face{
   font-family: "Roboto";
   font-style: regular;
@@ -20,8 +13,8 @@
 } 
 
 @font-face{
-  font-family: "Roboto-Light";
-  font-style: regular;
+  font-family: "Roboto";
+  font-style: light;
   font-weight: 300;
   src: 
     local("Roboto-Light"),
@@ -29,8 +22,8 @@
 } 
 
 @font-face{
-  font-family: "Roboto-Medium";
-  font-style: regular;
+  font-family: "Roboto";
+  font-style: medium;
   font-weight: 500;
   src: 
     local("Roboto-Medium"),
@@ -45,26 +38,6 @@
     url("./assets/fonts/Comfortaa-Light.ttf") format(ttf);
 } 
 
-
-/* 
-
-.main-container{
-  display: grid;
-  margin: 0px;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: auto auto auto;
-}
-
-#main-actions-container{
-  grid-column: col-start 2 / span 5;
-  grid-row: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
- */
-
 :root{
   --color-primary: rgba(220, 240, 250, 1);
   --color-primary-light:rgba(220, 240, 250, 0.5);
@@ -72,10 +45,13 @@
   --color-overlay: rgba(130, 180, 205, 1);
   --color-secondary: rgba(29, 183, 237, 1);
   --color-accent: rgba(255, 215, 112, 1);
-  --light-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  --color-dark-text: rgba(0, 0, 0, 1);
-  --color-regular-text: rgba(53, 46, 65, 1);
-  --color-light-text: rgba(53, 46, 65, 1);
+  --light-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  --hard-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+  --overlay-shadow: 0px -5px 3px rgba(0, 0, 0, 0.3);
+
+  --color-contrast-text:  #000 ;
+  --color-light-text: #fff;
+  --color-regular-text: #444;
 
   --font-regular: "Roboto";
   --font-light:"Roboto-Light";
@@ -86,30 +62,50 @@
   --text-medium: 1.5rem;
   --text-small: 1rem
 }
+
+@media(prefers-color-scheme: dark){
+  :root{
+    --color-primary: #376F89;
+    --color-primary-light:rgba(29, 183, 237, 0.5);
+    --color-primary-dark: rgba(150, 180, 200, 1);
+    --color-overlay: rgba(130, 180, 205, 1);
+    --color-secondary: rgba(29, 183, 237, 1);
+    --color-accent: rgba(255, 215, 112, 1);
+    --light-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+    --color-contrast-text:  #fff ;
+    --color-regular-text: #fff;
+  }
+  body{
+    background-color: #222;
+  }
+  
+}
 @media only screen and (max-width: 600px){
   :root{
     font-size: 12px;
   }
-
 }
 
 /*global*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.3em;
+  font-family: var(--font-regular);
 
-h1, h2, h3{
-  margin: 0px;
 } 
 
-body{
-  margin: 0;
+a{
+  text-decoration: none
+} 
+
+section{
   width: 100%;
-  font-family: var(--font-regular);
+  margin-bottom: 4rem;  
+  color: var(--color-regular-text);
 }
-
-#root{
-  height: 100vh;
-  width: 100vw;
-}
-
 
 .app-container{
   height: 100vh;
@@ -134,7 +130,8 @@ body{
 .btn{
   background-color: var(--color-accent);
   box-shadow: var(--light-shadow);
-  color: var(--color-dark-text);
+  font-family: var(--font-pretty);
+  color: #000;
   padding: 0.5em 1em;
   border-radius: 0.5em;
   border: none;
@@ -142,9 +139,6 @@ body{
   margin: 1vw;
 }
 
-/*end global*/
-
-/*header*/
 .main-header{
   height: 60px;
   padding: 5px 6vw;
@@ -155,47 +149,60 @@ body{
   justify-content: space-between;
 }
 
+.main-footer{
+  position: absolute;
+  bottom: 0;
+
+}
+
 .main-navbar li{
   display: inline;
   margin-left: 2vw;
-  text-decoration: none;
 }
 
 .main-navbar a{
-  text-decoration: none;
-  color: var(--color-dark-text);
+  color: var(--color-contrast-text);
   font-size: 1.15em;
 }
 
 .main-navbar a:hover{
   color: var(--color-secondary);
+  transition: all 300ms ease;
 }
 
-.logo-container{
-  display: block;
-  font-family: var(--font-pretty);
-  text-decoration: none;
-}
 .logo-container a{
+  color: var(--color-contrast-text);
+  font-family: var(--font-pretty);
+  display: block;
   text-decoration: none;
   font-size: 2em;
-  color: var(--color-dark-text);
-}
-/* end header */
-
-.main-footer{
-  height: 200px;
-  background-color: rgba(42, 124, 148, 0.04);
 }
 
-.previews-container{
+.flex-container{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-end;
+  align-items: center;
+}
+
+.section-header{
+  font-size: var(--text-medium);
+  padding: 1rem;
+}
+.box{
+  width: 80%;
   margin-top: 2vw;
+}
+
+.tab:hover{
+  color: var(--color-secondary);
+  transition: all 300ms ease;
+}
+
+.tab.active{
+  color: var(--color-secondary);
 }
 /* 
 .previews-container::before{
@@ -204,87 +211,72 @@ body{
  */
 
 /* Collection preview */
+
 .preview{
   width: 220px;
   height: 140px;
-  padding: 1em;
-
-  margin: 1vw;
-
+  padding: 1em 0.5em;
   border-radius: 8px;
   background-color: var(--color-primary);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.preview-title{
-  font-size: var(--text-medium);
-  margin-bottom: 0.5em;
-}
-
-.preview-details{
-  font-size: var(--text-small);
-}
-
-.collection-preview-main{
-  position: absolute;
   color: var(--color-regular-text);
 }
 
-.collection-preview-overlay{
+
+
+.link-preview-title{
+  font-size: var(--text-medium);
+}
+
+.link-preview-details{
+  font-size: var(--text-small);
+}
+
+.border{
   position: relative;
   background: none;
   left: 0.45rem;
   bottom: 0.45rem;
   border: 1px solid var(--color-primary-dark);
-  color: rgba(0,0,0,0);
-  font-size: var(--text-large);
 }
 
-.preview-container:hover .collection-preview-overlay{
-  position: relative;
-  background-image: rgba(250, 250, 250, 0.8);
-  backdrop-filter: blur(7px);
-  /* left: inherit;
-  bottom: inherit; */
-  border: 1px solid var(--color-primary-dark);
-  color: black;
-}
-
-.preview-container:hover .collection-preview-main{
-  color: var(--color-primary);
-
-}
-
-.card-preview-back{
-  display: block;
+.preview-main{
   position: absolute;
-  background: var(--color-primary-dark);
-  color: var(--color-regular-text);
-  text-align: center;
-  padding-top: 40px;
-}
-.card-preview-front{
-  position: relative;
-  color: var(--color-regular-text);
 }
 
-.preview-container:hover .card-preview-front{
+.preview-overlay{
+  color: rgba(0,0,0,0);
+  font-family: var(--font-pretty);
+  font-size: var(--text-medium);
+}
+
+.preview-container{
+  margin: 1vw;
+}
+
+.preview-container:hover .preview-overlay{
+  position: relative;
   background-image: rgba(250, 250, 250, 0.8);
   backdrop-filter: blur(7px);
-  /* left: inherit;
-  bottom: inherit; */
-  top: 50%;
-  box-shadow: var(--box-shadow);
+  color: var(--color-contrast-text);
+  transition: all 500ms ease;
 }
 
+.preview-container:hover .hide-text{
+ color: var(--color-primary); 
 
+}
+
+.preview-main{
+
+}
 
 /* Collection preview end*/
 
-.wrapper{
+/* .quick-actions-container{
   width: 100%;
   display: flex;
   flex-direction: row-reverse;
@@ -292,7 +284,7 @@ body{
   flex-wrap: wrap;
   align-items: flex-start;
 }
-
+ */
 
 .home-greetings {
   /*   display: flex;
@@ -301,7 +293,7 @@ body{
   
     border: 1px solid rgba(150, 180, 200, 1);
     padding: 1.5em;
-    border-radius: 20px;
+    border-radius: 0.5em;
     font-size: var(--text-medium);
     width: 50vw;
     text-align: center;
@@ -322,6 +314,8 @@ body{
 #add-card-btn{
   font-size: var(--text-large);
   font-family: var(--font-pretty);
+  position: absolute;
+  right: 10vw;
 }
 
 #quick-start-btn{
@@ -334,13 +328,15 @@ body{
 #to-manage-btn{
   font-size: var(--text-medium);
   font-family: var(--font-pretty);
-  width: 200px;
+  width: 13rem;
 }
 
 /* Card */
 .card-container{
+  min-width: 25rem;
+  min-height: 15rem;
   width: 40vw;
-  height: 40vh;
+  height: 25vw;
   padding: 20px;
   font-size: 2rem;
   margin: 10px;
@@ -351,7 +347,7 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
   transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 }
@@ -374,6 +370,28 @@ body{
   opacity: 100%;
   transform: rotateY(0deg);
 }
+.card-caption{
+  color: var(--color-light-text);
+  font-size: var(--text-small);
+  font-family: var(--font-pretty);
+  float: bottom;
+}
+.title{
+  font-size: var(--text-large);
+}
+.detail{
+  font-size: var(--text-small);
+}
+.session-info{
+  padding: 0.5rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.passed-time{
+  font-size: var(--text-medium);
+}
 /* Card end*/
 
 .tabbar li{
@@ -381,12 +399,12 @@ body{
   margin-left: 2vw;
   text-decoration: none;
   font-size: var(--text-medium);
-  font-family: var(--font);
+  font-family: var(--font-regular);
 }
 
 .tabbar a{
   text-decoration: none;
-  color: var(--color-dark-text);
+  color: var(--color-contrast-text);
   font-size: 1.15em;
 }
 
@@ -404,7 +422,44 @@ hr{
   border: 0.5px solid var(--color-primary-dark);
 }
 
+.board{
+  margin-top: 1vw;
+  width: 70vw;
+}
 
+.add-btn{
+  background-color: var(--color-primary-light);
+  color: var(--color-light-text);
+  font-size: 4rem;
+}
+
+.card-preview-back{
+  display: block;
+  position: absolute;
+  background: var(--color-primary-dark);
+  color: var(--color-regular-text);
+  text-align: center;
+  padding-top: 40px;
+}
+.card-preview-front{
+  position: relative;
+  color: var(--color-regular-text);
+
+}
+
+.preview-container:hover .card-preview-front{
+  transform: translateY(80px) ;
+  transition: all 300ms ease;
+  box-shadow: var(--overlay-shadow);
+}
+
+.preview-header{
+  width: 90%;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-contrast-text);
+}
 /* 
 #control-board{
   width: calc(250px * 4 ) ;
@@ -428,4 +483,23 @@ hr{
     padding: 1em;
     flex-shrink: 10px;
   }
+}
+
+
+.editor{
+  width: 50vw;
+  height: 30vw;
+  background-color: #fff;
+  box-shadow: 0 0 30px var(--color-primary-dark);
+  border-radius: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-card-content{
+  width: 80%;
+  height: 80%;
+  background-color: var(--color-primary-light);
+  text-align: center;
 }
