@@ -3,72 +3,93 @@ import React from 'react'
 import CardPreview from '../Components/CardPreview'
 import CollectionPreview from '../Components/CollectionPreview'
 
-export const Tabbar = () => {
+export const Tabbar = ({children, activeTabIndex}) => {
     return (
         <nav className="tabbar">
             <ul className="tab-links">
-                <li className="tab active" id="collectionsTab" >Collections</li>
-                <li className="tab" id="cardsTab" >Cards</li>
+                {children}
             </ul>
             <hr/>
         </nav>
     )
 }
 
-export const Tab = props => {
+export const Tab = ({label, onClick}) => {
+    
     return (
-    <li><button onClick={props.onClick}>{props.name}</button> </li>
+        <li className="tab" onClick={onClick}>{label}</li>
     )
 }
 
-export const Board = props => {
-
+export const Pannel = ({children}) => {
     return (
-        <>
-            <div className="flex-container previews-container active" id="collections">
-                        {props.collections}
+        
+            <div className="flex-container ">
+                {children}
             </div>
-            <div className="flex-container previews-container " id="cards">
-                        {props.cards}
-            </div>
-        </>
+    )
+}
+
+export const TabView = ({children}) => {
+    return (
+            <>
+                <Tab label="Collections" index="0"/>
+                <Tab label="Cards" index="1"/>
+
+                <div className="board">
+                    <Pannel index="0">
+                        <CreateNewButton/>
+                        {this.collections}
+                    </Pannel>
+
+                    <Pannel index="1">
+                        <CreateNewButton/>
+                        {this.cards}
+                    </Pannel>
+                </div>
+            </>
     )
 }
 
 
+export const CreateNewButton = props => {
+    return (
+        <div className="preview-container">
+            <div className="preview-component add-btn">+
+            </div>
+        </div>
+    )
+}
 
-// should use keys here in order to update only particular items
-// 
 class Manage extends React.Component {
     constructor(props){
         super(props);
         this.collections = [<CollectionPreview/>, <CollectionPreview/>, <CollectionPreview/>, <CollectionPreview/>];
-        this.cards = [];
-
+        this.cards = [<CardPreview/>, <CardPreview/>, <CardPreview/>, <CardPreview/>, <CardPreview/>, <CardPreview/>];
         this.state = {
-            onCollections: true,
-            collections: this.collections,
-            cards: this.cards
+            activeTabIndex: 0
         }
     }
 
+    handleClick(){
+        alert("Clicked");
+    }
     render(){
         return (
             <>
-                <nav className="tabbar">
-                    <ul className="tab-links">
-                        <li className="tab active" id="collectionsTab">Collections</li>
-                        <li className="tab" id="cardsTab" >Cards</li>
-                    </ul>
-                    <hr/>
-                </nav>
-                <div className="display">
-                    <div className="flex-container" id="collections">
-                                {this.state.collections}
-                    </div>
-                    <div className="flex-container " id="cards">
-                                {this.state.cards}
-                    </div>
+                <Tabbar activeTab={this.state.activeTabIndex}>
+                    <Tab label="Collections" onClick={this.handleClick}/>
+                    <Tab label="Cards" onClick={this.handleClick}/>
+                </Tabbar>
+                <div className="board">
+                    <Pannel index="0">
+                        <CreateNewButton/>
+                        {this.collections}
+                    </Pannel>
+                    <Pannel index="1">
+                        <CreateNewButton/>
+                        {this.cards}
+                    </Pannel>
                 </div>
             </>
         )
