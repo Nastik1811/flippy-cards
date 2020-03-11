@@ -8,6 +8,7 @@ const Card= () => {
             <div className="card-front">
                 Front side
             </div>
+            <div className="card-caption">Click to flip</div>
         </div>
     )
 }

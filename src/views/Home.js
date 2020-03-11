@@ -23,7 +23,7 @@ const ReviewInvitation = () => {
         <div className="home-greetings">
             <GreetingMsg userName="Anastasia"/>
             <InvitationMsg/>
-            <button  className="btn" id="quick-start-btn">Start workout</button>
+            <button className="accent-btn" id="quick-start-btn">Start workout</button>
     </div>
     )
 }
@@ -35,7 +35,9 @@ const CollectionPicker = props => {
             <header className="section-header">You can also choose a collection:</header>
             <div className="flex-container">
                 {collections}
-                <button className="btn" id="to-manage-btn">Manage <wbr/> collections</button>
+                <div className="preview-container">
+                    <button className="accent-btn" id="to-manage-btn">Manage <wbr/> collections</button>
+                </div>
             </div>
         </section>
     )
@@ -52,8 +54,8 @@ const Statistics = () => {
 const Home = () => { 
     return(
         <>
-            <section>
-                <button id="add-card-btn" className="btn" >+ Add card</button>
+            <section className="home-main">
+                <button id="add-card-btn" className="accent-btn" >+ Add card</button>
                 <ReviewInvitation/>
             </section>
             <CollectionPicker/>

@@ -14,7 +14,7 @@
 
 @font-face{
   font-family: "Roboto";
-  font-style: light;
+  font-style: regular;
   font-weight: 300;
   src: 
     local("Roboto-Light"),
@@ -23,7 +23,7 @@
 
 @font-face{
   font-family: "Roboto";
-  font-style: medium;
+  font-style: regular;
   font-weight: 500;
   src: 
     local("Roboto-Medium"),
@@ -54,7 +54,7 @@
   --color-regular-text: #444;
 
   --font-regular: "Roboto";
-  --font-light:"Roboto-Light";
+  --font-light:"Roboto", 300;
   --font-bold:"Roboto-Medium";
   --font-pretty: "Comfortaa";
 
@@ -88,6 +88,7 @@
 }
 
 /*global*/
+
 * {
   margin: 0;
   padding: 0;
@@ -127,7 +128,7 @@ section{
   margin-top: 5vw;
 }
 
-.btn{
+.accent-btn{
   background-color: var(--color-accent);
   box-shadow: var(--light-shadow);
   font-family: var(--font-pretty);
@@ -139,6 +140,13 @@ section{
   margin: 1vw;
 }
 
+.section-header{
+  font-size: var(--text-medium);
+  padding: 1rem;
+}
+
+/* End global */
+/* Navbar */
 .main-header{
   height: 60px;
   padding: 5px 6vw;
@@ -178,6 +186,174 @@ section{
   font-size: 2em;
 }
 
+/* End navbar */
+/* home */
+.home-main{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+
+#greeting-message{
+  font-family: var(--font-regular);
+  font-size: var(--text-large);
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+#invitation-message{
+  margin-bottom: 1em;
+}
+
+#add-card-btn{
+  font-size: var(--text-large);
+  font-family: var(--font-pretty);
+  margin-bottom: 20px;
+}
+
+#quick-start-btn{
+  font-size: var(--text-medium);
+  font-family: var(--font-pretty);
+  width: 50%;
+  min-width: 10em;
+}
+
+#to-manage-btn{
+  font-size: var(--text-medium);
+  font-family: var(--font-pretty);
+  width: 13rem;
+}
+
+.home-greetings {
+  /*   display: flex;
+    flex-direction: column;
+    align-items: center; */
+  
+    border: 1px solid rgba(150, 180, 200, 1);
+    padding: 1.5em;
+    border-radius: 0.5em;
+    font-size: var(--text-medium);
+    width: 40rem;
+    min-width: 20rem;
+    text-align: center;
+  }
+
+/* End home */
+.preview-container{
+  margin: 0.5rem;
+  width: 220px;
+  height: 140px;
+}
+
+.preview-component{
+  width: 220px;
+  height: 140px;
+  padding: 1em 0.5em;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-regular-text);
+}
+
+.main-component{
+  position: absolute;
+  background-color: var(--color-primary);
+}
+
+.overlay-component{
+  color: rgba(0,0,0,0);
+  font-family: var(--font-pretty);
+  font-size: var(--text-medium);
+  position: relative;
+  background: none;
+  left: 0.45rem;
+  bottom: 0.45rem;
+  border: 1px solid var(--color-primary-dark);
+}
+
+.preview-container:hover .overlay-component{
+  position: relative;
+  background-image: rgba(250, 250, 250, 0.8);
+  backdrop-filter: blur(7px);
+  color: var(--color-contrast-text);
+  transition: all 500ms ease;
+}
+
+.preview-container:hover .main-component{
+ color: var(--color-primary); 
+}
+/* Collection preview */
+.collection-preview{
+  display: block;
+  position: absolute;
+  background-color: var(--color-primary);
+}
+
+.outline-border{
+  position: relative;
+  background: none;
+  left: 0.45rem;
+  bottom: 0.45rem;
+  border: 1px solid var(--color-primary-dark);
+}
+
+.preview-header{
+  width: 100%;
+  color: var(--color-contrast-text);
+  position: absolute;
+  top: 1em;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.preview-details{
+  position: absolute;
+  width: 100%;
+  top: 3em;
+}
+.preview-footer{
+  width: 100%;
+  position: absolute;
+  bottom: 1em;
+  font-size: 0.8rem;
+  text-align: center;
+
+}
+/* End collection preview */
+
+/* Card preview */
+
+.card-preview-back{
+  display: block;
+  position: absolute;
+  background: var(--color-primary-dark);
+  color: var(--color-regular-text);
+  text-align: center;
+  padding-top: 40px;
+}
+.card-preview-front{
+  position: relative;
+  color: var(--color-regular-text);
+  background: var(--color-primary);
+
+}
+.preview-container:hover .card-preview-front{
+  transform: translateY(80px) ;
+  transition: all 300ms ease;
+  box-shadow: var(--overlay-shadow);
+}
+.overlay{
+  overflow: hidden;
+}
+/* End card preview */
+
+
 .flex-container{
   width: 100%;
   display: flex;
@@ -187,13 +363,9 @@ section{
   align-items: center;
 }
 
-.section-header{
-  font-size: var(--text-medium);
-  padding: 1rem;
-}
-.box{
-  width: 80%;
-  margin-top: 2vw;
+.tab{
+  color: var(--color-contrast-text);
+  transition: all 300ms ease;
 }
 
 .tab:hover{
@@ -204,26 +376,7 @@ section{
 .tab.active{
   color: var(--color-secondary);
 }
-/* 
-.previews-container::before{
-  content: "You also could choose a collection.";
-}
- */
 
-/* Collection preview */
-
-.preview{
-  width: 220px;
-  height: 140px;
-  padding: 1em 0.5em;
-  border-radius: 8px;
-  background-color: var(--color-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-regular-text);
-}
 
 
 
@@ -235,40 +388,9 @@ section{
   font-size: var(--text-small);
 }
 
-.border{
-  position: relative;
-  background: none;
-  left: 0.45rem;
-  bottom: 0.45rem;
-  border: 1px solid var(--color-primary-dark);
-}
 
-.preview-main{
-  position: absolute;
-}
 
-.preview-overlay{
-  color: rgba(0,0,0,0);
-  font-family: var(--font-pretty);
-  font-size: var(--text-medium);
-}
 
-.preview-container{
-  margin: 1vw;
-}
-
-.preview-container:hover .preview-overlay{
-  position: relative;
-  background-image: rgba(250, 250, 250, 0.8);
-  backdrop-filter: blur(7px);
-  color: var(--color-contrast-text);
-  transition: all 500ms ease;
-}
-
-.preview-container:hover .hide-text{
- color: var(--color-primary); 
-
-}
 
 .preview-main{
 
@@ -286,53 +408,12 @@ section{
 }
  */
 
-.home-greetings {
-  /*   display: flex;
-    flex-direction: column;
-    align-items: center; */
-  
-    border: 1px solid rgba(150, 180, 200, 1);
-    padding: 1.5em;
-    border-radius: 0.5em;
-    font-size: var(--text-medium);
-    width: 50vw;
-    text-align: center;
-  }
 
 
-#greeting-message{
-  font-family: var(--font-regular);
-  font-size: var(--text-large);
-  margin-bottom: 1em;
-  text-align: left;
-}
-
-#invitation-message{
-  margin-bottom: 1em;
-}
-
-#add-card-btn{
-  font-size: var(--text-large);
-  font-family: var(--font-pretty);
-  position: absolute;
-  right: 10vw;
-}
-
-#quick-start-btn{
-  font-size: var(--text-medium);
-  font-family: var(--font-pretty);
-  width: 50%;
-  min-width: 10em;
-}
-
-#to-manage-btn{
-  font-size: var(--text-medium);
-  font-family: var(--font-pretty);
-  width: 13rem;
-}
 
 /* Card */
 .card-container{
+  position: relative;
   min-width: 25rem;
   min-height: 15rem;
   width: 40vw;
@@ -374,7 +455,8 @@ section{
   color: var(--color-light-text);
   font-size: var(--text-small);
   font-family: var(--font-pretty);
-  float: bottom;
+  position: absolute;
+  bottom: 20px;
 }
 .title{
   font-size: var(--text-large);
@@ -388,6 +470,7 @@ section{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  color: var(--color-contrast-text);
 }
 .passed-time{
   font-size: var(--text-medium);
@@ -433,49 +516,9 @@ hr{
   font-size: 4rem;
 }
 
-.card-preview-back{
-  display: block;
-  position: absolute;
-  background: var(--color-primary-dark);
-  color: var(--color-regular-text);
-  text-align: center;
-  padding-top: 40px;
-}
-.card-preview-front{
-  position: relative;
-  color: var(--color-regular-text);
 
-}
 
-.preview-container:hover .card-preview-front{
-  transform: translateY(80px) ;
-  transition: all 300ms ease;
-  box-shadow: var(--overlay-shadow);
-}
 
-.preview-header{
-  width: 90%;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-  color: var(--color-contrast-text);
-}
-/* 
-#control-board{
-  width: calc(250px * 4 ) ;
-}
-@media only screen and (max-width: 1000px){
-  #control-board{
-    width: calc(250px * 3) ;
-  }
-}
-
-@media only screen and (max-width: 750px){
-  #control-board{
-    width: calc(250px * 2) ;
-  }
-}
-*/
 @media only screen and (max-width: 600px){
   .preview{
     width: 170px;
@@ -484,7 +527,6 @@ hr{
     flex-shrink: 10px;
   }
 }
-
 
 .editor{
   width: 50vw;
