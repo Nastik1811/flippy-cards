@@ -1,9 +1,11 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 
 const CollectionPreview = () => {
     return(
-        <div className="preview-container">
+        <Link to={`/collection/1`}>
+
+            <div className="preview-container">
             <div className="preview-component collection-preview">
                 <header className="preview-header">
                     <div className="preview-title">Collection name</div>
@@ -14,6 +16,8 @@ const CollectionPreview = () => {
             </div>
             <div className="preview-component outline-border"></div>
         </div>
+        </Link>
+        
     )
 }
 

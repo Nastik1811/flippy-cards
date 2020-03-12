@@ -8,6 +8,7 @@ import Navbar from './Components/Navbar'
 import { Route, Link, Switch, Router } from 'react-router-dom'
 import CardEditor from './views/CardEditor'
 import { Landing } from './views/Landing'
+import CollectionEditor from './views/CollectionEditor'
 
 let isAutorized = true;
 
@@ -23,6 +24,7 @@ const App = () => {
                     <Route exact path='/session' component={Session}/>
                     <Route exact path='/session/:slug' component={Session}/>
                     <Route exact path='/editor/:slug' component={CardEditor}/>
+                    <Route exact path='/collection/:slug' component={CollectionEditor}/>
                     <Route component={Error}/> 
                 </Switch>
             </div>
