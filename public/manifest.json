@@ -1,6 +1,6 @@
 {
   "short_name": "Flippy",
-  "name": "Flippy - app for better memorization",
+  "name": "Flippy",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
