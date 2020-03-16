@@ -11,6 +11,8 @@ import { Landing } from './views/Landing'
 import CollectionEditor from './views/CollectionEditor'
 import firebase from './firebase'
 import PrivateRoute from './PrivateRoute'
+import { Login } from './Components/Login'
+import Signup from './Components/Signup'
 
 
 
@@ -21,6 +23,8 @@ const App = () => {
             <div className="main-container">
                 <Switch>
                     <Route exact path='/' component={Landing}/>
+                    <Route exact path='/login' component={Login}/>
+                    <Route exact path='/signup' component={Signup}/>
                     <PrivateRoute exact path='/home' component={Home}/>
                     <PrivateRoute exact path='/manage/' component={Manage}/> 
                     <PrivateRoute exact path='/session' component={Session}/>
