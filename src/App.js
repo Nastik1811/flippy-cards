@@ -5,26 +5,28 @@ import Error from './views/Error'
 import Session from './views/Session'
 import Navbar from './Components/Navbar'
 
-import { Route, Link, Switch, Router } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import CardEditor from './views/CardEditor'
 import { Landing } from './views/Landing'
 import CollectionEditor from './views/CollectionEditor'
+import firebase from './firebase'
+import PrivateRoute from './PrivateRoute'
 
-let isAutorized = true;
+
 
 const App = () => {
     return (
         <div className="app-container cloud-background">
-            <Navbar isAutorized={isAutorized}/>
+            <Navbar/>
             <div className="main-container">
                 <Switch>
                     <Route exact path='/' component={Landing}/>
-                    <Route exact path='/home' component={Home}/>
-                    <Route exact path='/manage/' component={Manage}/> 
-                    <Route exact path='/session' component={Session}/>
-                    <Route exact path='/session/:slug' component={Session}/>
-                    <Route exact path='/editor/:slug' component={CardEditor}/>
-                    <Route exact path='/collection/:slug' component={CollectionEditor}/>
+                    <PrivateRoute exact path='/home' component={Home}/>
+                    <PrivateRoute exact path='/manage/' component={Manage}/> 
+                    <PrivateRoute exact path='/session' component={Session}/>
+                    <PrivateRoute exact path='/session/:slug' component={Session}/>
+                    <PrivateRoute exact path='/editor/:slug' component={CardEditor}/>
+                    <PrivateRoute exact path='/collection/:slug' component={CollectionEditor}/>
                     <Route component={Error}/> 
                 </Switch>
             </div>
