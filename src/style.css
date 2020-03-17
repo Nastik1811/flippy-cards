@@ -5,7 +5,7 @@
 
 @font-face{
   font-family: "Roboto";
-  font-style: regular;
+  font-style: normal;
   font-weight: 400;
   src: 
     local("Roboto"),
@@ -14,7 +14,7 @@
 
 @font-face{
   font-family: "Roboto";
-  font-style: regular;
+  font-style: normal;
   font-weight: 300;
   src: 
     local("Roboto-Light"),
@@ -23,7 +23,7 @@
 
 @font-face{
   font-family: "Roboto";
-  font-style: regular;
+  font-style: normal;
   font-weight: 500;
   src: 
     local("Roboto-Medium"),
@@ -31,7 +31,7 @@
 } 
 @font-face{
   font-family: "Comfortaa";
-  font-style: regular;
+  font-style: normal;
   font-weight: 400;
   src: 
     local("Comfortaa"),
@@ -81,7 +81,7 @@
   }
   
 }
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 650px){
   :root{
     font-size: 12px;
   }
@@ -171,10 +171,12 @@ section{
 .main-navbar a{
   color: var(--color-contrast-text);
   font-size: 1.15em;
+  transition: all 300ms ease;
 }
 
 .main-navbar a:hover{
   color: var(--color-secondary);
+  transform: rotate(10deg);
   transition: all 300ms ease;
 }
 
@@ -363,22 +365,6 @@ section{
   align-items: center;
 }
 
-.tab{
-  color: var(--color-contrast-text);
-  transition: all 300ms ease;
-}
-
-.tab:hover{
-  color: var(--color-secondary);
-  transition: all 300ms ease;
-}
-
-.tab.active{
-  color: var(--color-secondary);
-}
-
-
-
 
 .link-preview-title{
   font-size: var(--text-medium);
@@ -387,29 +373,6 @@ section{
 .link-preview-details{
   font-size: var(--text-small);
 }
-
-
-
-
-
-.preview-main{
-
-}
-
-/* Collection preview end*/
-
-/* .quick-actions-container{
-  width: 100%;
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  align-items: flex-start;
-}
- */
-
-
-
 
 /* Card */
 .card-container{
@@ -429,27 +392,33 @@ section{
   justify-content: center;
   align-items: center;
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
-  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: rotateY(0deg);
+  transition: transform 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
 }
+
 .card-back{
   position: absolute;
   text-align: center;
-  opacity: 0%;
   transform: rotateY(180deg);
+  transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .card-front{
   position: relative;
+  transform: rotateY(0deg);
+  transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.card-container:hover .card-front{
-  opacity: 0%;
+.card-container.back .card-front{
   transform: rotateY(180deg);
 }
 
-.card-container:hover .card-back{
-  opacity: 100%;
+.card-container.back .card-back{
   transform: rotateY(0deg);
+}
+
+.card-container.back{
+  transform: rotateY(180deg);
 }
 .card-caption{
   color: var(--color-light-text);
@@ -505,26 +474,61 @@ hr{
   border: 0.5px solid var(--color-primary-dark);
 }
 
-.board{
+.board-active{
+  display: grid;
   margin-top: 1vw;
   width: 70vw;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr)) ;
+}
+
+.board{
+  display: none;
+}
+
+.tab{
+  color: var(--color-contrast-text);
+  transition: all 300ms ease;
+}
+
+.tab:hover{
+  color: var(--color-secondary);
+  transition: all 300ms ease;
+}
+
+.tab-active{
+  color: var(--color-secondary);
 }
 
 .add-btn{
+  position: absolute;
   background-color: var(--color-primary-light);
   color: var(--color-light-text);
   font-size: 4rem;
 }
 
 
+.cards-board{
+  display: grid;
+  margin-top: 1vw;
+  width: 70vw;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr)) ;
+}
 
 
-@media only screen and (max-width: 600px){
-  .preview{
+@media only screen and (max-width: 650px){
+  .preview-container{
+    width: 170px;
+    height: 110px;
+  }
+
+  .preview-component{
     width: 170px;
     height: 110px;
     padding: 1em;
     flex-shrink: 10px;
+  }
+  .board-active{
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
   }
 }
 
@@ -535,6 +539,7 @@ hr{
   box-shadow: 0 0 30px var(--color-primary-dark);
   border-radius: 1em;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -544,4 +549,15 @@ hr{
   height: 80%;
   background-color: var(--color-primary-light);
   text-align: center;
+}
+
+.edit-card-content textarea{
+  width: 70%;
+  height: 70%;
+}
+
+.landing{
+  display: grid;
+  
+
 }

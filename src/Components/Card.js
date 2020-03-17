@@ -1,16 +1,28 @@
 import React from 'react'
-const Card= () => {
-    return(
-        <div className="card-container">
-            <div className="card-back">
-                Back side
+
+class Card extends React.Component {
+    constructor(){
+        super();
+        this.state = {
+            isFlipped: false
+        }
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(){
+        this.setState((state => ({isFlipped: !state.isFlipped})));  
+    }
+
+    render() {
+        return (
+            <div className={this.state.isFlipped? "card-container back" : "card-container"} onClick={this.handleClick}>
+                <div className="card-back">{this.props.card.back}
+                </div>
+                <div className="card-front">{this.props.card.front}
+                </div>
+                <span className="card-caption">Click to flip</span>
             </div>
-            <div className="card-front">
-                Front side
-            </div>
-            <div className="card-caption">Click to flip</div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Card;
