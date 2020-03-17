@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import {Link} from 'react-router-dom';
-import app from '../firebase';
+import app, {authUI, authConfig} from '../firebase';
 import firebase from 'firebase'
+import { AuthContext } from '../Auth';
 
 
 const Navbar = () => {
-    let isAuthorized = true;
-
+    const {currentUser} = useContext(AuthContext);
     return (
         <header className="main-header">
             <div className="logo-container" >
@@ -14,16 +14,16 @@ const Navbar = () => {
             </div>
             <nav className="main-navbar">
                 <ul className="nav-links">
-                    {!!app.currentUser ? (
+                    {!!currentUser ? (
                         <>
                             <li><Link to='/home' >Home</Link></li>
                             <li><Link to='/manage'>Manage</Link></li>
-                            <li><button className="sign-out" onClick={app.auth().signOut()}>Sign out</button></li>
+                            <li><button className="sign-out" onClick={() => app.auth().signOut()}>Sign out</button></li>
                         </>
                     ) : (
                         <>
                         <li><Link to='/login' className="sign-in">Log in</Link></li>
-                        <li><Link to='/signin' className="sign-in">Sign up</Link></li>
+                        <li><Link to='/signup' className="sign-in">Sign up</Link></li>
                         </>
                         )
                     }

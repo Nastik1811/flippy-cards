@@ -6,17 +6,19 @@ import { AuthContext } from '../Auth';
 export const Login = ({history}) => {
     const handleLogin = useCallback(
         async event => {
-            event.preventDefault();
-            const {email, password} = event.target.elements;
-            try{
-                await app.auth().signInWithEmailAndPassword(email.value, password.value);
-                history.push("/home")
-            }catch(error){
-                alert("error");
-            }
+          event.preventDefault();
+          const { email, password } = event.target.elements;
+          try {
+            await app
+              .auth()
+              .signInWithEmailAndPassword(email.value, password.value);
+            history.push("/home");
+          } catch (error) {
+            alert(error);
+          }
         },
-        [history],
-    )
+        [history]
+      );
 
     const {currentUser} = useContext(AuthContext);
     if(!!currentUser){
@@ -33,7 +35,7 @@ export const Login = ({history}) => {
                 Password
                 <input type="password" name="password" placeholder="password"/>
             </label>
-            <button type="submit">Sign up</button>
+            <button type="submit">Login</button>
         </form>
         
     </div>

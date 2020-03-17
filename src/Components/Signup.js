@@ -5,19 +5,21 @@ import {withRouter, Redirect} from 'react-router-dom';
 
 
 const Signup = ({history}) => {
-    const handleSignup = useCallback(
-        async event => {
-            event.preventDefault();
-            const {email, password} = event.target.elements;
-            try{
-                await app.auth().createUserWithEmailAndPassword(email.value, password.value);
-                history.push("/home")
-            }catch(error){
-                alert("error");
-            }
-        },
-        [history],
-    )
+
+    const handleSignUp = useCallback(async event => {
+        event.preventDefault();
+        const { email, password } = event.target.elements;
+        try {
+          await app
+            .auth()
+            .createUserWithEmailAndPassword(email.value, password.value);
+          history.push("/home");
+        } catch (error) {
+          alert(error);
+        }
+      }, [history]);
+
+
 
     const {currentUser} = useContext(AuthContext);
     if(!!currentUser){
@@ -26,7 +28,7 @@ const Signup = ({history}) => {
 
     return (
         <div>
-            <form onSubmit={handleSignup}>
+            <form onSubmit={handleSignUp}>
                 <label >
                     Email
                     <input type="email" name="email" placeholder="email"/>
@@ -42,4 +44,4 @@ const Signup = ({history}) => {
     )
 }
 
-export default Signup;
+export default withRouter(Signup);
