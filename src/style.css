@@ -375,58 +375,65 @@ section{
 }
 
 /* Card */
-.card-container{
+.card{
   position: relative;
+  cursor: pointer;
   min-width: 25rem;
   min-height: 15rem;
   width: 40vw;
   height: 25vw;
-  padding: 20px;
   font-size: 2rem;
   margin: 10px;
   border-radius: 8px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+ 
+  transition: transform 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+
+}
+
+.card-back, .card-front{
   background-image: linear-gradient(135deg, var(--color-primary-light) 5%, var(--color-secondary)); 
-  /* background-color: var(--color-secondary); */
+  width: 100%;
+  height: 100%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
-  transform: rotateY(0deg);
-  transition: transform 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
+  backface-visibility: hidden;
+  border-radius: inherit;
 }
 
 .card-back{
-  position: absolute;
-  text-align: center;
   transform: rotateY(180deg);
-  transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-image: linear-gradient(135deg, var(--color-light-text) 5%, var(--color-accent)); 
 }
+
 .card-front{
-  position: relative;
-  transform: rotateY(0deg);
-  transition: all 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-image: linear-gradient(135deg, var(--color-primary) 5%, var(--color-secondary)); 
 }
 
-.card-container.back .card-front{
-  transform: rotateY(180deg);
-}
-
-.card-container.back .card-back{
-  transform: rotateY(0deg);
-}
-
-.card-container.back{
-  transform: rotateY(180deg);
-}
 .card-caption{
   color: var(--color-light-text);
   font-size: var(--text-small);
   font-family: var(--font-pretty);
   position: absolute;
   bottom: 20px;
+  text-align: center;
+  width: 100%;
+  transition: 0 0.8s;
 }
+
+
+.card.flipped{
+  transform: rotateY(180deg);
+}
+
+.card.flipped .card-caption{
+  transform: rotateY(180deg);
+}
+
 .title{
   font-size: var(--text-large);
 }

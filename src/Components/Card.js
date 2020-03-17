@@ -14,10 +14,11 @@ class Card extends React.Component {
 
     render() {
         return (
-            <div className={this.state.isFlipped? "card-container back" : "card-container"} onClick={this.handleClick}>
-                <div className="card-back">{this.props.card.back}
-                </div>
+            <div className={this.state.isFlipped? "card flipped" : "card"} onClick={this.handleClick}>
+                
                 <div className="card-front">{this.props.card.front}
+                </div>
+                <div className="card-back">{this.props.card.back}
                 </div>
                 <span className="card-caption">Click to flip</span>
             </div>
