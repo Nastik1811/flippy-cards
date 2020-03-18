@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import app, {authUI, authConfig} from '../firebase';
 import firebase from 'firebase'
 import { AuthContext } from '../Auth';
@@ -16,9 +16,9 @@ const Navbar = () => {
                 <ul className="nav-links">
                     {!!currentUser ? (
                         <>
-                            <li><Link to='/home' >Home</Link></li>
-                            <li><Link to='/manage'>Manage</Link></li>
-                            <li><button className="sign-out" onClick={() => app.auth().signOut()}>Sign out</button></li>
+                            <li><NavLink activeClassName="active-link" to='/home' >Home</NavLink></li>
+                            <li><NavLink activeClassName="active-link" to='/manage'>Manage</NavLink></li>
+                            <li><Link className="sign-out" onClick={() => app.auth().signOut()}>Sign out</Link></li>
                         </>
                     ) : (
                         <>

@@ -39,7 +39,7 @@ const CollectionPicker = props => {
     return (
         <section>
             <header className="section-header">You can also choose a collection:</header>
-            <div className="flex-container">
+            <div className="grid-container">
                 {links}
                 <div className="preview-container">
                     <Link to="/manage"><button className="accent-btn" id="to-manage-btn">Manage <wbr/> collections</button></Link>
@@ -58,11 +58,11 @@ const Statistics = () => {
 }
 
 const Home = () => { 
-    
+    let container = document.querySelector(".app-container");
     return(
         <>
             <section className="home-main">
-                <button id="add-card-btn" className="accent-btn"> Add card</button>
+                <button id="add-card-btn" className="accent-btn" onClick={() => {container.classList.toggle("cloud-background")}}> Add card</button>
                 <ReviewInvitation/>
             </section>
             <CollectionPicker/>
