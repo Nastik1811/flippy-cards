@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CollectionReviewLink from '../Components/CollectionReviewLink'
+import { AuthContext } from '../Auth'
+import {collections} from "../DummyData"
+import { Link } from 'react-router-dom'
 
 
 const GreetingMsg = props => {
+    
     return (
         <div id="greeting-message" >
             Hello, {props.userName}!
@@ -11,6 +15,7 @@ const GreetingMsg = props => {
 }
 
 const InvitationMsg = props => {
+
     return (
         <div id="invitation-message" >
             You have something to reapet. Your cards are awaiting you.. Let’s start learning!
@@ -19,24 +24,25 @@ const InvitationMsg = props => {
 }
 
 const ReviewInvitation = () => {
+    const {currentUser} = useContext(AuthContext);
     return (
         <div className="home-greetings">
             <GreetingMsg userName="Anastasia"/>
             <InvitationMsg/>
-            <button className="accent-btn" id="quick-start-btn">Start workout</button>
+            <button className="accent-btn" id="quick-start-btn">Start now</button>
     </div>
     )
 }
 
 const CollectionPicker = props => {
-    let collections = [<CollectionReviewLink/>,<CollectionReviewLink/>, <CollectionReviewLink/>, <CollectionReviewLink/>, <CollectionReviewLink/> ];
+    let links = collections.map((c, i) => <CollectionReviewLink slug={i} name={c.name} cards={c.cards.length}/>)
     return (
         <section>
             <header className="section-header">You can also choose a collection:</header>
             <div className="flex-container">
-                {collections}
+                {links}
                 <div className="preview-container">
-                    <button className="accent-btn" id="to-manage-btn">Manage <wbr/> collections</button>
+                    <Link to="/manage"><button className="accent-btn" id="to-manage-btn">Manage <wbr/> collections</button></Link>
                 </div>
             </div>
         </section>
@@ -52,10 +58,11 @@ const Statistics = () => {
 }
 
 const Home = () => { 
+    
     return(
         <>
             <section className="home-main">
-                <button id="add-card-btn" className="accent-btn" >+ Add card</button>
+                <button id="add-card-btn" className="accent-btn"> Add card</button>
                 <ReviewInvitation/>
             </section>
             <CollectionPicker/>
