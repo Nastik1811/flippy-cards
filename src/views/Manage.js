@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom'
 import React from 'react'
 import CardPreview from '../Components/CardPreview'
 import CollectionPreview from '../Components/CollectionPreview'
+import { collections } from '../DummyData'
 
 export const Tabbar = ({children, activeTabIndex}) => {
     let tabs = children;
@@ -72,8 +73,8 @@ export const CreateNewButton = props => {
 class Manage extends React.Component {
     constructor(props){
         super(props);
-        this.collections = [<CollectionPreview/>, <CollectionPreview/>, <CollectionPreview/>, <CollectionPreview/>];
-        this.cards = [<CardPreview/>, <CardPreview/>, <CardPreview/>, <CardPreview/>, <CardPreview/>, <CardPreview/>];
+        this.collections = collections.map((c, i) => <CollectionPreview slug={i} name={c.name} created={c.created}/>);
+        this.cards = collections[0].cards.map(c => <CardPreview front={c.front} back={c.back} />);
         this.handleClick = this.handleClick.bind(this);
         this.state = {
             activeTabIndex: 0
@@ -85,7 +86,6 @@ class Manage extends React.Component {
             activeTabIndex: index,
         }))
     }
-
 
     render(){
         return (
@@ -104,9 +104,7 @@ class Manage extends React.Component {
                     </Pannel>
             </>
         )
-    }
-
+        }
 
 }
-
 export default Manage;

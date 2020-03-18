@@ -1,12 +1,12 @@
 import React from 'react'
-const CardPreview = () => {
+const CardPreview = ({front, back}) => {
     return(
         <div className="preview-container overlay">
             <div className="preview-component card-preview-back">
-                Back side of card
+                {back}
             </div>
             <div className="preview-component card-preview-front">
-                Front side of card
+                {front}
             </div>
         </div>
     )
