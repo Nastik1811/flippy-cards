@@ -29,7 +29,7 @@ const App = () => {
                     <PrivateRoute exact path='/manage/' component={Manage}/> 
                     <PrivateRoute exact path='/session' component={Session}/>
                     <PrivateRoute exact path='/session/:slug' component={Session}/>
-                    <PrivateRoute exact path='/editor/:slug' component={CardEditor}/>
+                    <PrivateRoute exact path='/new' component={CardEditor}/>
                     <PrivateRoute exact path='/collection/:slug' component={CollectionEditor}/>
                     <Route component={Error}/> 
                 </Switch>

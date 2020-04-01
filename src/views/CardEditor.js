@@ -15,7 +15,7 @@ const EditorWindow = props => {
 const CardEditor = () => {
     const { register, handleSubmit, errors } = useForm();
     const onSubmit = data => {
-        // ????? app.auth().currentUser.uid || currentUser.uid from AuthContext || какой-нибудь redax ?????
+        // ????? app.auth().currentUser.uid || currentUser.uid from AuthContext || како
         
         app.firestore().collection('users').doc(app.auth().currentUser.uid).collection('cards').add({
             front: data.front,

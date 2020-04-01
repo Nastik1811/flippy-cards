@@ -28,7 +28,7 @@ const Signup = ({history}) => {
 
     return (
         <div>
-            <form onSubmit={handleSignUp}>
+            <form onSubmit={handleSignUp} className="auth-form">
                 <label >
                     Email
                     <input type="email" name="email" placeholder="email"/>

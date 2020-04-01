@@ -18,7 +18,7 @@ const Navbar = () => {
                         <>
                             <li><NavLink activeClassName="active-link" to='/home' >Home</NavLink></li>
                             <li><NavLink activeClassName="active-link" to='/manage'>Manage</NavLink></li>
-                            <li><Link className="sign-out" onClick={() => app.auth().signOut()}>Sign out</Link></li>
+                            <li><Link to='/' className="sign-out" onClick={() => app.auth().signOut()}>Sign out</Link></li>
                         </>
                     ) : (
                         <>

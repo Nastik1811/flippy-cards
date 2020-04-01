@@ -59,6 +59,17 @@ export const collections = [
             }
         ]
     },
+    {
+        name: "React",
+        created: Date.now(),
+        cards: [
+            {
+                front: "What is the main rule of using hooks?",
+                back: "Hooks can be used only inside function components or other hooks",
+                stage: 0
+            }
+        ]
+    }
 ]
 
 function getCollections(){

@@ -38,22 +38,6 @@ export const Pannel = ({children, index, activeTabIndex}) => {
 }
 
 export const TabView = ({children}) => {
-    return (
-            <>
-                <Tabbar>
-                    <Tab index="0" activeTabIndex={this.state.activeTabIndex} label="Collections" onClick={this.handleClick}/>
-                    <Tab index="1" activeTabIndex={this.state.activeTabIndex} label="Cards" onClick={this.handleClick} />
-                </Tabbar>
-                    <Pannel index="0" activeTabIndex={this.state.activeTabIndex}>
-                        <CreateNewButton/>
-                        {this.collections}
-                    </Pannel>
-                    <Pannel index="1" activeTabIndex={this.state.activeTabIndex}>
-                        <CreateNewButton/>
-                        {this.cards}
-                    </Pannel>
-            </>
-    )
 }
 
 
@@ -77,12 +61,12 @@ class Manage extends React.Component {
         this.cards = collections[0].cards.map(c => <CardPreview front={c.front} back={c.back} />);
         this.handleClick = this.handleClick.bind(this);
         this.state = {
-            activeTabIndex: 0
+            activeTabIndex: "0",
         }
     }
 
     handleClick(index){
-        this.setState((state) => ({
+        this.setState(() => ({
             activeTabIndex: index,
         }))
     }
@@ -94,14 +78,15 @@ class Manage extends React.Component {
                     <Tab index="0" activeTabIndex={this.state.activeTabIndex} label="Collections" onClick={this.handleClick}/>
                     <Tab index="1" activeTabIndex={this.state.activeTabIndex} label="Cards" onClick={this.handleClick} />
                 </Tabbar>
-                    <Pannel index="0" activeTabIndex={this.state.activeTabIndex}>
-                        <CreateNewButton/>
-                        {this.collections}
-                    </Pannel>
-                    <Pannel index="1" activeTabIndex={this.state.activeTabIndex}>
-                        <CreateNewButton/>
-                        {this.cards}
-                    </Pannel>
+                {this.state.activeTabIndex === 0 ? <panel1 /> : <panel2 />}
+                <Pannel index="0" activeTabIndex={this.state.activeTabIndex}>
+                    <CreateNewButton/>
+                    {this.collections}
+                </Pannel>
+                <Pannel index="1" activeTabIndex={this.state.activeTabIndex}>
+                    <CreateNewButton/>
+                    {this.cards}
+                </Pannel>
             </>
         )
         }

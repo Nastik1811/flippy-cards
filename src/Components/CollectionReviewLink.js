@@ -10,7 +10,11 @@ const CollectionReviewLink = ({slug, name, cards}) => {
                 <div className="link-preview-title">{name}</div>
                 <div className="link-preview-details">{cards} cards to review</div>
             </div>
-            <Link to={`/session/${slug}`}><div className="preview-component overlay-component"> Click to start </div></Link>
+
+            <Link to={`/session/${slug}`}>
+                <div className="preview-component overlay-component"> Click to start </div>
+            </Link>
+            
         </div>
        
     )

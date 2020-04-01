@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import CollectionReviewLink from '../Components/CollectionReviewLink'
 import { AuthContext } from '../Auth'
-import {collections} from "../DummyData"
+import {collections} from "../DummyData" 
+import CardEditor from './CardEditor'
 import { Link } from 'react-router-dom'
 
 
@@ -29,7 +30,7 @@ const ReviewInvitation = () => {
         <div className="home-greetings">
             <GreetingMsg userName="Anastasia"/>
             <InvitationMsg/>
-            <button className="accent-btn" id="quick-start-btn">Start now</button>
+            <Link to="/session" className="accent-btn" id="quick-start-btn">Start now</Link>
     </div>
     )
 }
@@ -42,7 +43,7 @@ const CollectionPicker = props => {
             <div className="grid-container">
                 {links}
                 <div className="preview-container">
-                    <Link to="/manage"><button className="accent-btn" id="to-manage-btn">Manage <wbr/> collections</button></Link>
+                    <Link to="/manage" className="accent-btn" id="to-manage-btn">Manage <wbr/> collections</Link>
                 </div>
             </div>
         </section>
@@ -58,11 +59,10 @@ const Statistics = () => {
 }
 
 const Home = () => { 
-    let container = document.querySelector(".app-container");
     return(
         <>
             <section className="home-main">
-                <button id="add-card-btn" className="accent-btn" onClick={() => {container.classList.toggle("cloud-background")}}> Add card</button>
+                <Link to="/new" id="add-card-btn" className="accent-btn"> Add card</Link>
                 <ReviewInvitation/>
             </section>
             <CollectionPicker/>
