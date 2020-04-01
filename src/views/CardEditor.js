@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-import { useParams } from 'react-router-dom'
-import { useForm } from 'react-hook-form';
+import React, {useCallback, useContext} from 'react'
 import app from '../firebase';
-import { Redirect } from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom'
 
 const EditorWindow = props => {
     return (
@@ -12,44 +10,58 @@ const EditorWindow = props => {
     )
 }
 
-const CardEditor = () => {
-    const { register, handleSubmit, errors } = useForm();
-    const onSubmit = data => {
-        // ????? app.auth().currentUser.uid || currentUser.uid from AuthContext || како
-        
-        app.firestore().collection('users').doc(app.auth().currentUser.uid).collection('cards').add({
-            front: data.front,
-            back: data.back,
-            collection: data.collection,
-            created: new Date(),
-            nextRecall: new Date(),
-            learningStage: 0,
-          }).catch(function(error) {
-            console.error('Error writing new message to Firebase Database', error);
-          });
-    }
-    
-    console.log(errors);
+const CardEditor = ({history}) => {
+    const handleSubmit = useCallback(
+        async event => {
+          event.preventDefault();
+          console.log(event.target.elements);
+          const { front, back, collection } = event.target.elements;
+          try {
+            await app.firestore().collection('cards').add({
+                front: front.value,
+                back: back.value,
+                collection: collection.value,
+                created: new Date(),
+                nextRecall: new Date(),
+                learningStage: 0,
+              }).catch(function(error) {
+                console.error('Error writing new message to Firebase Database', error);
+              });
+            history.push("/home");
+          } catch (error) {
+            alert(error);
+          }
+        },
+        [history]
+      );
 
     return (
             <div className="editor">
-                Edit card here
-                <form onSubmit={handleSubmit(onSubmit)} className="card-editor-form">
-                    <textarea placeholder="front side" name="front" ref={register({required: true, maxLength: 255})} />
-                    <textarea placeholder="back side" name="back" ref={register({required: true, maxLength: 255})} />
+                <form onSubmit={handleSubmit} className="card-editor-form">
+                    <div className="row-flex-container">
+                        <div className="edit-container">
+                             <label>FRONT SIDE</label>
+                            <textarea placeholder="front side" name="front" />
+                        </div>
+                        <div className="edit-container"> 
+                            <label>BACK SIDE</label>
+                            <textarea placeholder="back side" name="back" />
+                        </div>
+                    </div>
+
                     <label>
                         Choose a collection: 
-                        <select name="collection" ref={register}>
+                        <select name="collection" >
                             <option>Js</option>
                             <option>English words</option>
                             <option>React</option>
                         </select>
                     </label>
-                    <input type="submit" />
+                    <input type="submit" className="submit-btn" value="Save" />
                 </form>
                 
             </div>
     )
 }
 
-export default CardEditor;
+export default withRouter(CardEditor);

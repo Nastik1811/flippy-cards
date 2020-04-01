@@ -61,8 +61,9 @@
   --color-primary-light:rgba(220, 240, 250, 0.5);
   --color-primary-dark: rgba(150, 180, 200, 1);
   --color-overlay: rgba(130, 180, 205, 1);
-  --color-secondary: rgba(29, 183, 237, 1);
+  --color-secondary: rgb(112, 197, 228);
   --color-accent: rgba(255, 215, 112, 1);
+  --color-bookmark: rgb(138, 209, 236);
 
   --btn-shadow: 0px 2px 10px rgba(167, 176, 182, 0.2);
   --btn-hover-shadow: 1px 5px 15px rgba(87, 93, 97, 0.15);
@@ -73,7 +74,8 @@
 
   --color-contrast-text:  #000 ;
   --color-light-text: #fff;
-  --color-regular-text: #444;
+  --color-regular-text: #333;
+  --color-overlay-text: rgb(39, 79, 116);
 
   --font-regular: "Roboto";
   --font-light:"Roboto", 300;
@@ -100,6 +102,7 @@
 
     --color-contrast-text:  #fff ;
     --color-regular-text: #fff;
+    --color-overlay-text: rgb(227, 242, 255);
   }
   body{
     background-color: #222;
@@ -164,9 +167,9 @@ button{
 .accent-btn{
   display: inline-block;
   background-color: var(--color-accent);
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15), inset -1px -1px 5px rgba(0, 0, 0, 0.1), inset 2px 2px 5px rgba(255, 255, 255, 0.4);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15), inset -1px -1px 5px rgba(151, 137, 101, 0.4), inset 2px 2px 5px rgba(255, 255, 255, 0.4);
   font-family: "Raleway";
-  font-size: var(--text-large);
+  font-size: var(--text-medium);
   text-align: center;
   cursor: pointer;
   padding: 0.8rem 1.5rem;
@@ -180,6 +183,7 @@ button{
 
 #add-card-btn{
   margin-top: 0px;
+  font-size: var(--text-large);
 }
 
 #add-card-btn::before{
@@ -265,7 +269,7 @@ button{
   transform: translateY(-110px);
   transition: 0.4s ease ;
   z-index: -1;
-  background: url("./assets/images/bookmark1.svg") no-repeat;
+  background: url("./assets/images/bookmark2.svg") no-repeat;
   background-size: 100% 100% ;
 }
 
@@ -342,6 +346,7 @@ button{
   grid-template-columns: repeat(auto-fill, minmax(250px, 270px)) ;
   gap: 10px;
   align-items: center;
+  justify-items: center;
 }
 
 /* End home */
@@ -375,8 +380,8 @@ button{
 
 .overlay-component{
   color: rgba(0,0,0,0);
-  font-family: var(--font-pretty);
-  font-size: var(--text-medium);
+  font-family: "Raleway";
+  font-size: var(--text-large);
   position: relative;
   background: none;
   left: 0.45rem;
@@ -389,7 +394,7 @@ button{
   position: relative;
   background-image: rgba(250, 250, 250, 0.8);
   backdrop-filter: blur(7px);
-  color: var(--color-contrast-text);
+  color: var(--color-overlay-text);
 }
 
 .preview-container:hover .main-component{
@@ -581,43 +586,79 @@ hr{
 
 
 .editor{
-  position: fixed;
-  margin: auto;
-  backdrop-filter: blur(7px);
-  width: 700px;
-  height: 500px;
-  background-color: transparent;
-  z-index: 1000;
-  box-shadow: 0 0 30px var(--color-primary-dark);
-  border-radius: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  position: fixed;
+  margin: auto;
+  backdrop-filter: blur(7px);
+  min-height: 600px;
+  background-color: rgba(220, 240, 250, 0.5);
+  box-shadow: 0 0 30px var(--color-primary-dark);
+  border-radius: 1em;
+  padding: 30px 20px;
 }
 
 .card-editor-form{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 }
+
+.row-flex-container{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.edit-container{
+  display: inline-block;
+  min-width: 450px;
+  height: fit-content;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+}
+.editor label{
+  display: block;
+  font-size: var(--text-medium);
+  font-family: "Raleway";
+  color: var(--color-regular-text);
+  margin: 10px;
+}
+
 .card-editor-form textarea {
   resize: none;
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 300px;
   padding: 10px;
   font-size: var(--text-medium);
   text-align: center;
-
   white-space: pre-wrap;
   overflow-wrap: break-word;
+  border-radius: 8px;
+  border: 1px solid var(--color-primary-dark);
 }
 
 .card-editor-form textarea:focus {
   outline: none;
+}
+
+.card-editor-form select{
+  background-color: var(--color-primary-dark);
+  color: var(--color-contrast-text);
+  font-size: inherit;
+  padding: .5em;
+  padding-right: 2.5em;	
+  margin-left: 10px;
+  border-radius: 5px;
+  height: 1.3em;
+  border: none;
 }
 
 .blocked{
@@ -703,18 +744,21 @@ input::placeholder{
 
   width: 200px;
   padding: 0.5em;
-  font-size: 0.8em;
-  margin-top: 10px;
+  font-size: 1.5rem;
+  margin-top: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(150, 180, 200, 0.5), 
-  inset -2px -2px 10px rgba(150, 180, 200, 0.1);
+  box-shadow: 0px 0px 10px rgba(109, 137, 156, 0.2), 0px 0px 10px rgba(255, 255, 255, 0.5),
+  inset -3px -3px 4px rgba(150, 180, 200, 0.4), 
+  inset 3px 3px 2px rgba(255, 255, 255, 0.5);
   border: none;
-  background-color: var(--color-primary-light);
+  background-color: rgb(214, 239, 252);
+  font-family: "Raleway";
 }
 
 .submit-btn:hover, .submit-btn:focus {
-  box-shadow: 0px 5px 10px rgba(150, 180, 200, 0.9), 
-  inset 0 -5px 20px rgba(206, 236, 255, 1);
+  box-shadow: 0px 0px 10px rgba(109, 137, 156, 0.5), 0px 0px 10px rgba(255, 255, 255, 0.5),
+  inset -3px -3px 4px rgba(150, 180, 200, 0.4), 
+  inset 3px 3px 2px rgba(255, 255, 255, 0.5);
 }
 
 
