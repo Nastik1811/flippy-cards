@@ -4,6 +4,7 @@ import firebase from 'firebase'
 import { AuthContext } from '../Auth'
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
+import girl from '../assets/images/girl.png'
 
 export const Landing = () => {
 
@@ -13,15 +14,8 @@ export const Landing = () => {
     }
     return (
         <div className="landing">
-            <section>
-                Hello from landing!
-                <img className="landing-img" src="assets/images/girl.png" alt=""/>
+            <section className="landing-section"> 
                 <Link to="/signup" className="accent-btn"  >Get started! </Link>
-
-            </section>
-            <section>
-                Description
-                <Link className="accent-btn" >Get started!</Link>
             </section>
         </div>
     )
