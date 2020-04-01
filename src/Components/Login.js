@@ -25,18 +25,14 @@ export const Login = ({history}) => {
         return <Redirect to="/home" />
     }
     return (
-        <div >
-        <form onSubmit={handleLogin} className="auth-form">
-            <label >
-                Email
-                <input type="email" name="email" placeholder="email"/>
-            </label>
-            <label>
-                Password
-                <input type="password" name="password" placeholder="password"/>
-            </label>
-            <button type="submit" className="btn">Login</button>
-        </form>
+    <div className="auth-container">
+      <h2 className="form-header">Login</h2>
+      <form onSubmit={handleLogin} className="auth-form">
+          <input type="email" name="email" placeholder="email"/>
+          <input type="password" name="password" placeholder="password"/>
+          
+          <button type="submit" className="submit-btn">Login</button>
+      </form>
         
     </div>
     )
