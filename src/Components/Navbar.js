@@ -13,12 +13,11 @@ const Navbar = () => {
                 <Link to='/home'>Flippy</Link>
             </div>
             <nav className="main-navbar">
-                <ul className="nav-links">
                     {!!currentUser ? (
                         <>
-                            <li><NavLink activeClassName="active-link" to='/home' >Home</NavLink></li>
-                            <li><NavLink activeClassName="active-link" to='/manage'>Manage</NavLink></li>
-                            <li><Link to='/' className="sign-out" onClick={() => app.auth().signOut()}>Sign out</Link></li>
+                            <NavLink className="nav-link" activeClassName="active-link" to='/home' >Home</NavLink>
+                            <NavLink className="nav-link" activeClassName="active-link" to='/manage'>Manage</NavLink>
+                            <Link to='/' className="sign-out" onClick={() => app.auth().signOut()}>Sign out</Link>
                         </>
                     ) : (
                         <>
@@ -27,7 +26,6 @@ const Navbar = () => {
                         </>
                         )
                     }
-                </ul>
             </nav>
         </header>
     )

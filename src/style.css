@@ -9,7 +9,7 @@
   font-weight: 400;
   src: 
     local("Roboto"),
-    url("./assets/fonts/Roboto-Regular.ttf") format(ttf);
+    url("./assets/fonts/Roboto-Regular.ttf") format('truetype');
 } 
 
 @font-face{
@@ -18,7 +18,7 @@
   font-weight: 300;
   src: 
     local("Roboto-Light"),
-    url("./assets/fonts/Roboto-Light.ttf") format(ttf);
+    url("./assets/fonts/Roboto-Light.ttf") format('truetype');
 } 
 
 @font-face{
@@ -27,7 +27,7 @@
   font-weight: 500;
   src: 
     local("Roboto-Medium"),
-    url("./assets/fonts/Roboto-Medium.ttf") format(ttf);
+    url("./assets/fonts/Roboto-Medium.ttf") format('truetype');
 } 
 @font-face{
   font-family: "Comfortaa";
@@ -35,7 +35,16 @@
   font-weight: 400;
   src: 
     local("Comfortaa"),
-    url("./assets/fonts/Comfortaa-Light.ttf") format(ttf);
+    url("./assets/fonts/Comfortaa-Regular.ttf") format('truetype');
+} 
+
+@font-face{
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 300;
+  src: 
+    local("Comfortaa"),
+    url("./assets/fonts/Comfortaa-Light.ttf") format('truetype');
 } 
 
 :root{
@@ -59,7 +68,7 @@
 
   --font-regular: "Roboto";
   --font-light:"Roboto", 300;
-  --font-bold:"Roboto-Medium";
+  --font-bold:"Roboto", 500;
   --font-pretty: "Comfortaa";
 
   --text-large: 1.8rem;
@@ -192,7 +201,7 @@ button{
   height: 100%;
 }
 
-.main-navbar ul{
+.main-navbar{
   height: 100%;
   display: grid;
   grid-template-columns: repeat(3, auto);
@@ -200,31 +209,56 @@ button{
   align-items: center;
   justify-items: center;
 }
+
 .main-navbar li{
-  display: inline;
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  vertical-align: middle;
+  line-height: 100%;
 }
 
 .main-navbar a{
-  position: relative;
   color: var(--color-contrast-text);
-  display: inline-block;
+  z-index: 1;
+  display: block;
   font-size: 1.15em;
   transition: all 200ms ease;
+  position: relative;
 }
 
-.main-navbar a:hover{
-  transform: scale(1.1);
-  transition: all 0.1 ease;
-}
-
-.active-link::before{
+.nav-link::before{
   position: absolute;
   display: block;
   content: "";
   height: 60px;
-  opacity: 30%;
-  top: -30px;
-  background-color: var(--color-accent);
+  width: 100%;
+  padding: 15px 20px;
+  left: -20px;
+  transform: translateY(-110px);
+  transition: 0.4s ease ;
+  z-index: -1;
+  background: url("./assets/images/bookmark1.svg") no-repeat;
+  background-size: 100% 100% ;
+}
+
+.nav-link:hover::before{
+  transform: translateY(-80px);
+
+}
+
+.active-link:hover::before{
+  transform: translateY(-35px);
+
+}
+
+.active-link::before{
+  transform: translateY(-40px);
+  transition: 0.5s ease ;
+}
+
+.sign-out:hover{
+  color: var(--color-secondary);
 }
 
 .logo-container a{
@@ -248,7 +282,7 @@ button{
 
 
 #greeting-message{
-  font-family: var(--font-regular);
+  font: "Comfortaa", 300 ;
   font-size: var(--text-large);
   margin-bottom: 1em;
   text-align: left;
