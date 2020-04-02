@@ -1,0 +1,22 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.main-section{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.add-btn{
+  @extend %accent-btn;
+  margin-top: 0px;
+  font-size: $text-large;
+}
+
+
+.add-btn::before{
+  content: "+";
+}

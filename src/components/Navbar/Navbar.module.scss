@@ -1,0 +1,85 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+%link{
+  color:   $color-contrast-text;
+  font-family: "Roboto";
+  z-index: 1;
+  display: block;
+  font-size: 1.15em;
+  position: relative;
+}
+
+.header{
+  height: 60px;
+  padding: 5px 6vw;
+  vertical-align: middle;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar{
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    column-gap: 20px;
+    align-items: center;
+    justify-items: center;
+  }
+  
+  
+.nav-link{
+    @extend %link;
+  }
+  
+.nav-link::before{
+    position: absolute;
+    display: block;
+    content: "";
+    height: 60px;
+    width: 100%;
+    padding: 15px 20px;
+    left: -20px;
+    transform: translateY(-110px);
+    transition: 0.4s ease ;
+    z-index: -1;
+    background: url("../../assets/images/bookmark2.svg") no-repeat;
+    background-size: 100% 100% ;
+  }
+  
+.nav-link:hover::before{
+    transform: translateY(-80px);
+  }
+  
+.active-link{
+    font-weight: 500;
+    color: #000;
+  }
+  
+.active-link:hover::before{
+    transform: translateY(-35px);
+  
+  }
+  
+.active-link::before{
+    transform: translateY(-40px);
+    transition: 0.5s ease ;
+  }
+  
+.auth-link{
+  @extend %link;
+}  
+
+.auth-link:hover{
+    color:   $color-secondary ;
+  }
+  
+.logo-container a{
+    color:   $color-contrast-text ;
+    font-family: "Comfortaa";
+    display: block;
+    text-decoration: none;
+    font-size: 2.2rem;
+  }

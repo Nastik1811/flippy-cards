@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 
-import './style.css';
+import './style.scss';
 import './assets/fonts/Roboto-Regular.ttf';
 import './assets/fonts/Roboto-Light.ttf';
 import './assets/fonts/Roboto-Medium.ttf';

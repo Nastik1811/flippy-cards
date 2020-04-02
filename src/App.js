@@ -1,18 +1,14 @@
 import React from 'react'
-import Home from './views/Home'
-import Manage from './views/Manage'
-import Error from './views/Error'
-import Session from './views/Session'
-import Navbar from './Components/Navbar'
-
 import { Route, Switch } from 'react-router-dom'
-import CardEditor from './views/CardEditor'
-import { Landing } from './views/Landing'
-import CollectionEditor from './views/CollectionEditor'
-import firebase from './firebase'
-import PrivateRoute from './PrivateRoute'
-import { Login } from './Components/Login'
-import Signup from './Components/Signup'
+import Navbar from './components/Navbar';
+import PrivateRoute from './components/PrivateRoute';
+import Landing from './views/Landing';
+import Manager from './views/Manager';
+import Overview from './views/Overview';
+import CardEditor from './views/CardEditor';
+import CollectionEditor from './views/CollectionEditor';
+import Home from './views/Home';
+import { Login, Signup } from './views/Auth';
 
 
 
@@ -26,9 +22,9 @@ const App = () => {
                     <Route exact path='/login' component={Login}/>
                     <Route exact path='/signup' component={Signup}/>
                     <PrivateRoute exact path='/home' component={Home}/>
-                    <PrivateRoute exact path='/manage/' component={Manage}/> 
-                    <PrivateRoute exact path='/session' component={Session}/>
-                    <PrivateRoute exact path='/session/:slug' component={Session}/>
+                    <PrivateRoute exact path='/manage/' component={Manager}/> 
+                    <PrivateRoute exact path='/session' component={Overview}/>
+                    <PrivateRoute exact path='/session/:slug' component={Overview}/>
                     <PrivateRoute exact path='/new' component={CardEditor}/>
                     <PrivateRoute exact path='/collection/:slug' component={CollectionEditor}/>
                     <Route component={Error}/> 

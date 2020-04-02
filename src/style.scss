@@ -1,0 +1,161 @@
+/* 1. Use relative sizes
+   2. Remove duplications
+   3. define root font-size according to the screen size 
+   4. other sizes difine via rem*/
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+@font-face{
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: 
+    local("Roboto"),
+    url("./assets/fonts/Roboto-Regular.ttf") format('truetype');
+} 
+
+@font-face{
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  src: 
+    local("Roboto-Light"),
+    url("./assets/fonts/Roboto-Light.ttf") format('truetype');
+} 
+
+@font-face{
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  src: 
+    local("Roboto-Medium"),
+    url("./assets/fonts/Roboto-Medium.ttf") format('truetype');
+} 
+@font-face{
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 400;
+  src: 
+    local("Comfortaa"),
+    url("./assets/fonts/Comfortaa-Regular.ttf") format('truetype');
+} 
+
+@font-face{
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 300;
+  src: 
+    local("Comfortaa"),
+    url("./assets/fonts/Comfortaa-Light.ttf") format('truetype');
+} 
+
+@font-face{
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  src: 
+    local("Raleway"),
+    url("./assets/fonts/Raleway-Medium.ttf") format('truetype');
+} 
+
+
+@media(prefers-color-scheme: dark){
+  :root{
+    --color-primary: #376F89;
+    --color-primary-light:rgba(29, 183, 237, 0.5);
+    --color-primary-dark: rgba(150, 180, 200, 1);
+    --color-overlay: rgba(130, 180, 205, 1);
+    --color-secondary: rgba(29, 183, 237, 1);
+    --color-accent: rgba(255, 215, 112, 1);
+    --light-shadow: 0 0 8px rgba(0, 0, 0, 0.1);  
+    --card-shadow: 5px 5px 20px rgba(255, 255, 255, 0.4);
+
+    --color-contrast-text:  #fff ;
+    --color-regular-text: #fff;
+    --color-overlay-text: rgb(227, 242, 255);
+  }
+  body{
+    background-color: #222;
+  }
+  
+}
+@media only screen and (max-width: 650px){
+  :root{
+    font-size: 14px;
+  }
+}
+
+/*global*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1.4em;
+  font-family: "Roboto";
+
+} 
+
+a{
+  text-decoration: none
+} 
+
+section{
+  width: 100%;
+  margin-bottom: 4rem;  
+  color: $color-regular-text;
+}
+
+.app-container{
+  height: 100vh;
+  width: 100vw;
+}
+
+.cloud-background{
+  background: url('./assets/images/Clouds.png') top left no-repeat ;
+  background-size: 100vw auto ;
+}
+
+.main-container{
+  /* height: 100%; */
+  padding: 5px 6vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+  margin-top: 40px;
+}
+
+button:focus{
+  outline:0;
+}
+
+button{
+  cursor: pointer;
+}
+
+.section-header{
+  font-size: $text-medium;
+  padding: 1rem;
+}
+
+/* End global */
+
+
+.main-footer{
+  position: absolute;
+  bottom: 0;
+
+}
+
+.popup-container{
+  width:100%;
+  height: 100%;
+
+}
+
+input::placeholder{
+  color: $color-primary-dark;
+}
+
+
