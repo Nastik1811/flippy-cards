@@ -1,0 +1,47 @@
+
+  @import 'src/styles/_variables.scss';
+  @import 'src/styles/_placeholders.scss';
+  .title{
+    font-size: $text-large;
+  }
+  .detail{
+    font-size: $text-small;
+  }
+  .session-info{
+    padding: 0.5rem 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: $color-contrast-text;
+  }
+  .passed-time{
+    font-size: $text-medium;
+  }
+  
+  .buttons-panel{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .buttons-panel-hidden{
+    visibility: hidden;
+  }
+  
+  .buttons-panel button{
+    cursor: pointer;
+    background-color: $color-accent;
+    font-family: "Raleway";
+    font-size: $text-medium;
+    border: 2px solid  rgba(0, 0, 0, 0.05);
+    border-radius: 10%;
+    padding: 25px;
+    margin: 20px 40px;
+    box-shadow: inset 8px 8px 15px rgba(255, 255, 255, 0.4), 
+    0px 0px 15px rgba(0, 0, 0, 0.1), inset -8px -8px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .buttons-panel button:hover{
+    outline: none;
+    transform: scale(1.1);
+  }

@@ -1,0 +1,34 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.collection-preview{
+  @extend %preview-container;
+  background-color: $color-primary ;
+
+  position: relative;
+}
+
+
+  .header{
+    width: 100%;
+    color: $color-contrast-text ;
+    position: absolute;
+    top: 1em;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .details{
+    position: absolute;
+    width: 100%;
+    top: 3em;
+  }
+  .footer{
+    width: 100%;
+    position: absolute;
+    bottom: 1.5rem;
+    font-size: 0.8rem;
+    text-align: center;
+    color:$color-overlay-text ;
+  
+  }
