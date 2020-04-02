@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import CardPreview from '../Components/CardPreview'
-import CollectionPreview from '../Components/CollectionPreview'
-import { collections } from '../DummyData'
+import CardPreview from '../components/CardPreview'
+import CollectionPreview from '../components/CollectionPreview'
+import { collections, getCards } from '../DummyData'
 
 export const Tabbar = ({children, activeTabIndex}) => {
     let tabs = children;
@@ -57,8 +57,8 @@ export const CreateNewButton = props => {
 class Manage extends React.Component {
     constructor(props){
         super(props);
-        this.collections = collections.map((c, i) => <CollectionPreview slug={i} name={c.name} created={c.created}/>);
-        this.cards = collections[0].cards.map(c => <CardPreview front={c.front} back={c.back} />);
+        this.collections = collections;
+        this.cards = getCards();
         this.handleClick = this.handleClick.bind(this);
         this.state = {
             activeTabIndex: "0",
@@ -80,12 +80,12 @@ class Manage extends React.Component {
                 </Tabbar>
                 {this.state.activeTabIndex === 0 ? <panel1 /> : <panel2 />}
                 <Pannel index="0" activeTabIndex={this.state.activeTabIndex}>
-                    <CreateNewButton/>
-                    {this.collections}
+                    
+                    {this.collections.map((c, i) => <CollectionPreview slug={i} name={c.name} created={c.created}/>)}
                 </Pannel>
                 <Pannel index="1" activeTabIndex={this.state.activeTabIndex}>
-                    <CreateNewButton/>
-                    {this.cards}
+                    
+                    {this.cards.map(c => <CardPreview front={c.front} back={c.back} />)}
                 </Pannel>
             </>
         )

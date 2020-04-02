@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import CollectionReviewLink from '../Components/CollectionReviewLink'
+import CollectionReviewLink from '../components/CollectionReviewLink'
 import { AuthContext } from '../Auth'
 import {collections} from "../DummyData" 
 import CardEditor from './CardEditor'

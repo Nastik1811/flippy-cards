@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import CardPreview from '../Components/CardPreview'
+import CardPreview from '../components/CardPreview'
 import { useParams } from 'react-router-dom'
 import { collections } from '../DummyData'
 
@@ -15,15 +15,15 @@ const CollectionEditor = () => {
     let {slug} = useParams();
     let collection = collections[slug];
     
-    let cards = collection.cards.map(c => <CheckablePreview><CardPreview front={c.front} back={c.back}/></CheckablePreview>)
+    let cards = collection.cards
         return (
             <>
                 <div className="edit-collection">
                     <header>
-                        <h1 contentEditable="true" className="collection-name">{collection.name}</h1>
+                        <h1 className="collection-name">{collection.name}</h1>
                     </header>
                     <div className="cards-board">
-                        {cards}
+                        {cards.map(c => <CheckablePreview><CardPreview front={c.front} back={c.back}/></CheckablePreview>)}
                     </div>
                 </div>
                 

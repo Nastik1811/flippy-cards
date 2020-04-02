@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import Card from '../Components/Card'
-import {collections} from "../DummyData"
+import Card from '../components/Card'
+import {collections, getCards} from "../DummyData"
 import {useParams} from 'react-router-dom'
 
 const SessionInfo = ({name, left}) => {
@@ -21,24 +21,30 @@ const Timer = ({time}) => {
 
 const Session = () => {
     let {slug} = useParams();
-    let collection = collections[slug];
+    let cards = slug ? collections[slug].cards : getCards();
+    let collectionName = slug ? collections[slug].name : "All cards"
     
     const [currentCardIndex, setCardIndex] = useState(0);
     const [isFlipped, setFlipped] = useState(false);
-    const [left, setLeft] = useState(collection.cards.length - 1);
+    const [left, setLeft] = useState(cards.length - 1);
     
     useEffect(() => {}, []);
 
     const handleClick = () => {
-        setFlipped(false);
-        setCardIndex(currentCardIndex + 1);
-        setLeft(left - 1);
+        if(left !== 0 ){
+            setFlipped(false);
+            setCardIndex(currentCardIndex + 1);
+            setLeft(left - 1);
+        }
+        else{
+            alert("It is the last card. Please return to home.")
+        }
     }
 
     return (
             <div>
-                <SessionInfo name={collection.name} left = {left} />
-                <Card card={collection.cards[currentCardIndex]} onClick={() => setFlipped(true)} isFlipped={isFlipped}/>
+                <SessionInfo name={collectionName} left = {left} />
+                <Card card={cards[currentCardIndex]} onClick={() => setFlipped(true)} isFlipped={isFlipped}/>
                 <div className={isFlipped? "buttons-panel": "buttons-panel hidden"} >
                     <button className="" onClick={handleClick}>Fail</button>
                     <button className="" onClick={handleClick}>Win</button>
