@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
-import CardPreview from '../Components/CardPreview'
-import CollectionPreview from '../Components/CollectionPreview'
+import CardPreview from '../components/CardPreview'
+import CollectionPreview from '../components/CollectionPreview'
 import { collections } from '../DummyData'
 
 export const Tabbar = ({children, activeTabIndex}) => {

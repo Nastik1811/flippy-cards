@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import {NavLink, Link} from 'react-router-dom';
 import app, {authUI, authConfig} from '../firebase';
-import firebase from 'firebase'
 import { AuthContext } from '../Auth';
 
 

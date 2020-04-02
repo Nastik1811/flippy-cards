@@ -14,7 +14,7 @@ export const Landing = () => {
     }
     return (
         <div className="landing">
-            <section className="landing-section"> 
+            <section className="landing-section medium"> 
                 <Link to="/signup" className="accent-btn"  >Get started! </Link>
             </section>
         </div>

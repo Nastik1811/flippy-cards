@@ -12,7 +12,7 @@ const CollectionPreview = ({slug, name, created}) => {
                 </header>
                 <div className="preview-details">
                 </div>
-                <footer className="preview-footer">Created {created}}</footer>
+                <footer className="preview-footer">Created 12.03.2020 </footer>
             </div>
             <div className="preview-component outline-border"></div>
         </div>

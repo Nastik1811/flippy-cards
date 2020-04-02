@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import CardPreview from '../Components/CardPreview'
+import CardPreview from '../components/CardPreview'
 import { useParams } from 'react-router-dom'
 import { collections } from '../DummyData'
 
