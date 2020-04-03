@@ -1,6 +1,7 @@
 @import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
 
-.main{
+.main-section{
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -9,109 +10,17 @@
   align-items: flex-start;
 }
 
-
-.greeting-message{
-  font-family: "Roboto";
-  font-size: var(--text-large);
-  text-align: left;
-}
-
-.invitation-message{
-  margin: 1em;
-}
-
-
-.greeting{
-  border: 1px solid rgba(150, 180, 200, 1);
-  padding: 1.5em;
-  border-radius: 0.5em;
-  font-size: var(--text-medium);
-  min-width: 50%;
-  width: 600px;
-  text-align: center;
-}
-
-
-.collection-board{
-  display: grid;
-  margin-top: 10px;
-  min-width: 60vw;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 270px)) ;
-  gap: 10px;
-  align-items: center;
-  justify-items: center;
-}
-
-
 .add-btn{
+  @extend %accent-btn;
   margin-top: 0px;
-  font-size: var(--text-large);
+  font-size: $text-large;
 }
 
 .add-btn::before{
   content: "+";
 }
 
-.quick-start-btn{
-  font-family: "Comfortaa";
-  width: 50%;
-  min-width: 10em;
-}
 
-.manage-btn{
-  width: 90%;
-}
-
-.preview-container{
-  width: 250px;
-  height: 160px;
-  border-radius: 8px;
-  margin: 5px;
-}
-
-.preview-component{
-  width: 250px;
-  height: 160px;
-  padding: 1em 0.5em;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-regular-text);
-  line-height: 3rem;
-}
-
-.main-component{
-  position: absolute;
-  background-color: var(--color-primary);
-  line-height: 2rem;
-  transition: all 0.3s 0.1s ease;
-}
-
-.overlay-component{
-  color: rgba(0,0,0,0);
-  font-family: "Raleway";
-  font-size: var(--text-large);
-  position: relative;
-  background: none;
-  left: 0.45rem;
-  bottom: 0.45rem;
-  border: 1px solid var(--color-primary-dark);
-  transition: all 0.4s ease;
-}
-
-.preview-container:hover .overlay-component{
-  position: relative;
-  background-image: rgba(250, 250, 250, 0.8);
-  backdrop-filter: blur(7px);
-  color: var(--color-overlay-text);
-}
-
-.preview-container:hover .main-component{
- color: var(--color-primary); 
- transition: all 0s;
-}
 /* Collection preview */
 .collection-preview{
   display: block;

@@ -1,0 +1,24 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.link-container{
+    @extend %preview-container;
+    margin: 5px;
+  }
+
+.manage-btn{
+    @extend %accent-btn;
+    width: 90%;
+  }
+
+.links-board{
+    display: grid;
+    margin-top: 10px;
+    min-width: 60vw;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 270px)) ;
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+  }
+
+
