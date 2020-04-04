@@ -67,15 +67,60 @@ export const collections = [
                 front: "What is the main rule of using hooks?",
                 back: "Hooks can be used only inside function components or other hooks",
                 stage: 0
+            },
+            {
+                front: "What is keys use for?",
+                back: "Keys helps React identify which itemshave changed.",
+                stage: 0
+            }
+        ]
+    },
+    {
+        name: "Phrases",
+        created: Date.now(),
+        cards: [
+            {
+                front: "What the heck is going on?",
+                back: "???",
+                stage: 0
+            },
+            {
+                front: "have head in the clouds",
+                back: "not being realistic",
+                stage: 0
+            },
+            {
+                front: "I don’t know off the top of my head",
+                back: "I need to check",
+                stage: 0
+            },
+            {
+                front: "Stay in touch",
+                back: "keep talking to me",
+                stage: 0
+            },
+            {
+                front: "You look like a deer in headlights",
+                back: "frozen with fear",
+                stage: 0
+            },
+            {
+                front: "Blessing in disguise",
+                back: "It looks bad, but will turn out well",
+                stage: 0
             }
         ]
     }
 ]
 
-function getCollections(){
+export function getCollections(){
     return collections;
 }
 
-function getCards(collectionIndex){
-    return collections[collectionIndex]['cards'];
+export function getCards(){
+    let result = []
+    for (var collection of collections){
+        result = result.concat(collection.cards);
+    }
+    return result;
 }
