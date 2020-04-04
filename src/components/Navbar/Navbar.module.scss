@@ -1,6 +1,15 @@
 @import 'src/styles/_variables.scss';
 @import 'src/styles/_placeholders.scss';
 
+%link{
+  color:   $color-contrast-text;
+  font-family: "Roboto";
+  z-index: 1;
+  display: block;
+  font-size: 1.15em;
+  position: relative;
+}
+
 .header{
   height: 60px;
   padding: 5px 6vw;
@@ -22,12 +31,7 @@
   
   
 .nav-link{
-    color:   $color-contrast-text;
-    font-family: "Roboto";
-    z-index: 1;
-    display: block;
-    font-size: 1.15em;
-    position: relative;
+    @extend %link;
   }
   
 .nav-link::before{
@@ -41,13 +45,12 @@
     transform: translateY(-110px);
     transition: 0.4s ease ;
     z-index: -1;
-    background: url("./assets/images/bookmark1.svg") no-repeat;
+    background: url("../../assets/images/bookmark1.svg") no-repeat;
     background-size: 100% 100% ;
   }
   
 .nav-link:hover::before{
     transform: translateY(-80px);
-  
   }
   
 .active-link{
@@ -65,13 +68,17 @@
     transition: 0.5s ease ;
   }
   
+.auth-link{
+  @extend %link;
+}  
+
 .auth-link:hover{
     color:   $color-secondary ;
   }
   
 .logo-container a{
     color:   $color-contrast-text ;
-    font-family:   $font-pretty ;
+    font-family: "Comfortaa";
     display: block;
     text-decoration: none;
     font-size: 2.2rem;

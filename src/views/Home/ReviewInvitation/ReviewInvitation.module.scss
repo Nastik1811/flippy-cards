@@ -2,7 +2,7 @@
 @import 'src/styles/_placeholders.scss';
 
 .greeting-msg{
-    font-size: var(--text-large);
+    font-size: $text-large;
     text-align: left;
   }
   
@@ -15,16 +15,15 @@
     border: 1px solid rgba(150, 180, 200, 1);
     padding: 1.5em;
     border-radius: 0.5em;
-    font-size: var(--text-medium);
+    font-size: $text-medium;
     min-width: 50%;
     width: 600px;
     text-align: center;
   }
 
 .start-btn{
-    @extend %accent-btn;
-    font-family: "Comfortaa";
-    width: 50%;
-    min-width: 10em;
-  }
-  
+  @extend %accent-btn;
+  font-family: "Comfortaa";
+  width: 50%;
+  min-width: 10em;
+}

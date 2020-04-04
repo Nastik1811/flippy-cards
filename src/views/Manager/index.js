@@ -5,11 +5,11 @@ import CollectionPreview from './CollectionPreview'
 import { getCollections, getCards } from '../../DummyData'
 import styles from './Manager.module.scss'
 
-const Tabbar = ({children, activeTabIndex}) => {
+const Tabbar = ({children}) => {
 
     return (
-        <nav className="tabbar">
-            <ul className="tab-links">
+        <nav className={styles["tabbar"]}>
+            <ul className={styles["tab-links"]}>
                 {children}
             </ul>
             <hr/>
@@ -19,7 +19,7 @@ const Tabbar = ({children, activeTabIndex}) => {
 
 const Tab = ({active, index, label, onClick}) => {
 
-    let className = active ? "tab-active" : "tab";
+    let className = active ? styles["tab-active"] : styles["tab"];
     return (
         <li className={className} onClick={()=>{onClick(index)}}>{label}</li>
     )
@@ -27,7 +27,7 @@ const Tab = ({active, index, label, onClick}) => {
 
 const CardsPanel = ({cards}) => {
     return (
-            <div className="board-active">
+            <div className={styles["board"]}>
                 <CreateNewButton/>
                 {cards.map(c => <CardPreview front={c.front} back={c.back} />)}
             </div>
@@ -36,48 +36,45 @@ const CardsPanel = ({cards}) => {
 
 const CollectionsPanel = ({collections}) => {
     return (
-            <div className="board-active">
-                 <CreateNewButton/>
+            <div className={styles["board"]}>
+                <CreateNewButton/>
                 {collections.map((c, i) => <CollectionPreview slug={i} name={c.name} created={c.created}/>)}
             </div>
     )
 }
 
-export const CreateNewButton = props => {
+const CreateNewButton = props => {
     return (
-        <>
-        <div className="preview-container">
-            <div className="preview-component add-btn">+
+            <div className={styles["add-btn"]}>+
             </div>
-            <div className="preview-component outline-border"></div>
-        </div>
-        
-        </>
     )
 }
 
 const Manager = () => {
-    const [cards, setCards] = useState(null);
-    const [collections, setCollections] = useState(null);
-    const [currentTab, setCurrentTab] = useState(0);
+    let collections = getCollections();
+    let cards = getCards();
 
-    useEffect(()=>{
-        const data = getCards();
-        setCards(data)
-    }, [])
+    //const [cards, setCards] = useState(getCards());
+    //const [collections, setCollections] = useState(getCollections());
+    const [currentTab, setCurrentTab] = useState(1);
 
-    useEffect(()=>{
-        const data = getCollections();
-        setCollections(data)
-    }, [])
+    // useEffect(()=>{
+    //     const data = getCards();
+    //     setCards(data)
+    // })
+
+    // useEffect(()=>{
+    //     const data = getCollections();
+    //     setCollections(data)
+    // })
 
     return (
         <>
             <Tabbar>
-                <Tab index="0" active={currentTab === 0 ? true : false}  label="Collections" onClick={index => setCurrentTab(index)}/>
-                <Tab index="1" active={currentTab === 1 ? true : false}  label="Cards" onClick={index => setCurrentTab(index)} />
+                <Tab index="0" active={currentTab == 0 ? true : false}  label="Collections" onClick={index => setCurrentTab(index)}/>
+                <Tab index="1" active={currentTab == 1 ? true : false}  label="Cards" onClick={index => setCurrentTab(index)} />
             </Tabbar>
-            {currentTab === 0 ? <CollectionsPanel collections={collections}/> : <CardsPanel cards={cards} />}
+            {currentTab == 0 ? <CollectionsPanel collections={collections}/> : <CardsPanel cards={cards} />}
         </>
     )
 }

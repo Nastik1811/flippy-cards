@@ -6,10 +6,10 @@ import styles from './Overview.module.scss'
 
 const SessionInfo = ({name, left}) => {
     return (
-        <div className="session-info">
+        <div className={styles["session-info"]}>
             <div>
-                <div className="title">{name}</div>
-                <div className="detail">{left} cards left</div>
+                <div className={styles["title"]}>{name}</div>
+                <div className={styles["detail"]}>{left} cards left</div>
             </div>
             <Timer time = "0:20"/>
         </div>
@@ -17,7 +17,7 @@ const SessionInfo = ({name, left}) => {
 }
 
 const Timer = ({time}) => {
-    return(<div className="passed-time"> {time}</div>)
+    return(<div className={styles["passed-time"]}> {time}</div>)
 }
 
 const Overview = () => {
@@ -40,7 +40,7 @@ const Overview = () => {
             <div>
                 <SessionInfo name={collection.name} left = {left} />
                 <Card card={collection.cards[currentCardIndex]} onClick={() => setFlipped(true)} isFlipped={isFlipped}/>
-                <div className={isFlipped? "buttons-panel": "buttons-panel hidden"} >
+                <div className={ isFlipped? styles["buttons-panel"]: styles["buttons-panel-hidden"]} >
                     <button className="" onClick={handleClick}>Fail</button>
                     <button className="" onClick={handleClick}>Win</button>
                 </div>

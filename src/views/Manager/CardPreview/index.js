@@ -3,12 +3,16 @@ import styles from './CardPreview.module.scss'
 
 const CardPreview = ({front, back}) => {
     return(
-        <div className="preview-container overlay">
-            <div className="preview-component card-preview-back">
-                {back}
+        <div className={styles["card-preview"]}>
+            <div className={styles["back"]}>
+                <p className={styles["detail"]}>
+                    {back}
+                </p> 
             </div>
-            <div className="preview-component card-preview-front">
-                {front}
+            <div className={styles["front"]}>
+                <p className={styles["detail"]}>
+                    {front}
+                </p> 
             </div>
         </div>
     )

@@ -11,9 +11,9 @@ const Landing = () => {
         return <Redirect to="/home" />
     }
     return (
-        <div className="landing">
-            <section className="landing-section medium"> 
-                <Link to="/signup" className="accent-btn"  >Get started! </Link>
+        <div className={styles["landing"]}>
+            <section className={styles["landing-section"]}> 
+                <Link to="/signup" className={styles["start-btn"]}>Get started! </Link>
             </section>
         </div>
     )
