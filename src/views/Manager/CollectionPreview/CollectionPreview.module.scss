@@ -1,0 +1,39 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+.collection-preview{
+    display: block;
+    position: absolute;
+    background-color: var(--color-primary);
+  }
+  
+  .outline-border{
+    position: relative;
+    background: none;
+    left: 0.45rem;
+    bottom: 0.45rem;
+    border: 1px solid var(--color-primary-dark);
+  }
+  
+  .preview-header{
+    width: 100%;
+    color: var(--color-contrast-text);
+    position: absolute;
+    top: 1em;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .preview-details{
+    position: absolute;
+    width: 100%;
+    top: 3em;
+  }
+  .preview-footer{
+    width: 100%;
+    position: absolute;
+    bottom: 1.5rem;
+    font-size: 0.8rem;
+    text-align: center;
+    color:var(--color-overlay-text);
+  
+  }

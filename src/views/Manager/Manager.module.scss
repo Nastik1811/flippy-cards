@@ -1,0 +1,57 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.tabbar li{
+    display: inline;
+    margin-left: 2vw;
+    text-decoration: none;
+    font-size: var(--text-medium);
+    cursor: pointer;
+  }
+  
+  
+  .tabbar{
+    margin-top: 1vw;
+    width: 800px;
+  }
+  
+  hr{
+    margin-top: 0.4em;
+    border: 0.5px solid var(--color-primary-dark);
+  }
+  
+  .board-active{
+    display: grid;
+    margin-top: 2rem;
+    max-width: 100%;
+    width: 90%;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 10px;
+    gap: 10px;
+  }
+  
+  .board{
+    display: none;
+  }
+  
+  .tab{
+    transition: all 300ms ease;
+    color: var(--color-contrast-text);
+  }
+  
+  .tab:hover{
+    color: rgb(24, 146, 190);
+  }
+  
+  .tab-active{
+    color: rgb(24, 146, 190);
+  }
+  
+  .add-btn{
+    position: absolute;
+    cursor: pointer;
+    background-color: var(--color-primary);
+    color: var(--color-light-text);
+    font-size: 4rem;
+  }
