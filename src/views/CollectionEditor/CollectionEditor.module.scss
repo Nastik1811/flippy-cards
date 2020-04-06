@@ -2,21 +2,45 @@
 @import 'src/styles/_placeholders.scss';
 
 .name{
-    font-family: "Raleway";
-    color: $color-contrast-text;
-  }
-  
-.cards{
-    display: grid;
-    margin-top: 2rem;
-    min-width: 60vw;
-    max-width: 80vw;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) ;
-    row-gap: 10px;
-    column-gap: 10px;
-    
-  }
-  
-  .editor{
+  font-family: "Raleway";
+  color: $color-contrast-text;
+  display: inline-block;
+}
 
-  }
+.save-btn{
+  @extend %submit-btn;
+  position: absolute;
+  right: 10px;
+  width: 200px;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+.cards{
+  display: grid;
+  margin-top: 2rem;
+  min-width: 60vw;
+  max-width: 80vw;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) ;
+  row-gap: 10px;
+  column-gap: 10px;
+  justify-items: center;
+  
+}
+
+.editor{
+  height: 600px;
+  width: 80%;
+  border: 2px solid $color-primary-dark;
+  border-radius: 8px;
+  padding: 30px;
+}
+
+.scroll{
+  overflow: scroll;
+  width: 100%;
+}
+
+.editor header{
+  position: relative;
+}

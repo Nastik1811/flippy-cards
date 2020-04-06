@@ -56,6 +56,23 @@ export const collections = [
                 back: `this is actually a binding that is made when a function is invoked, and *what* it references 
                 is determined entirely by the call-site where the function is called.`,
                 stage: 0
+            },
+            {
+                front: "What is event.target ?",
+                back: "In simplest terms, the event.target is the element on which the event occurred or the element that triggered the event.",
+                stage: 0
+            },
+            {
+                front: "What is Scope?",
+                back: `Scope in JavaScript is the area where we have valid access to variables or functions. 
+                JavaScript has three types of Scopes. Global Scope, Function Scope, and Block Scope(ES6).`,
+                stage: 0
+            },
+            {
+                front: "What is this?",
+                back: `this is actually a binding that is made when a function is invoked, and *what* it references 
+                is determined entirely by the call-site where the function is called.`,
+                stage: 0
             }
         ]
     },
