@@ -56,7 +56,7 @@ const Manager = () => {
 
     //const [cards, setCards] = useState(getCards());
     //const [collections, setCollections] = useState(getCollections());
-    const [currentTab, setCurrentTab] = useState(1);
+    const [currentTab, setCurrentTab] = useState(0);
 
     // useEffect(()=>{
     //     const data = getCards();

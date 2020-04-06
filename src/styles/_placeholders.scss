@@ -43,3 +43,22 @@
         inset 3px 3px 2px rgba(255, 255, 255, 0.5);
         }
 }
+
+%main-section{
+    width: 100%;
+    
+    header{
+        font-size: $text-medium;
+        padding: 1rem;
+        color: $color-regular-text;
+    }
+  }
+  
+
+  %outline-border{
+    position: absolute;
+    @extend %preview-container;
+    border: 1px solid $color-primary-dark;
+    left: 0.45rem;
+    bottom: 0.45rem;
+  }

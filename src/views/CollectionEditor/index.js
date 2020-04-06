@@ -21,9 +21,12 @@ const CollectionEditor = () => {
                 <div className={styles["editor"]}>
                     <header>
                         <h1 contentEditable="true" className={styles["name"]}>{collection.name}</h1>
+                        <button className={styles["save-btn"]}> Save</button>
                     </header>
-                    <div className={styles["cards"]}>
-                        {cards}
+                    <div className={styles["scroll"]}>
+                        <div className={styles["cards"]}>
+                            {cards}
+                        </div>
                     </div>
                 </div>
                 
