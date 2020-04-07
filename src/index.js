@@ -11,12 +11,15 @@ import './assets/fonts/Comfortaa-Regular.ttf';
 import './assets/images/Clouds.png';
 import App from './App'
 import { AuthProvider } from './Auth';
+import { FirebaseProvider } from './firebase'
 
 ReactDOM.render(
-    <AuthProvider>
-        <Router>
-            <App/>
-        </Router>
-    </AuthProvider>,
+    <FirebaseProvider>
+        <AuthProvider>
+            <Router>
+                <App/>
+            </Router>
+        </AuthProvider>
+    </FirebaseProvider>,
      document.getElementById('root'));
 
