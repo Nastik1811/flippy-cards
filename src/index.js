@@ -12,13 +12,16 @@ import './assets/images/Clouds.png';
 import App from './App'
 import { AuthProvider } from './Auth';
 import { FirebaseProvider } from './firebase'
+import { DataProvider } from './DataManger';
 
 ReactDOM.render(
     <FirebaseProvider>
         <AuthProvider>
-            <Router>
-                <App/>
-            </Router>
+            <DataProvider>
+                <Router>
+                    <App/>
+                </Router>
+            </DataProvider>
         </AuthProvider>
     </FirebaseProvider>,
      document.getElementById('root'));
