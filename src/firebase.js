@@ -17,19 +17,23 @@ const config = {
 
 class Firebase {
   constructor() {
-    const instance = firebase.initializeApp(config);
-    this.auth = instance.auth();
+    const app = firebase.initializeApp(config);
+    this.auth = app.auth();
+    this.firestore = app.firestore();
   }
 
   signOut =() => this.auth.signOut();
   createUser = (email, password, userName) =>{
-    this.auth.createUserWithEmailAndPassword(email, password);
+    this.auth.createUserWithEmailAndPassword(email, password).then(cred => {
+      this.firestore.collection('users').doc(cred.user.uid).set({
+        user_name: userName,
+      })
+    })
   }
   login = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
   onAuthStateChanged = (observer) => this.auth.onAuthStateChanged(observer);
-  
-
 }
+
 export const FirebaseContext = createContext(null);
 
 export const FirebaseProvider = ({children}) => {
