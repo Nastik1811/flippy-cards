@@ -55,16 +55,17 @@ But ... Firestore don’t provide grouping queries (so we can’t group cards by
 
   3. Store some card information, that helps determine whether a collection need repetition, inside the collection
 
-    **Collection** _(firestore document)_
+      **Collection** _(firestore document)_
 
-    - Name: name
+      - Name: name
 
-    - Created_date: date
-    - Cards: [card_1, card_2, ...]  *// card_i ~ { id, is_need_to_repeat }*
+      - Created_date: date
+      - Cards: [card_1, card_2, ...]  *// card_i ~ { id, is_need_to_repeat }*
 
-    I personally like this approach most, but on those firestore YouTube playlist was said that arrays in firesore are weird and it's better not to use them. (but I need to recall what exactly is strange about them)
+      I personally like this approach most, but on those firestore YouTube playlist was said that arrays in firesore are weird and it's better not to use them. (but I need to recall what exactly is strange about them)
 
     
+--- 
 
 Of course, there is plenty of other issues, but that should be solved first, I think.
 
