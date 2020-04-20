@@ -1,29 +1,32 @@
-import React, {useCallback, useContext} from 'react'
-import { FirebaseContext } from '../../firebase';
-import {withRouter, Redirect} from 'react-router-dom'
+import React, {useCallback, useContext, useState, useEffect} from 'react'
+import {withRouter} from 'react-router-dom'
 import styles from './CardEditor.module.scss'
+import { DataContext } from '../../DataManger';
 
 const CardEditor = ({history}) => {
-  const app = useContext(FirebaseContext);
+  const {manager} = useContext(DataContext);
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => await manager.getCollections().then(data => setCollections(data));
+    fetchData()
+  }, [manager])
 
   const handleSubmit = useCallback(
       async event => {
         event.preventDefault();
-        console.log(event.target.elements);
-        const { front, back, collection } = event.target.elements;
-        try {
-          await app.addCard({
-              front: front.value,
-              back: back.value,
-              collection: collection.value
-            })
-          history.push("/home");
-        } catch (error) {
-          alert(error);
-        }
-      },
-      [history]
-    );
+        const { front, back, collection} = event.target.elements;
+        
+        await manager.addCard({
+          content:{
+            front: front.value,
+            back: back.value,
+          },
+          collection_id: collection.value
+        })
+
+        history.push("/home");
+      }, [history, manager] );
 
     return (
             <div className={styles["editor"]}>
@@ -42,9 +45,7 @@ const CardEditor = ({history}) => {
                     <label>
                         Choose a collection: 
                         <select name="collection" >
-                            <option>Js</option>
-                            <option>English words</option>
-                            <option>React</option>
+                          {collections.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
                         </select>
                     </label>
                     <input type="submit" className={styles["submit-btn"]} value="Save" />

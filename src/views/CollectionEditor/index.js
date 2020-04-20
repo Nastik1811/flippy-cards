@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import CardItem from './CardItem'
 import { useParams } from 'react-router-dom'
-import { collections } from '../../DummyData'
 import styles from './CollectionEditor.module.scss'
+import { DataContext } from '../../DataManger'
 
 const CheckablePreview = ({children}) => {
     return(<div>
@@ -13,25 +13,40 @@ const CheckablePreview = ({children}) => {
 const CollectionEditor = () => {
 
     let {slug} = useParams();
-    let collection = collections[slug];
+    const {manager} = useContext(DataContext);
+    const [collection, setCollection] = useState(null);
+    const [cards, setCards] = useState([]);
+
+    useEffect(() => {
+        async function fetchData(){
+            await manager.getCards(slug).then(data => setCards(data));
+        }
+        fetchData();
+    }, [manager, slug])
+
+    useEffect(() => {
+        async function fetchData(){
+            await manager.getCollection(slug).then(data => setCollection(data));
+        }
+        fetchData();
+     }, [manager, slug])
     
-    let cards = collection.cards.map(c => <CheckablePreview><CardItem front={c.front} back={c.back}/></CheckablePreview>)
-        return (
-            <>
-                <div className={styles["editor"]}>
-                    <header>
-                        <h1 contentEditable="true" className={styles["name"]}>{collection.name}</h1>
-                        <button className={styles["save-btn"]}> Save</button>
-                    </header>
-                    <div className={styles["scroll"]}>
-                        <div className={styles["cards"]}>
-                            {cards}
-                        </div>
+    return (
+        <>
+            <div className={styles["editor"]}>
+                <header>
+                    <h1 className={styles["name"]}>{collection? collection.name: "" }</h1>
+                    <button className={styles["save-btn"]}> Save</button>
+                </header>
+                <div className={styles["scroll"]}>
+                    <div className={styles["cards"]}>
+                        {cards.map(c => <CardItem front={c.content.front} back={c.content.back} key={c.id}/>)}
                     </div>
                 </div>
-                
-            </>
-        )
+            </div>
+            
+        </>
+    )
   
 }
 
