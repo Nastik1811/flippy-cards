@@ -1,9 +1,9 @@
-import ReactDOM from 'react-dom'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CardPreview from './CardPreview'
+import { Link } from 'react-router-dom'
 import CollectionPreview from './CollectionPreview'
-import { getCollections, getCards } from '../../DummyData'
 import styles from './Manager.module.scss'
+import { DataContext } from '../../DataManger'
 
 const Tabbar = ({children}) => {
 
@@ -27,46 +27,47 @@ const Tab = ({active, index, label, onClick}) => {
 
 const CardsPanel = ({cards}) => {
     return (
+        cards ?
             <div className={styles["board"]}>
-                <CreateNewButton/>
-                {cards.map(c => <CardPreview front={c.front} back={c.back} />)}
-            </div>
+                <Link to="/new" className={styles["add-btn"]}> + </Link>
+                {cards.map(c => <CardPreview slug={c.id} front={c.content.front} back={c.content.back} key={c.id} />)}
+            </div> 
+            : 
+            <div>Loading...</div>
     )
 }
 
-const CollectionsPanel = ({collections}) => {
+const CollectionsPanel = ({collections, match}) => {
     return (
+        collections ?
             <div className={styles["board"]}>
-                <CreateNewButton/>
-                {collections.map((c, i) => <CollectionPreview slug={i} name={c.name} created={c.created}/>)}
+                <Link to={match.url + "/new"}  className={styles["add-btn"]}> + </Link>
+                {collections.map(c => <CollectionPreview slug={c.id} name={c.name} key={c.id}/>)}
             </div>
+            : 
+            <div>Loading...</div>
     )
 }
 
-const CreateNewButton = props => {
-    return (
-            <div className={styles["add-btn"]}>+
-            </div>
+//I'm still thinking about suggested approach to manage collections and cards separately via corresponding urls
+//But for now I'd like to solve other problems first
+
+const Manager = ({match}) => {
+    const {manager} = useContext(DataContext);
+
+    const [collections, setCollections] = useState([]);
+    useEffect(() => {
+        manager.getCollections().then(data => setCollections(data))
+    }, [manager]
     )
-}
 
-const Manager = () => {
-    let collections = getCollections();
-    let cards = getCards();
+    const [cards, setCards] = useState([]);
+    useEffect(() => {
+        manager.getCards().then(data => setCards(data))
+    }, [manager]
+    )
 
-    //const [cards, setCards] = useState(getCards());
-    //const [collections, setCollections] = useState(getCollections());
     const [currentTab, setCurrentTab] = useState(0);
-
-    // useEffect(()=>{
-    //     const data = getCards();
-    //     setCards(data)
-    // })
-
-    // useEffect(()=>{
-    //     const data = getCollections();
-    //     setCollections(data)
-    // })
 
     return (
         <>
@@ -74,7 +75,7 @@ const Manager = () => {
                 <Tab index="0" active={currentTab === 0 ? true : false}  label="Collections" onClick={index => setCurrentTab(index)}/>
                 <Tab index="1" active={currentTab === 1 ? true : false}  label="Cards" onClick={index => setCurrentTab(index)} />
             </Tabbar>
-            {currentTab === 0 ? <CollectionsPanel collections={collections}/> : <CardsPanel cards={cards} />}
+            {currentTab === 0 ? <CollectionsPanel collections={collections} match={match}/> : <CardsPanel cards={cards} />}
         </>
     )
 }
