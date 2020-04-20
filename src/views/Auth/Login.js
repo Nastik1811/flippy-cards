@@ -19,12 +19,13 @@ export const Login = ({history}) => {
             alert(error);
           }
         },
-        [history]
+        [history, app]
       );
 
     if(!!currentUser){
         return <Redirect to="/home" />
     }
+    
     return (
     <div className={styles["auth-container"]}>
       <h2 className={styles["form-header"]}>Login</h2>

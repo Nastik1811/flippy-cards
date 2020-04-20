@@ -1,5 +1,4 @@
 import React, {useCallback, useContext} from 'react'
-import app from '../../firebase';
 import { AuthContext } from '../../Auth';
 import {FirebaseContext} from '../../firebase';
 import {withRouter, Redirect} from 'react-router-dom';
@@ -19,7 +18,7 @@ const Signup = ({history}) => {
       } catch (error) {
         alert(error);
       }
-    }, [history]);
+    }, [history, app]);
 
     if(!!currentUser){
         return <Redirect to="/home" />
