@@ -12,9 +12,9 @@ As you can remember from our last meeting I had lots of questions about data fet
 
   - User name
 
-- - Cards _(firestore collection with the next doc's structure)_
+  - Cards _(firestore collection with the next doc's structure)_
 
-  - - Content 
+    - Content 
       - front
       - Back
     - Collection_id
@@ -23,7 +23,7 @@ As you can remember from our last meeting I had lots of questions about data fet
 
   - Collections _(firestore collection with the next doc's structure)_
 
-  - - Name
+    - Name
     - Created_date
     - the rest is in question yet
 
@@ -37,22 +37,22 @@ As you can remember from our last meeting I had lots of questions about data fet
 
 
 
-##### Two big problem I need to solve:
+#### Two big problems I need to solve:
 
 - To gain total number of cards to repeat  we should query cards collection with “where” clause that checks whether a card is ready for repeat
 
-- - First problem here is **how** to determine that card is *“ready”*. I thought I could just compare _“next_repetition_date”_ with current date. But I couldn't find the way to implement it because firestore stores dates as Timestamp and has no mechanism to compare two Timestamp objects with ">=" or so. (since Timestamp consist of _seconds_ and _nanoseconds_ properties I tried to use _seconds_ as key for comparison. Maybe I made something wrong but it didn't work)
+  - First problem here is **how** to determine that card is *“ready”*. I thought I could just compare _“next_repetition_date”_ with current date. But I couldn't find the way to implement it because firestore stores dates as Timestamp and has no mechanism to compare two Timestamp objects with ">=" or so. (since Timestamp consist of _seconds_ and _nanoseconds_ properties I tried to use _seconds_ as key for comparison. Maybe I made something wrong but it didn't work)
   - Another approach I reasoned is to store boolean field like _“is_need_to_repeat”_ that will dynamically update with some period (maybe.. every midnight server goes through all cards, compare dates and update this field if needed. Just thoughts 🙂 ). But to be honest I have no real idea how to implement it. 
 
-- Ok, consider that we miraculosly found the way to determine which cards need repetition. It meens we could fetch all cards we need to repeat as an array of docs. What next?) We need to fill our links ![image-20200420194922633](/Users/anastasia/Library/Application Support/typora-user-images/image-20200420194922633.png) But ... Firestore don’t provide grouping queries (so we can’t group cards by collection_id). 
+- Ok, consider that we miraculosly found the way to determine which cards need repetition. It meens we could fetch all cards we need to repeat as an array of docs. What next?) We need to fill our links ![screen](/Users/anastasia/Desktop/flippy/screen.jpg) But ... Firestore don’t provide grouping queries (so we can’t group cards by collection_id). 
 
   Some ideas:
 
-- 1. Maybe there is a way to write a js-function to perform such grouping. 
+  1. Maybe there is a way to write a js-function to perform such grouping. 
 
-- 2. Another idea — have the same “is_need_to_repeat” field for collection (and when card ’s status updates — the status of its collection also updates… but again I'm not sure about the possibility of such an implementation ).
+  2. Another idea — have the same “is_need_to_repeat” field for collection (and when card ’s status updates — the status of its collection also updates… but again I'm not sure about the possibility of such an implementation ).
 
-- - Store some card information, that helps determine whether a collection need repetition, inside the collection
+  3. Store some card information, that helps determine whether a collection need repetition, inside the collection
 
     **Collection** _(firestore document)_
 

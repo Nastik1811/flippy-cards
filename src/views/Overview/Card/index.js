@@ -6,9 +6,9 @@ const Card = ({card, isFlipped, onClick}) => {
     return (
         <div className={isFlipped? styles["flipped-card"] : styles["card"]} onClick={onClick}>
             
-            <div className={styles["card-front"]}>{card.front}
+            <div className={styles["card-front"]}>{card.content.front}
             </div>
-            <div className={styles["card-back"]}>{card.back}
+            <div className={styles["card-back"]}>{card.content.back}
             </div>
             <span className={styles["card-caption"]}>Click to flip</span>
         </div>
