@@ -64,7 +64,7 @@ But ... Firestore don’t provide grouping queries (so we can’t group cards by
 
       I personally like this approach most, but on those firestore YouTube playlist was said that arrays in firesore are weird and it's better not to use them. (but I need to recall what exactly is strange about them)
       
-      _21.04 upd_  
+      _21.04 10:00 upd_  
       What if the Cards here is a map { card_id: is_need_repetition } rather than an array? I.e. Collection document looks like:
       
       **Collection** _(firestore document)_
@@ -78,7 +78,9 @@ But ... Firestore don’t provide grouping queries (so we can’t group cards by
           }
          
        Is it a bad idea?
-      
+       
+      _21.04 10:20 upd_  
+      Just rechecked information about arrays. Seems, the problems with them arise when multiple users are trying to modify the same array simultaneously. Since our strucure  implies access to modifications only to the “owner” of the collection, maybe arrays no the worst choice?  But it might be better to store two arrays instread of one: totas_cards and cards_to_repeat, that contain only ids of cards.
 
     
 --- 
