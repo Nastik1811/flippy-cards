@@ -63,6 +63,22 @@ But ... Firestore don’t provide grouping queries (so we can’t group cards by
       - Cards: [card_1, card_2, ...]  *// card_i ~ { id, is_need_to_repeat }*
 
       I personally like this approach most, but on those firestore YouTube playlist was said that arrays in firesore are weird and it's better not to use them. (but I need to recall what exactly is strange about them)
+      
+      _21.04 upd_  
+      What if the Cards here is a map { card_id: is_need_repetition } rather than an array? I.e. Collection document looks like:
+      
+      **Collection** _(firestore document)_
+  
+      - Name: name
+      - Created_date: date
+      - Cards: {  
+          FJHSihs8eh30e: true,    
+          ihYP3YGDhfd34: false,  
+          ...  
+          }
+         
+       Is it a bad idea?
+      
 
     
 --- 
