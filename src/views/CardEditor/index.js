@@ -16,17 +16,23 @@ const CardEditor = ({history}) => {
       async event => {
         event.preventDefault();
         const { front, back, collection} = event.target.elements;
-        
+
+        const collection_id = collection.value
+        const collection_name = collections.find(e => e.id === collection_id).name
         await manager.addCard({
           content:{
             front: front.value,
             back: back.value,
           },
-          collection_id: collection.value
+          collection: {
+            id: collection_id,
+            name: collection_name
+          }
+          
         })
 
         history.push("/home");
-      }, [history, manager] );
+      }, [history, manager, collections] );
 
     return (
             <div className={styles["editor"]}>
