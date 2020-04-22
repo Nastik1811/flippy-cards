@@ -1,17 +1,17 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './ReviewInvitation.module.scss'
 import { DataContext } from '../../../DataManger'
 
-const InvitationMsg = props => {
+const InvitationMsg = ({userName, amount}) => {
 
     return (
         <>
             <div className={styles["greeting-msg"]} >
-                Hello, {props.userName}!
+                Hello, {userName}!
             </div>
             <div className={styles["invitation-msg"]} >
-                You have something to reapet. Your cards are awaiting you.. Let’s start learning!
+                You have something to reapet. {amount} cards are awaiting you.. Let’s start learning!
             </div>
         </>
     )
@@ -20,21 +20,20 @@ const InvitationMsg = props => {
 const ReviewInvitation = () => {
     const {manager} = useContext(DataContext);
 
-    // do I really need hooks here?
     const [userName, setUserName] = useState(null);
+    const [total, setTotal] = useState(0)
 
-    //what is the difference between next two ways of setting user name?
-    //manager.getUserName().then(name => setUserName(name));
+    useEffect(() => {
+        manager.getTotalRepeatNumber().then(data => setTotal(data))
+    }, [manager])
 
-    //It's all bad. I'm trying to get value from firestore after every re-render that is really notable
-    React.useEffect(() => {
+    useEffect(() => {
         manager.getUserName().then(name => setUserName(name));
     }, [manager]) 
-    
 
     return (
         <div className={styles["greeting"]}>
-            <InvitationMsg  userName={userName}/>
+            <InvitationMsg  userName={userName} amount={total}/>
             <Link to="/session" className={styles["start-btn"]}>Start now</Link>
         </div>
     )

@@ -42,8 +42,7 @@ class DataManger {
             ...data,
             created: date,
             next_recall: date,
-            learning_stage: 0,
-            need_repetition: true
+            learning_stage: 0
         }
 
         this.userRef.collection('cards').add(card);
@@ -61,7 +60,6 @@ class DataManger {
             name,
             created: date,
             last_edit: date,
-            need_repetition: false,
             cards_total: 0,
             cards_to_repeat: 0
         }
@@ -74,7 +72,7 @@ class DataManger {
 
     getCards(collection_id){
         if(collection_id){
-            return this.cardsRef.where("collection_id", "==", collection_id).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
+            return this.cardsRef.where("collection.id", "==", collection_id).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
         }
         else{
             return this.cardsRef.get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
@@ -85,18 +83,39 @@ class DataManger {
         return this.collectionsRef.doc(id).get().then(doc => doc.data())
     }
 
-    //just experiments with implementation of methods I've mentioned in README (unfortunately, not working ones)
     getCardsToRecall(collection_id){
         if(collection_id){
-            return this.cardsRef.where("collection_id", "==", collection_id).where("need_repetition", "==", true).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
+            return this.cardsRef.where("collection.id", "==", collection_id).where("next_recall", "<=", new Date()).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
         }
         else{
-            return this.cardsRef.where("need_repetition", "==", true).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
+            return this.cardsRef.where("next_recall", "<=", new Date()).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
         } 
     }
 
-    getCollectionsToRecall(){
-        this.cardsRef.where("need_repetition", "==", true).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
+    getTotalRepeatNumber(){
+        return this.cardsRef.where("next_recall", "<=", new Date()).get().then(query => query.docs.length);
     }
+
+    async getCollectionToRepeatPreviews(){
+        const cards = await this.cardsRef.where("next_recall", "<=", new Date()).get().then(query => query.docs.map(doc => ({id: doc.id, collection: doc.data().collection})));
+        
+        const grouped_cards = this.reselectCards(cards) // {id: [cards]}
+        const collections = []
+        
+        Object.keys(grouped_cards).forEach( id => {
+                const name = grouped_cards[id][0].collection.name
+                const amount = grouped_cards[id].length
+                collections.push({id, name, amount})
+            }
+        )
+        return collections
+    }
+
+    reselectCards(cards) {
+        const grouppedCards = {};
+        cards.forEach(card => grouppedCards[card.collection.id] ? grouppedCards[card.collection.id].push(card) : grouppedCards[card.collection.id] = [card])
+        delete grouppedCards[null]
+        return grouppedCards;
+      }
   
   }
