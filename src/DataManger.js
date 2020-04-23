@@ -6,13 +6,13 @@ import { AuthContext } from './Auth';
 
 export const DataContext = React.createContext();
 
-export const marks = {
+export const MARK = {
     BAD: 0,
     GOOD: 1,
     EXCELLENT: 2
 }
 
-export const status = {
+export const STATUS = {
     NEW: 0,
     IN_PROGRESS: 1,
     LEARNT: 2
@@ -54,7 +54,7 @@ class DataManger {
             ...data,
             created: date,
             next_recall: date,
-            status: status.NEW
+            status: STATUS.NEW
         }
 
         this.userRef.collection('cards').add(card);
@@ -139,13 +139,13 @@ class DataManger {
         let nextPeriod;
 
         switch(mark){
-            case marks.BAD:
+            case MARK.BAD:
                 nextPeriod = suggestedPeriod + delay/4 
                 break;
-            case marks.GOOD:
+            case MARK.GOOD:
                 nextPeriod = (suggestedPeriod + delay/2 ) * 1.5 + 1
                 break;
-            case marks.EXCELLENT:
+            case MARK.EXCELLENT:
                 nextPeriod = (suggestedPeriod + delay) * 2 + 2
                 break;
             default:
@@ -155,15 +155,18 @@ class DataManger {
         return nextPeriod
     }
 
-    async updateCardProgress(card, mark){
-        switch(status){
-            case status.NEW:
+    updateCardProgress(card, mark){
+        
+        switch(card.status){
+            case STATUS.NEW:
+                console.log("new")
                 this.updateNew(card, mark)
                 break;
-            case status.IN_PROGRESS:
+            case STATUS.IN_PROGRESS:
+                console.log("progress")
                 this.updateInProgress(card, mark)
                 break;
-            case status.LEARNT:
+            case STATUS.LEARNT:
                 this.updateLearnt(card)
                 break;
             default:
@@ -181,10 +184,12 @@ class DataManger {
         let nextRecall = new Date()
         nextRecall.setDate(today.getDate() + nextPeriod)
 
+        let status = nextPeriod > 365 ? STATUS.LEARNT : card.status
+
         this.cardsRef.doc(card.id).update({
             next_recall: firebase.firestore.Timestamp.fromDate(nextRecall),
             last_recall: firebase.firestore.Timestamp.fromDate(today),
-            status: status
+            status
         })     
 
     }
@@ -193,15 +198,15 @@ class DataManger {
         let status;
 
         switch(mark){
-            case marks.BAD:
+            case MARK.BAD:
                 nextPeriod = 0;
                 break;
-            case marks.GOOD:
+            case MARK.GOOD:
                 nextPeriod = 1;
                 break;
-            case marks.EXCELLENT:
+            case MARK.EXCELLENT:
                 nextPeriod = 24;
-                status = status.IN_PROGRESS;
+                status = STATUS.IN_PROGRESS;
                 break;
             default:
                 nextPeriod = 0
@@ -224,7 +229,7 @@ class DataManger {
 
         let suggestedPeriod = suggestedRecall.getDate() - previousRecall.getDate();
         
-        let nextPeriod = mark === marks.BAD ? suggestedPeriod : suggestedPeriod * 1.5
+        let nextPeriod = mark === MARK.BAD ? suggestedPeriod : suggestedPeriod * 1.5
         
         const today = new Date()
         let nextRecall = new Date()

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import Card from './Card'
 import {useParams} from 'react-router-dom'
 import styles from './Overview.module.scss'
-import { DataContext, marks } from '../../DataManger'
+import { DataContext, MARK } from '../../DataManger'
 
 const SessionInfo = ({name, left}) => {
     return (
@@ -40,8 +40,8 @@ const Overview = () => {
 
     
     const handleClick = (mark) => {
-        manager.updateLearningProgress(cards[currentCardIndex], mark)
-        
+        manager.updateCardProgress(cards[currentCardIndex], mark)
+
         if(left !== 0 ){
             setFlipped(false);
             setCardIndex(currentCardIndex + 1);
@@ -58,9 +58,9 @@ const Overview = () => {
                 <SessionInfo name={collection_id ? cards[0].collection.name : "All cards"} left = {left} />
                 <Card card={cards[currentCardIndex].content} onClick={() => setFlipped(true)} isFlipped={isFlipped}/>
                 <div className={ isFlipped? styles["buttons-panel"]: styles["buttons-panel-hidden"]} >
-                    <button className="" onClick={() => handleClick(marks.BAD)}>Fail</button>
-                    <button className="" onClick={() => handleClick(marks.GOOD)} >Deal</button>
-                    <button className="" onClick={() => handleClick(marks.EXCELLENT)} >Win</button>
+                    <button className="" onClick={() => handleClick(MARK.BAD)}>Fail</button>
+                    <button className="" onClick={() => handleClick(MARK.GOOD)} >Deal</button>
+                    <button className="" onClick={() => handleClick(MARK.EXCELLENT)} >Win</button>
                 </div>
             </div>
             :

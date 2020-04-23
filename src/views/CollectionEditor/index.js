@@ -15,22 +15,18 @@ const CollectionEditor = () => {
     let {slug} = useParams();
     const {manager} = useContext(DataContext);
     const [collection, setCollection] = useState(null);
-    const [cards, setCards] = useState([]);
+    const [checkedCards, setCheckedCards] = useState([]);
+    const [uncheckedCards, setUncheckedCards] = useState([]);
 
     useEffect(() => {
         async function fetchData(){
-            await manager.getCards(slug).then(data => setCards(data));
+            await manager.getCards(slug).then(data => setCheckedCards(data));
+            await manager.getCardsWithoutCollection().then(data => setUncheckedCards(data));
+            await manager.getCollection(slug).then(data => setCollection(data));
         }
         fetchData();
     }, [manager, slug])
 
-    useEffect(() => {
-        async function fetchData(){
-            await manager.getCollection(slug).then(data => setCollection(data));
-        }
-        fetchData();
-     }, [manager, slug])
-    
     return (
         <>
             <div className={styles["editor"]}>
@@ -40,7 +36,8 @@ const CollectionEditor = () => {
                 </header>
                 <div className={styles["scroll"]}>
                     <div className={styles["cards"]}>
-                        {cards.map(c => <CardItem front={c.content.front} back={c.content.back} key={c.id}/>)}
+                        {checkedCards.map(c => <CardItem front={c.content.front} back={c.content.back} key={c.id}/>)}
+                        {uncheckedCards.map(c => <CardItem front={c.content.front} back={c.content.back} key={c.id}/>)}
                     </div>
                 </div>
             </div>
