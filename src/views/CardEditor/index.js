@@ -15,20 +15,21 @@ const CardEditor = ({history}) => {
   const handleSubmit = useCallback(
       async event => {
         event.preventDefault();
-        const { front, back, collection} = event.target.elements;
+        const { front, back, collection_id} = event.target.elements;
+      
+        const id = collection_id.value;
+        console.log(id)
+        const collection = id? {
+          id,
+          name: collections.find(collection => collection.id === id).name
+        } : null;
 
-        const collection_id = collection.value
-        const collection_name = collections.find(e => e.id === collection_id).name
         await manager.addCard({
-          content:{
+          content: {
             front: front.value,
-            back: back.value,
+            back: back.value
           },
-          collection: {
-            id: collection_id,
-            name: collection_name
-          }
-          
+          collection
         })
 
         history.push("/home");
@@ -50,7 +51,7 @@ const CardEditor = ({history}) => {
 
                     <label>
                         Choose a collection: 
-                        <select name="collection" >
+                        <select name="collection_id" >
                           {collections.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
                         </select>
                     </label>
