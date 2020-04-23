@@ -6,6 +6,18 @@ import { AuthContext } from './Auth';
 
 export const DataContext = React.createContext();
 
+export const marks = {
+    BAD: 0,
+    GOOD: 1,
+    EXCELLENT: 2
+}
+
+export const status = {
+    NEW: 0,
+    IN_PROGRESS: 1,
+    LEARNT: 2
+}
+
 export const DataProvider = ({children}) => {
     const {app} = useContext(FirebaseContext);
     const {currentUser} = useContext(AuthContext);
@@ -42,26 +54,18 @@ class DataManger {
             ...data,
             created: date,
             next_recall: date,
-            learning_stage: 0
+            status: status.NEW
         }
 
         this.userRef.collection('cards').add(card);
-
-        if(data.collection_id){
-            //update collection (according to what exactly will be store inside it, which is not clear yet) 
-        }
     }
 
     addCollection(name){
         const date = firebase.firestore.Timestamp.fromDate(new Date());
-        // not sure about last 3 fields 
-        // to be honest I'm not sure about anything in this class.
         let collection = {
             name,
             created: date,
-            last_edit: date,
-            cards_total: 0,
-            cards_to_repeat: 0
+            last_edit: date
         }
         this.collectionsRef.add(collection);
     }
@@ -113,9 +117,123 @@ class DataManger {
 
     reselectCards(cards) {
         const grouppedCards = {};
-        cards.forEach(card => grouppedCards[card.collection.id] ? grouppedCards[card.collection.id].push(card) : grouppedCards[card.collection.id] = [card])
-        delete grouppedCards[null]
+        cards.forEach(card => {
+            if(card.collection){
+                grouppedCards[card.collection.id] ? grouppedCards[card.collection.id].push(card) : grouppedCards[card.collection.id] = [card]
+            }
+        })
         return grouppedCards;
-      }
+    }
+
+    getCardsWithoutCollection(){
+    return this.cardsRef.where("collection", "==", null).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
+    }
+
+    //overview logic
+    calculatePeriod(previousRecall, suggestedRecall, mark){
+        const today = new Date();
+
+        let suggestedPeriod = suggestedRecall.getDate() - previousRecall.getDate();
+        let delay = today.getDate() - suggestedRecall.getDate();
+
+        let nextPeriod;
+
+        switch(mark){
+            case marks.BAD:
+                nextPeriod = suggestedPeriod + delay/4 
+                break;
+            case marks.GOOD:
+                nextPeriod = (suggestedPeriod + delay/2 ) * 1.5 + 1
+                break;
+            case marks.EXCELLENT:
+                nextPeriod = (suggestedPeriod + delay) * 2 + 2
+                break;
+            default:
+                nextPeriod = 0
+        }
+
+        return nextPeriod
+    }
+
+    async updateCardProgress(card, mark){
+        switch(status){
+            case status.NEW:
+                this.updateNew(card, mark)
+                break;
+            case status.IN_PROGRESS:
+                this.updateInProgress(card, mark)
+                break;
+            case status.LEARNT:
+                this.updateLearnt(card)
+                break;
+            default:
+                break;
+        }  
+    }
+
+    updateInProgress(card, mark){
+        let previousRecall = card.last_recall.toDate();
+        let suggestedRecall = card.next_recall.toDate()
+
+        let nextPeriod = this.calculatePeriod(previousRecall, suggestedRecall, mark)
+
+        const today = new Date()
+        let nextRecall = new Date()
+        nextRecall.setDate(today.getDate() + nextPeriod)
+
+        this.cardsRef.doc(card.id).update({
+            next_recall: firebase.firestore.Timestamp.fromDate(nextRecall),
+            last_recall: firebase.firestore.Timestamp.fromDate(today),
+            status: status
+        })     
+
+    }
+    updateNew(card, mark){
+        let nextPeriod;
+        let status;
+
+        switch(mark){
+            case marks.BAD:
+                nextPeriod = 0;
+                break;
+            case marks.GOOD:
+                nextPeriod = 1;
+                break;
+            case marks.EXCELLENT:
+                nextPeriod = 24;
+                status = status.IN_PROGRESS;
+                break;
+            default:
+                nextPeriod = 0
+        }
+
+        const today = new Date()
+        let nextRecall = new Date()
+        nextRecall.setHours(today.getHours() + nextPeriod)
+
+        this.cardsRef.doc(card.id).update({
+            next_recall: firebase.firestore.Timestamp.fromDate(nextRecall),
+            last_recall: firebase.firestore.Timestamp.fromDate(today),
+            status: status
+        })
+    }
+
+    updateLearnt(card, mark){
+        let previousRecall = card.last_recall.toDate();
+        let suggestedRecall = card.next_recall.toDate();
+
+        let suggestedPeriod = suggestedRecall.getDate() - previousRecall.getDate();
+        
+        let nextPeriod = mark === marks.BAD ? suggestedPeriod : suggestedPeriod * 1.5
+        
+        const today = new Date()
+        let nextRecall = new Date()
+        nextRecall.setDate(today.getDate() + nextPeriod)
+
+        this.cardsRef.doc(card.id).update({
+            next_recall: firebase.firestore.Timestamp.fromDate(nextRecall),
+            last_recall: firebase.firestore.Timestamp.fromDate(today)
+        })     
+    }
   
   }

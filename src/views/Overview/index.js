@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import Card from './Card'
 import {useParams} from 'react-router-dom'
 import styles from './Overview.module.scss'
-import { DataContext } from '../../DataManger'
+import { DataContext, marks } from '../../DataManger'
 
 const SessionInfo = ({name, left}) => {
     return (
@@ -21,32 +21,27 @@ const Timer = ({time}) => {
 }
 
 const Overview = () => {
-    let {slug} = useParams();
+    const {slug} = useParams();
     const {manager} = useContext(DataContext);
+
     const collection_id = slug ? slug : null;
     
-    const [collection, setCollection] = useState(null);
     const [cards, setCards] = useState(null);
-
     const [currentCardIndex, setCardIndex] = useState(0);
     const [isFlipped, setFlipped] = useState(false);
     const [left, setLeft] = useState(0);
 
-    console.log(collection_id)
     useEffect(()=> {
         manager.getCardsToRecall(collection_id).then(data => {
             setCards(data);
-            setLeft(data.length - 1)
+            setLeft(data.length - 1);
         })
     }, [manager, collection_id])
 
-    //have no idea how to do it better
-    useEffect(() => {
-        collection_id ?
-        manager.getCollection(collection_id).then(data => setCollection(data)) : setCollection(null);
-    }, [manager, collection_id])
     
-    const handleClick = () => {
+    const handleClick = (mark) => {
+        manager.updateLearningProgress(cards[currentCardIndex], mark)
+        
         if(left !== 0 ){
             setFlipped(false);
             setCardIndex(currentCardIndex + 1);
@@ -60,11 +55,12 @@ const Overview = () => {
     return (
         cards?
             <div>
-                <SessionInfo name={collection ? collection.name : "All cards"} left = {left} />
-                <Card card={cards[currentCardIndex]} onClick={() => setFlipped(true)} isFlipped={isFlipped}/>
+                <SessionInfo name={collection_id ? cards[0].collection.name : "All cards"} left = {left} />
+                <Card card={cards[currentCardIndex].content} onClick={() => setFlipped(true)} isFlipped={isFlipped}/>
                 <div className={ isFlipped? styles["buttons-panel"]: styles["buttons-panel-hidden"]} >
-                    <button className="" onClick={handleClick}>Fail</button>
-                    <button className="" onClick={handleClick}>Win</button>
+                    <button className="" onClick={() => handleClick(marks.BAD)}>Fail</button>
+                    <button className="" onClick={() => handleClick(marks.GOOD)} >Deal</button>
+                    <button className="" onClick={() => handleClick(marks.EXCELLENT)} >Win</button>
                 </div>
             </div>
             :
