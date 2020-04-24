@@ -9,6 +9,7 @@ import CardEditor from './views/CardEditor';
 import CollectionEditor from './views/CollectionEditor';
 import Home from './views/Home';
 import { Login, Signup } from './views/Auth';
+import NewCollectionForm from './views/NewCollectionForm';
 
 
 
@@ -23,6 +24,7 @@ const App = () => {
                     <Route exact path='/signup' component={Signup}/>
                     <PrivateRoute exact path='/home' component={Home}/>
                     <PrivateRoute exact path='/manage/' component={Manager}/> 
+                    <PrivateRoute path='/manage/new' component={NewCollectionForm}/> 
                     <PrivateRoute exact path='/session' component={Overview}/>
                     <PrivateRoute exact path='/session/:slug' component={Overview}/>
                     <PrivateRoute exact path='/new' component={CardEditor}/>

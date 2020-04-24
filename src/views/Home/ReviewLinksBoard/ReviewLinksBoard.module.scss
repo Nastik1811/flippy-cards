@@ -15,11 +15,14 @@
 .links-board{
     display: grid;
     margin-top: 10px;
-    min-width: 60vw;
     grid-template-columns: repeat(auto-fill, minmax(250px, 270px)) ;
     gap: 10px;
     align-items: center;
     justify-items: center;
   }
 
+.main-section{
+  @extend %main-section;
+  margin-top: 50px;
+}
 

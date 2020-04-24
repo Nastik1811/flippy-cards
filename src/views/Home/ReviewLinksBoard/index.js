@@ -1,17 +1,27 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect }  from 'react'
 import ReviewLink from '../ReviewLink'
-import {collections} from "../../../DummyData" 
 import { Link } from 'react-router-dom'
 import styles from './ReviewLinksBoard.module.scss'
+import { DataContext } from '../../../DataManger'
 
+const ReviewLinksBoard = () => {
+    const {manager} = useContext(DataContext);
 
-const ReviewLinksBoard = props => {
-    let links = collections.map((c, i) => <ReviewLink slug={i} name={c.name} cards={c.cards.length}/>)
+    const [collections, setCollections] = useState(null);
+
+    useEffect(() => {
+        manager.getCollectionToRepeatPreviews().then(data => setCollections(data))
+    }, [manager])
+
     return (
-        <section>
-            <header className="section-header">You can also choose a collection:</header>
+        <section className={styles["main-section"]}>
+            <header>You can also choose a collection:</header>
             <div className={styles["links-board"]}>
-                {links}
+                { collections ? 
+                    collections.map(c => <ReviewLink slug={c.id} name={c.name} cards={c.amount} key={c.id}/>)
+                    : 
+                    <div>Loading..</div>
+                }
                 <div className={styles["link-container"]}>
                     <Link to="/manage" className={styles["manage-btn"]}>Manage <wbr/> collections</Link>
                 </div>

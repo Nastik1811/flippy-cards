@@ -1,32 +1,39 @@
-import React, {useCallback, useContext} from 'react'
-import app from '../../firebase';
-import {withRouter, Redirect} from 'react-router-dom'
+import React, {useCallback, useContext, useState, useEffect} from 'react'
+import {withRouter} from 'react-router-dom'
 import styles from './CardEditor.module.scss'
+import { DataContext } from '../../DataManger';
 
 const CardEditor = ({history}) => {
-    const handleSubmit = useCallback(
-        async event => {
-          event.preventDefault();
-          console.log(event.target.elements);
-          const { front, back, collection } = event.target.elements;
-          try {
-            await app.firestore().collection('cards').add({
-                front: front.value,
-                back: back.value,
-                collection: collection.value,
-                created: new Date(),
-                nextRecall: new Date(),
-                learningStage: 0,
-              }).catch(function(error) {
-                console.error('Error writing new message to Firebase Database', error);
-              });
-            history.push("/home");
-          } catch (error) {
-            alert(error);
-          }
-        },
-        [history]
-      );
+  const {manager} = useContext(DataContext);
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => await manager.getCollections().then(data => setCollections(data));
+    fetchData()
+  }, [manager])
+
+  const handleSubmit = useCallback(
+      async event => {
+        event.preventDefault();
+        const { front, back, collection_id} = event.target.elements;
+      
+        const id = collection_id.value;
+        console.log(id)
+        const collection = id? {
+          id,
+          name: collections.find(collection => collection.id === id).name
+        } : null;
+
+        await manager.addCard({
+          content: {
+            front: front.value,
+            back: back.value
+          },
+          collection
+        })
+
+        history.push("/home");
+      }, [history, manager, collections] );
 
     return (
             <div className={styles["editor"]}>
@@ -44,10 +51,8 @@ const CardEditor = ({history}) => {
 
                     <label>
                         Choose a collection: 
-                        <select name="collection" >
-                            <option>Js</option>
-                            <option>English words</option>
-                            <option>React</option>
+                        <select name="collection_id" >
+                          {collections.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
                         </select>
                     </label>
                     <input type="submit" className={styles["submit-btn"]} value="Save" />

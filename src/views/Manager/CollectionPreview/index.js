@@ -10,7 +10,7 @@ const CollectionPreview = ({slug, name, created}) => {
                         <div className={styles["title"]}>{name}</div>
                     </header>
                     <div className={styles["details"]}></div>
-                    <footer className={styles["footer"]}>Created 12.03.2020 </footer>
+                    <footer className={styles["footer"]}>{created}</footer>
             </div>
         </Link>
         

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 
 import './style.scss';
@@ -11,12 +11,18 @@ import './assets/fonts/Comfortaa-Regular.ttf';
 import './assets/images/Clouds.png';
 import App from './App'
 import { AuthProvider } from './Auth';
+import { FirebaseProvider } from './firebase'
+import { DataProvider } from './DataManger';
 
 ReactDOM.render(
-    <AuthProvider>
-        <Router>
-            <App/>
-        </Router>
-    </AuthProvider>,
+    <FirebaseProvider>
+        <AuthProvider>
+            <DataProvider>
+                <Router>
+                    <App/>
+                </Router>
+            </DataProvider>
+        </AuthProvider>
+    </FirebaseProvider>,
      document.getElementById('root'));
 

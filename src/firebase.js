@@ -1,6 +1,8 @@
+import React from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebaseui'; 
+import 'firebase/firestore';
+import { createContext } from 'react';
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -13,6 +15,33 @@ const config = {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
   };
 
-const app = firebase.initializeApp(config);
+class Firebase {
+  constructor() {
+    const app = firebase.initializeApp(config);
+    this.auth = app.auth();
+    this.firestore = app.firestore();
+  }
 
-export default app;
+  signOut =() => this.auth.signOut();
+  createUser = (email, password, userName) =>{
+    this.auth.createUserWithEmailAndPassword(email, password).then(cred => {
+      this.firestore.collection('users').doc(cred.user.uid).set({
+        user_name: userName,
+      })
+    })
+  }
+  login = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
+  onAuthStateChanged = (observer) => this.auth.onAuthStateChanged(observer);
+}
+
+export const FirebaseContext = createContext(null);
+
+export const FirebaseProvider = ({children}) => {
+  const app = React.useMemo(() => new Firebase(), []);
+
+  return(
+      <FirebaseContext.Provider value={{app}} >
+          {children}
+      </FirebaseContext.Provider>
+  )
+}

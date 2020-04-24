@@ -1,26 +1,25 @@
 import React, {useCallback, useContext} from 'react'
-import app from '../../firebase';
 import { AuthContext } from '../../Auth';
+import {FirebaseContext} from '../../firebase';
 import {withRouter, Redirect} from 'react-router-dom';
 import styles from './Auth.module.scss'
 
 
 const Signup = ({history}) => {
+  const {currentUser} = useContext(AuthContext);
+  const {app} = useContext(FirebaseContext);
 
-    const handleSignUp = useCallback(async event => {
-        event.preventDefault();
-        const { email, password } = event.target.elements;
-        try {
-          await app
-            .auth()
-            .createUserWithEmailAndPassword(email.value, password.value);
-          history.push("/home");
-        } catch (error) {
-          alert(error);
-        }
-      }, [history]);
+  const handleSignUp = useCallback(async event => {
+      event.preventDefault();
+      const { email, password,userName } = event.target.elements;
+      try {
+        await app.createUser(email.value, password.value, userName.value);
+        history.push("/home");
+      } catch (error) {
+        alert(error);
+      }
+    }, [history, app]);
 
-    const {currentUser} = useContext(AuthContext);
     if(!!currentUser){
         return <Redirect to="/home" />
     }

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import CardItem from './CardItem'
 import { useParams } from 'react-router-dom'
-import { collections } from '../../DummyData'
 import styles from './CollectionEditor.module.scss'
+import { DataContext } from '../../DataManger'
 
 const CheckablePreview = ({children}) => {
     return(<div>
@@ -11,24 +11,36 @@ const CheckablePreview = ({children}) => {
 } 
 
 const CollectionEditor = () => {
-
     let {slug} = useParams();
-    let collection = collections[slug];
-    
-    let cards = collection.cards.map(c => <CheckablePreview><CardItem front={c.front} back={c.back}/></CheckablePreview>)
-        return (
-            <>
-                <div className={styles["editor"]}>
-                    <header>
-                        <h1 contentEditable="true" className={styles["name"]}>{collection.name}</h1>
-                    </header>
-                    <div className={styles["cards"]}>
-                        {cards}
-                    </div>
+    const {manager} = useContext(DataContext);
+
+    const [collection, setCollection] = useState(null);
+    const [checkedCards, setCheckedCards] = useState([]);
+    const [uncheckedCards, setUncheckedCards] = useState([]);
+
+    useEffect(() => {
+        function fetchData(){
+            manager.getCards(slug).then(data => setCheckedCards(data));
+            manager.getCardsWithoutCollection().then(data => setUncheckedCards(data));
+            manager.getCollection(slug).then(data => setCollection(data));
+        }
+        fetchData();
+    }, [manager, slug])
+
+    return (
+        <div className={styles["editor"]}>
+            <header>
+                <h1 className={styles["name"]}>{collection? collection.name: "" }</h1>
+                <button className={styles["save-btn"]}> Save</button>
+            </header>
+            <div className={styles["scroll"]}>
+                <div className={styles["cards"]}>
+                    {checkedCards.map(c => <CardItem front={c.content.front} back={c.content.back} key={c.id}/>)}
+                    {uncheckedCards.map(c => <CardItem front={c.content.front} back={c.content.back} key={c.id}/>)}
                 </div>
-                
-            </>
-        )
+            </div>
+        </div>
+    )
   
 }
 

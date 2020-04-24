@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Card from './Card'
-import {collections, getCards} from "../../DummyData"
 import {useParams} from 'react-router-dom'
 import styles from './Overview.module.scss'
+import { DataContext, MARK } from '../../DataManger'
 
 const SessionInfo = ({name, left}) => {
     return (
@@ -21,17 +21,27 @@ const Timer = ({time}) => {
 }
 
 const Overview = () => {
-    let {slug} = useParams();
-    let cards = slug ? collections[slug].cards : getCards();
-    let collectionName = slug ? collections[slug].name : "All cards"
+    const {slug} = useParams();
+    const {manager} = useContext(DataContext);
+
+    const collection_id = slug ? slug : null;
     
+    const [cards, setCards] = useState(null);
     const [currentCardIndex, setCardIndex] = useState(0);
     const [isFlipped, setFlipped] = useState(false);
-    const [left, setLeft] = useState(cards.length - 1);
-    
-    useEffect(() => {}, []);
+    const [left, setLeft] = useState(0);
 
-    const handleClick = () => {
+    useEffect(()=> {
+        manager.getCardsToRecall(collection_id).then(data => {
+            setCards(data);
+            setLeft(data.length - 1);
+        })
+    }, [manager, collection_id])
+
+    
+    const handleClick = (mark) => {
+        manager.updateCardProgress(cards[currentCardIndex], mark)
+
         if(left !== 0 ){
             setFlipped(false);
             setCardIndex(currentCardIndex + 1);
@@ -43,14 +53,18 @@ const Overview = () => {
     }
 
     return (
+        cards?
             <div>
-                <SessionInfo name={collectionName} left = {left} />
-                <Card card={cards[currentCardIndex]} onClick={() => setFlipped(true)} isFlipped={isFlipped}/>
+                <SessionInfo name={collection_id ? cards[0].collection.name : "All cards"} left = {left} />
+                <Card card={cards[currentCardIndex].content} onClick={() => setFlipped(true)} isFlipped={isFlipped}/>
                 <div className={ isFlipped? styles["buttons-panel"]: styles["buttons-panel-hidden"]} >
-                    <button className="" onClick={handleClick}>Fail</button>
-                    <button className="" onClick={handleClick}>Win</button>
+                    <button className="" onClick={() => handleClick(MARK.BAD)}>Fail</button>
+                    <button className="" onClick={() => handleClick(MARK.GOOD)} >Deal</button>
+                    <button className="" onClick={() => handleClick(MARK.EXCELLENT)} >Win</button>
                 </div>
             </div>
+            :
+            <div>Loading ...</div>
         )
 }
 
