@@ -15,7 +15,7 @@ export const MARK = {
 export const STATUS = {
     NEW: 0,
     IN_PROGRESS: 1,
-    LEARNT: 2
+    LEARNED: 2
 }
 
 export const DataProvider = ({children}) => {
@@ -103,7 +103,7 @@ class DataManger {
     async getCollectionToRepeatPreviews(){
         const cards = await this.cardsRef.where("next_recall", "<=", new Date()).get().then(query => query.docs.map(doc => ({id: doc.id, collection: doc.data().collection})));
         
-        const grouped_cards = this.reselectCards(cards) // {id: [cards]}
+        const grouped_cards = this.reselectCards(cards) 
         const collections = []
         
         Object.keys(grouped_cards).forEach( id => {
@@ -130,115 +130,105 @@ class DataManger {
     }
 
     //overview logic
-    calculatePeriod(previousRecall, suggestedRecall, mark){
-        const today = new Date();
-
-        let suggestedPeriod = suggestedRecall.getDate() - previousRecall.getDate();
-        let delay = today.getDate() - suggestedRecall.getDate();
-
-        let nextPeriod;
-
-        switch(mark){
-            case MARK.BAD:
-                nextPeriod = suggestedPeriod + delay/4 
-                break;
-            case MARK.GOOD:
-                nextPeriod = (suggestedPeriod + delay/2 ) * 1.5 + 1
-                break;
-            case MARK.EXCELLENT:
-                nextPeriod = (suggestedPeriod + delay) * 2 + 2
-                break;
-            default:
-                nextPeriod = 0
-        }
-
-        return nextPeriod
-    }
-
     updateCardProgress(card, mark){
-        
+        let newStatus;
+        let nextRecall;
+
+        let today = new Date();
+        let previousRecall = card.last_recall ? card.last_recall.toDate() : today;
+        let scheduledRecall = card.next_recall.toDate();
+
         switch(card.status){
             case STATUS.NEW:
-                console.log("new")
-                this.updateNew(card, mark)
+                [nextRecall, newStatus] = this.getUpdatesForNew(mark)
                 break;
             case STATUS.IN_PROGRESS:
-                console.log("progress")
-                this.updateInProgress(card, mark)
+                [nextRecall, newStatus] = this.getUpdatesForInProgress(previousRecall, scheduledRecall, mark)
                 break;
-            case STATUS.LEARNT:
-                this.updateLearnt(card)
+            case STATUS.LEARNED:
+                [nextRecall, newStatus] = this.getUpdatesForLearned(previousRecall, scheduledRecall, mark)
                 break;
             default:
                 break;
         }  
-    }
-
-    updateInProgress(card, mark){
-        let previousRecall = card.last_recall.toDate();
-        let suggestedRecall = card.next_recall.toDate()
-
-        let nextPeriod = this.calculatePeriod(previousRecall, suggestedRecall, mark)
-
-        const today = new Date()
-        let nextRecall = new Date()
-        nextRecall.setDate(today.getDate() + nextPeriod)
-
-        let status = nextPeriod > 365 ? STATUS.LEARNT : card.status
 
         this.cardsRef.doc(card.id).update({
             next_recall: firebase.firestore.Timestamp.fromDate(nextRecall),
             last_recall: firebase.firestore.Timestamp.fromDate(today),
-            status
-        })     
-
-    }
-    updateNew(card, mark){
-        let nextPeriod;
-        let status;
-
-        switch(mark){
-            case MARK.BAD:
-                nextPeriod = 0;
-                break;
-            case MARK.GOOD:
-                nextPeriod = 1;
-                break;
-            case MARK.EXCELLENT:
-                nextPeriod = 24;
-                status = STATUS.IN_PROGRESS;
-                break;
-            default:
-                nextPeriod = 0
-        }
-
-        const today = new Date()
-        let nextRecall = new Date()
-        nextRecall.setHours(today.getHours() + nextPeriod)
-
-        this.cardsRef.doc(card.id).update({
-            next_recall: firebase.firestore.Timestamp.fromDate(nextRecall),
-            last_recall: firebase.firestore.Timestamp.fromDate(today),
-            status: status
+            status: newStatus
         })
     }
 
-    updateLearnt(card, mark){
-        let previousRecall = card.last_recall.toDate();
-        let suggestedRecall = card.next_recall.toDate();
+    getUpdatesForNew(mark){
+        let newInterval;
 
-        let suggestedPeriod = suggestedRecall.getDate() - previousRecall.getDate();
-        
-        let nextPeriod = mark === MARK.BAD ? suggestedPeriod : suggestedPeriod * 1.5
-        
-        const today = new Date()
-        let nextRecall = new Date()
-        nextRecall.setDate(today.getDate() + nextPeriod)
+        switch(mark){
+            case MARK.BAD:
+                newInterval = 0;
+                break;
+            case MARK.GOOD:
+                newInterval = 1;
+                break;
+            case MARK.EXCELLENT:
+                newInterval = 24;
+                break;
+            default:
+                throw Error;
+        }
 
-        this.cardsRef.doc(card.id).update({
-            next_recall: firebase.firestore.Timestamp.fromDate(nextRecall),
-            last_recall: firebase.firestore.Timestamp.fromDate(today)
-        })     
+        const today = new Date();
+        let nextRecall = new Date();
+        nextRecall.setHours(today.getHours() + newInterval);
+        let newStatus = mark === MARK.EXCELLENT ? STATUS.IN_PROGRESS : STATUS.NEW;
+
+        return [nextRecall, newStatus];
+    }
+
+    getUpdatesForInProgress(previousRecall, scheduledRecall, mark){
+        let newInterval = this.calculateInterval(previousRecall, scheduledRecall, mark);
+
+        const today = new Date();
+        let nextRecall = new Date();
+        nextRecall.setDate(today.getDate() + newInterval);
+        let newStatus = newInterval > 365 ? STATUS.LEARNED : STATUS.IN_PROGRESS;      
+        
+        return [nextRecall, newStatus];  
+    }
+
+    calculateInterval(previousRecall, suggestedRecall, mark){
+        const today = new Date();
+
+        let suggestedInterval = suggestedRecall.getDate() - previousRecall.getDate();
+        let delay = today.getDate() - suggestedRecall.getDate();
+
+        let newInterval;
+
+        switch(mark){
+            case MARK.BAD:
+                newInterval = suggestedInterval + delay/4 
+                break;
+            case MARK.GOOD:
+                newInterval = (suggestedInterval + delay/2 ) * 1.5
+                break;
+            case MARK.EXCELLENT:
+                newInterval = (suggestedInterval + delay) * 2
+                break;
+            default:
+                throw Error
+        }
+
+        return newInterval;
+    }
+
+    getUpdatesForLearned(previousRecall, scheduledRecall,  mark){
+        let suggestedInterval = scheduledRecall.getDate() - previousRecall.getDate();
+        let newInterval = mark === MARK.BAD ? suggestedInterval : suggestedInterval * 1.5
+        
+        const today = new Date();
+        let nextRecall = new Date();
+        nextRecall.setDate(today.getDate() + newInterval);
+
+        return [nextRecall, STATUS.LEARNED]  
     }
   
   }
