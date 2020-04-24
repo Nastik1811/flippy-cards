@@ -1,11 +1,9 @@
 import React, {useCallback, useContext} from 'react'
-import {withRouter, Redirect} from 'react-router-dom'
-import { AuthContext } from '../../Auth';
-import {FirebaseContext} from '../../firebase';
-import styles from './Auth.module.scss'
+import {withRouter} from 'react-router-dom'
+import {FirebaseContext} from '../../../firebase';
+import styles from '../Auth.module.scss'
 
-export const Login = ({history}) => {
-    const {currentUser} = useContext(AuthContext);
+const Login = ({history}) => {
     const {app} = useContext(FirebaseContext);
 
     const handleLogin = useCallback(
@@ -22,21 +20,13 @@ export const Login = ({history}) => {
         [history, app]
       );
 
-    if(!!currentUser){
-        return <Redirect to="/home" />
-    }
-    
     return (
-    <div className={styles["auth-container"]}>
-      <h2 className={styles["form-header"]}>Login</h2>
       <form onSubmit={handleLogin} className={styles["auth-form"]}>
           <input type="email" name="email" placeholder="email"/>
           <input type="password" name="password" placeholder="password"/>
           
           <button type="submit" className={styles["submit-btn"]}>Login</button>
       </form>
-        
-    </div>
     )
 }
 

@@ -8,7 +8,7 @@ import Overview from './views/Overview';
 import CardEditor from './views/CardEditor';
 import CollectionEditor from './views/CollectionEditor';
 import Home from './views/Home';
-import { Login, Signup } from './views/Auth';
+import Auth from './views/Auth';
 import NewCollectionForm from './views/NewCollectionForm';
 
 
@@ -20,10 +20,9 @@ const App = () => {
             <div className="main-container">
                 <Switch>
                     <Route exact path='/' component={Landing}/>
-                    <Route exact path='/login' component={Login}/>
-                    <Route exact path='/signup' component={Signup}/>
+                    <Route path='/auth' component={Auth}/>
                     <PrivateRoute exact path='/home' component={Home}/>
-                    <PrivateRoute exact path='/manage/' component={Manager}/> 
+                    <PrivateRoute path='/manage' component={Manager}/> 
                     <PrivateRoute path='/manage/new' component={NewCollectionForm}/> 
                     <PrivateRoute exact path='/session' component={Overview}/>
                     <PrivateRoute exact path='/session/:slug' component={Overview}/>
