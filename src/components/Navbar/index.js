@@ -12,7 +12,7 @@ const Navbar = () => {
     return (
         <header className={styles["header"]}>
             <div className={styles["logo-container"]} >
-                <Link to='/home'>Flippy</Link>
+                <NavLink to='/home'>Flippy</NavLink>
             </div>
             <nav className={styles["navbar"]}>
                     {!!currentUser ? (
@@ -23,8 +23,8 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                            <Link to='/login' className={styles["auth-link"]} >Log in</Link>
-                            <Link to='/signup' className={styles["auth-link"]} >Sign up</Link>
+                            <NavLink to='/auth/login' className={styles["auth-link"]} >Log in</NavLink>
+                            <NavLink to='/auth/signup' className={styles["auth-link"]} >Sign up</NavLink>
                         </>
                         )
                     }
