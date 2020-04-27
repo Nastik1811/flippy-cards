@@ -23,14 +23,14 @@ class Firebase {
   }
 
   signOut =() => this.auth.signOut();
-  createUser = (email, password, userName) =>{
+  createUser = ({email, password, name}) => {
     this.auth.createUserWithEmailAndPassword(email, password).then(cred => {
       this.firestore.collection('users').doc(cred.user.uid).set({
-        user_name: userName,
+        user_name: name,
       })
     })
   }
-  login = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
+  login = ({email, password}) => this.auth.signInWithEmailAndPassword(email, password);
   onAuthStateChanged = (observer) => this.auth.onAuthStateChanged(observer);
 }
 

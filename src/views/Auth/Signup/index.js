@@ -1,31 +1,46 @@
-import React, {useCallback, useContext} from 'react'
+import React, { useContext, useState} from 'react'
 import {FirebaseContext} from '../../../firebase';
-import {withRouter} from 'react-router-dom';
 import styles from '../Auth.module.scss'
+import SubmitButton from '../../../components/SubmitButton';
+import InputField from '../../../components/InputField';
 
 
-const Signup = ({history}) => {
+const Signup = () => {
   const {app} = useContext(FirebaseContext);
+  const [data, setData] = useState({ email: "", password: "", name: "" })
 
-  const handleSignUp = useCallback(async event => {
-      event.preventDefault();
-      const { email, password,userName } = event.target.elements;
-      try {
-        await app.createUser(email.value, password.value, userName.value);
-        history.push("/home");
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    try {
+        await app.createUser(data);
       } catch (error) {
         alert(error);
+        setData({ email: "", password: "", name: ""})
       }
-    }, [history, app]);
+    }
 
     return (
-        <form onSubmit={handleSignUp} className={styles["auth-form"]}>
-                <input type="text" name="userName" placeholder="name"/>
-                <input type="email" name="email" placeholder="email"/>
-                <input type="password" name="password" placeholder="password"/>
-                <button type="submit" className={styles["submit-btn"]}>Sign up</button>
-        </form>
+      <form onSubmit={handleSignUp} className={styles["auth-form"]}>
+        <InputField type="text" 
+          placeholder="name" 
+          value={data.name}
+          onChange={name => (setData({...data, name}))}
+          />
+        <InputField
+          type="email" 
+          value={data.email}
+          placeholder="email" 
+          onChange={email => (setData({...data, email}))}
+          />
+        <InputField 
+          type="password" 
+          value={data.password}
+          placeholder="password"  
+          onChange={password => (setData({...data, password}))}
+          />
+        <SubmitButton label="Sign up" className={styles["submit-btn"]}/>
+      </form>
     )
 }
 
-export default withRouter(Signup);
+export default Signup;

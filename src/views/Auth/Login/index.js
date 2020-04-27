@@ -1,33 +1,42 @@
-import React, {useCallback, useContext} from 'react'
-import {withRouter} from 'react-router-dom'
+import React, {useContext, useState} from 'react'
 import {FirebaseContext} from '../../../firebase';
 import styles from '../Auth.module.scss'
+import SubmitButton from '../../../components/SubmitButton';
+import InputField from '../../../components/InputField';
 
-const Login = ({history}) => {
+const Login = () => {
     const {app} = useContext(FirebaseContext);
+    const [data, setData] = useState({ email: "", password: "" });
 
-    const handleLogin = useCallback(
-        async event => {
-          event.preventDefault();
-          const { email, password } = event.target.elements;
-          try {
-            await app.login(email.value, password.value);
-            history.push("/home");
-          } catch (error) {
-            alert(error);
-          }
-        },
-        [history, app]
-      );
+    const handleLogin = async (event) => {
+      event.preventDefault();
+      try {
+        await app.login(data);
+      } catch (error) {
+        alert(error);
+        setData({ email: "", password: "" })
+      }
+    }
 
     return (
       <form onSubmit={handleLogin} className={styles["auth-form"]}>
-          <input type="email" name="email" placeholder="email"/>
-          <input type="password" name="password" placeholder="password"/>
-          
-          <button type="submit" className={styles["submit-btn"]}>Login</button>
+          <InputField
+            type="email" 
+            placeholder="email" 
+            value={data.email}
+            onChange={email => (setData({...data, email}))}
+            />
+          <InputField 
+            type="password" 
+            value={data.password}
+            placeholder="password"  
+            onChange={password => (setData({...data, password}))}
+            />
+          <SubmitButton label="Login" className={styles["submit-btn"]} />
       </form>
     )
 }
 
-export default withRouter(Login)
+
+
+export default Login
