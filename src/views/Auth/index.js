@@ -1,30 +1,29 @@
-import React, {useContext, useMemo} from 'react'
+import React, {useContext, useMemo, useCallback} from 'react'
 import { AuthContext } from '../../Auth';
-import {Redirect, NavLink, Route, Switch} from 'react-router-dom'
+import {Redirect, NavLink, Route, Switch, withRouter} from 'react-router-dom'
 import styles from './Auth.module.scss'
 import Login from './Login';
 import Signup from './Signup';
 
-const Auth = () => {
+const Auth = ({match}) => {
     const {currentUser} = useContext(AuthContext);
-    
-    useMemo(() => {
-        if(!!currentUser){
-            return <Redirect to="/home" />
-        }
-    }, [currentUser])
+
+    if(!!currentUser){
+        return <Redirect to="/home" />
+    }
 
     return (
         <div className={styles["auth-container"]}>
-            <nav className={styles["form-header"]}>
-                <NavLink to={"/auth/login"} className={styles["form-header"]} activeClassName={styles["tab-active"]} >Login</NavLink>
-                <NavLink to={"/auth/signup"}  className={styles["form-header"]} activeClassName={styles["tab-active"]}>Signup</NavLink>
+            <nav className={styles["auth-tabs"]}>
+                <NavLink to={match.url + "/login"} className={styles["tab"]} activeClassName={styles["tab-active"]} >Login</NavLink>
+                <NavLink to={match.url + "/signup"}  className={styles["tab"]} activeClassName={styles["tab-active"]}>Signup</NavLink>
             </nav>
             <Switch>
-                <Route path={"/auth/login"} children={<Login/>}/>
-                <Route path={"/auth/signup"} children={<Signup/>} />
+                <Route path={match.path + "/login"} children={<Login/>}/>
+                <Route path={match.path + "/signup"} children={<Signup/>} />
+                <Redirect to={match.path + "/login"}/>
             </Switch>        
         </div>
     )
 }
-export default Auth
+export default withRouter(Auth)

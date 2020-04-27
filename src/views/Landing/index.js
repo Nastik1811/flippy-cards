@@ -13,7 +13,7 @@ const Landing = () => {
     return (
         <div className={styles["landing"]}>
             <section className={styles["landing-section"]}> 
-                <Link to="/signup" className={styles["start-btn"]}>Get started! </Link>
+                <Link to="/auth" className={styles["start-btn"]}>Get started! </Link>
             </section>
         </div>
     )
