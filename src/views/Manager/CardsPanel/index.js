@@ -17,10 +17,10 @@ const CardsPanel = () => {
     }, [manager]
     )
 
-    return (
-            <Panel pathToNew={"/card/new"}>
-                {cards ? cards.map(c => <CardPreview card={c} key={c.id} />) : null}
-            </Panel>)
+    return (<Panel 
+                newItemUrl={"/card/new"}
+                items = {cards ? cards.map(c => <CardPreview card={c} key={c.id} />) : null}
+            />)
 }
 
 
