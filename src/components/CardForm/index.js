@@ -3,10 +3,8 @@ import { DataContext } from '../../DataManger';
 import styles from './CardForm.module.scss'
 import {SubmitButton, CollectionSelect, ContentArea} from '../FormElements'
 
-const CardForm = ({initialDetails, onSubmit}) => {
+const CardForm = ({initialDetails, collections, onSubmit}) => {
     const {manager} = useContext(DataContext);
-  
-    const [collections, setCollections] = useState([]);
   
     const [cardContent, setCardContent] = useState(initialDetails.content);
     const [cardCollection, setCardCollection] = useState(initialDetails.collection);
@@ -21,7 +19,6 @@ const CardForm = ({initialDetails, onSubmit}) => {
     }
   
     useEffect(() => {
-      manager.getCollections().then(data => setCollections(data))
     }, [manager])
   
     return(
@@ -31,16 +28,18 @@ const CardForm = ({initialDetails, onSubmit}) => {
               <ContentArea 
                 label="front" 
                 className={styles["edit-container"]} 
+                value={cardContent.front}
                 onChange={(front) => setCardContent({...cardContent, front})}/>
               <ContentArea 
                 label="back" 
                 className={styles["edit-container"]}  
+                value={cardContent.back}
                 onChange={(back) => setCardContent({...cardContent, back})}/>
           </div>
           <CollectionSelect 
             collections={collections}
             value={cardCollection} 
-            onChange={collection => setCardCollection(collection) }
+            onChange={setCardCollection}
           />
           <SubmitButton label="Save" className={styles["submit-btn"]} />
         </form>

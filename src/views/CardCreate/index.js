@@ -1,11 +1,13 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { DataContext } from '../../DataManger';
 import {Redirect} from 'react-router-dom'
 import CardForm from '../../components/CardForm';
+import Loader from '../../components/Loader';
 
-const CardCreate= ({history}) => {
+const CardCreate = () => {
     const {manager} = useContext(DataContext);
-    const [completed, setCompleted] = useState(false)
+    const [completed, setCompleted] = useState(false);
+    const [collections, setCollections] = useState(null);
   
     const initialDetails = {
         content: {
@@ -18,6 +20,10 @@ const CardCreate= ({history}) => {
         }
       }
   
+    useEffect(() => {
+        manager.getCollections().then(data => setCollections(data))
+      }, [manager])
+
     const onSubmit = async (newDetails) => {
       try {
         await manager.addCard(newDetails);
@@ -31,9 +37,14 @@ const CardCreate= ({history}) => {
       return <Redirect to="/manage/cards"/>
     }
 
-    return <CardForm 
+    return (
+      collections ? 
+      <CardForm 
             initialDetails={initialDetails} 
-            onSubmit={newDetails => onSubmit(newDetails)}/>  
+            collections={collections}
+            onSubmit={onSubmit}/>
+            : 
+      <Loader/>)
   }
 
   export default CardCreate
