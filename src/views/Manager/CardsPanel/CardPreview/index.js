@@ -1,20 +1,21 @@
 import React from 'react'
 import styles from './CardPreview.module.scss'
 
-const CardPreview = ({front, back}) => {
+const CardPreview = ({card}) => {
     return(
         <div className={styles["card-preview"]}>
             <div className={styles["back"]}>
                 <p className={styles["detail"]}>
-                    {back}
+                    {card.content.back}
                 </p> 
             </div>
             <div className={styles["front"]}>
                 <p className={styles["detail"]}>
-                    {front}
+                    {card.content.front}
                 </p> 
             </div>
         </div>
+        
     )
 }
 

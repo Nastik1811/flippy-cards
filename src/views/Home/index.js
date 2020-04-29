@@ -11,7 +11,7 @@ import { DataContext } from '../../DataManger'
 
     const [userName, setUserName] = useState(null);
     const [total, setTotal] = useState(0)
-    const [collections, setCollections] = useState([]);
+    const [collections, setCollections] = useState(null);
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -24,10 +24,7 @@ import { DataContext } from '../../DataManger'
 
     }, [manager])
 
-    console.log(isLoading)
-
-    return(
-        !isLoading?
+    return !isLoading ?
         <>
             <section className={styles["main-section"]}>
                 <Link to="/card/new" className={styles["add-btn"]}> Add card</Link>
@@ -37,7 +34,7 @@ import { DataContext } from '../../DataManger'
             <Statistics/>
         </> :
         <div>Loading...</div>
-    );
+    ;
 }
 
 

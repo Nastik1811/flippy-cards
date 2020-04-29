@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import styles from './ReviewLinksBoard.module.scss'
 
 const ReviewLinksBoard = ({collections}) => {
-    return (
+    let isNotEmpty = collections.length > 0
+    return isNotEmpty ?
         <section className={styles["main-section"]}>
                 <header>You can also choose a collection:</header>
                 <div className={styles["links-board"]}>
@@ -14,7 +15,8 @@ const ReviewLinksBoard = ({collections}) => {
                     </div>
                 </div>
         </section>
-        )
+        :
+        null
 }
 
 export default ReviewLinksBoard
