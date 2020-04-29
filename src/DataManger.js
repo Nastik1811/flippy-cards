@@ -83,7 +83,14 @@ class DataManger {
         }
     }
 
-    getCardDetail(id){
+    updateCard(id, newDetails){
+        this.cardsRef.doc(id).update({
+            content: newDetails.content,
+            collection: newDetails.collection
+        })
+    }
+
+    getCardDetails(id){
         return this.cardsRef.doc(id).get().then(doc => ({...doc.data(), id: doc.id}))
     }
 

@@ -2,15 +2,18 @@ import React, {useContext, useState, useEffect} from 'react'
 import {useParams, Redirect} from 'react-router-dom'
 import { DataContext } from '../../DataManger';
 import CardForm from '../../components/CardForm';
+import Loader from '../../components/Loader';
 
 const CardEdit = () => {
     const {manager} = useContext(DataContext);
     const {id} = useParams();
 
     const [initialDetails, setInitialDetails] = useState(null);
-    const [completed, setCompleted] = useState(false)
+    const [collections, setCollections] = useState(null);
+    const [completed, setCompleted] = useState(false);
 
     useEffect(() => {
+      manager.getCollections().then(data => setCollections(data))
       manager.getCardDetails(id).then(data => setInitialDetails(
             {
               content: data.content, 
@@ -32,13 +35,14 @@ const CardEdit = () => {
       return <Redirect to="/manage/cards"/>
     }
 
-    return (
-      initialDetails ? 
-        (<CardForm 
+    return ( 
+      initialDetails && collections ? 
+        <CardForm 
               initialDetails={initialDetails} 
+              collections={collections}
               onSubmit={onSubmit}/>
-              ) : 
-        <div>Loading...</div>
+               : 
+        <Loader/>
     )
   
   }
