@@ -1,6 +1,6 @@
-import React, {useContext, useMemo, useCallback} from 'react'
+import React, {useContext} from 'react'
 import { AuthContext } from '../../Auth';
-import {Redirect, NavLink, Route, Switch, withRouter} from 'react-router-dom'
+import {Redirect, NavLink, Route, Switch} from 'react-router-dom'
 import styles from './Auth.module.scss'
 import Login from './Login';
 import Signup from './Signup';
@@ -26,4 +26,4 @@ const Auth = ({match}) => {
         </div>
     )
 }
-export default withRouter(Auth)
+export default Auth

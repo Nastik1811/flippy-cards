@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { DataContext } from '../../DataManger';
-import styles from './CardEditor.module.scss'
+import styles from './CardForm.module.scss'
 import {SubmitButton, CollectionSelect, ContentArea} from '../FormElements'
 
 const CardForm = ({initialDetails, onSubmit}) => {

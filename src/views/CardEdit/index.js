@@ -1,13 +1,15 @@
 import React, {useContext, useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, Redirect} from 'react-router-dom'
 import { DataContext } from '../../DataManger';
 import CardForm from '../../components/CardForm';
 
-
-const CardEditContainer = ({history}) => {
+const CardEdit = () => {
     const {manager} = useContext(DataContext);
     const {id} = useParams();
+
     const [initialDetails, setInitialDetails] = useState(null);
+    const [completed, setCompleted] = useState(false)
+
     useEffect(() => {
       manager.getCardDetails(id).then(data => setInitialDetails(
             {
@@ -20,12 +22,16 @@ const CardEditContainer = ({history}) => {
     const onSubmit = async (newDetails) => {
       try {
         await manager.updateCard(id, newDetails)
-        history.push('/home')
+        setCompleted(true);
       } catch (error) {
         alert(error);
       }
     }
   
+    if(completed){
+      return <Redirect to="/manage/cards"/>
+    }
+
     return (
       initialDetails ? 
         (<CardForm 
@@ -37,4 +43,4 @@ const CardEditContainer = ({history}) => {
   
   }
 
-  export default CardEditContainer
+  export default CardEdit
