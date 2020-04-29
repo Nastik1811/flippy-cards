@@ -1,10 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import Statistics from './Statistics'
 import ReviewLinksBoard from './ReviewLinksBoard'
 import Invitation from './ReviewInvitation'
 import styles from './Home.module.scss'
 import { DataContext } from '../../DataManger'
+import LinkButton from '../../components/LinkButton'
+
 
  const Home = () => { 
     const {manager} = useContext(DataContext);
@@ -27,7 +28,7 @@ import { DataContext } from '../../DataManger'
     return !isLoading ?
         <>
             <section className={styles["main-section"]}>
-                <Link to="/card/new" className={styles["add-btn"]}> Add card</Link>
+                <LinkButton url="/card/new" className={styles["add-btn"]} label="Add card"/>
                 <Invitation userName={userName} total={total}/>
             </section>
             <ReviewLinksBoard collections={collections}/>
