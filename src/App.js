@@ -5,11 +5,11 @@ import PrivateRoute from './components/PrivateRoute';
 import Landing from './views/Landing';
 import Manager from './views/Manager';
 import Overview from './views/Overview';
-import CardEditor from './views/CardEditor';
-import CollectionEditor from './views/CollectionEditor';
 import Home from './views/Home';
 import Auth from './views/Auth';
-import NewCollectionForm from './views/NewCollectionForm';
+import CardCreate from './views/CardCreate';
+import CardEdit from './views/CardEdit';
+import CollectionEditor from './views/CollectionEdit';
 
 
 
@@ -22,11 +22,12 @@ const App = () => {
                     <Route exact path='/' component={Landing}/>
                     <Route path='/auth' component={Auth}/>
                     <PrivateRoute exact path='/home' component={Home}/>
-                    <PrivateRoute path='/manage' component={Manager}/> 
-                    <PrivateRoute path='/manage/new' component={NewCollectionForm}/> 
+                    <PrivateRoute path ='/manage' component={Manager}/> 
                     <PrivateRoute exact path='/session' component={Overview}/>
                     <PrivateRoute exact path='/session/:slug' component={Overview}/>
-                    <PrivateRoute exact path='/new' component={CardEditor}/>
+                    <PrivateRoute path='/card/new' component={CardCreate}/>
+                    <PrivateRoute path='/card/:id' component={CardEdit}/>
+                    <PrivateRoute exact path='/collection/new' component={CollectionEditor}/>
                     <PrivateRoute exact path='/collection/:slug' component={CollectionEditor}/>
                     <Route component={Error}/> 
                 </Switch>

@@ -14,19 +14,18 @@ const ReviewLinksBoard = () => {
     }, [manager])
 
     return (
-        <section className={styles["main-section"]}>
-            <header>You can also choose a collection:</header>
-            <div className={styles["links-board"]}>
-                { collections ? 
-                    collections.map(c => <ReviewLink slug={c.id} name={c.name} cards={c.amount} key={c.id}/>)
-                    : 
-                    <div>Loading..</div>
-                }
-                <div className={styles["link-container"]}>
-                    <Link to="/manage" className={styles["manage-btn"]}>Manage <wbr/> collections</Link>
+         collections ? 
+            (<section className={styles["main-section"]}>
+                <header>You can also choose a collection:</header>
+                <div className={styles["links-board"]}>
+                    {collections.map(c => <ReviewLink slug={c.id} name={c.name} cards={c.amount} key={c.id}/>)}
+                    <div className={styles["link-container"]}>
+                        <Link to="/manage" className={styles["manage-btn"]}>Manage <wbr/> collections</Link>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>)
+            :    
+            <div>Loading..</div>     
     )
 }
 
