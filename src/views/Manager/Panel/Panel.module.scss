@@ -1,0 +1,31 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.panel{
+    display: grid;
+    margin: auto;
+    margin-top: 3rem;
+    width: 90%;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 270px));
+    grid-gap: 10px;
+    gap: 10px;
+    }
+
+
+.to_new{
+    @extend %preview-container;
+    position: relative;
+    cursor: pointer;
+    background-color: $color-primary;
+    color: $color-light-text;
+    font-size: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    
+.to_new::before{
+    content: "";
+    @extend %outline-border;
+    }

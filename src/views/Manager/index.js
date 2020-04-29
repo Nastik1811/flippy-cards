@@ -1,73 +1,25 @@
-import React, { useState, useEffect, useContext } from 'react'
-import CardPreview from './CardPreview'
-import CollectionPreview from './CollectionPreview'
-import styles from './Manager.module.scss'
-import { DataContext } from '../../DataManger'
-
+import React from 'react'
+import CollectionsPanel from './CollectionsPanel';
+import CardsPanel from './CardsPanel';
 
 import {
     Switch,
     Route,
-    NavLink,
-    useRouteMatch,
-    Link,
     Redirect
   } from "react-router-dom";
+import Tabbar, { Tab } from './Tabbar';
 
-import CollectionCreate from '../CollectionCreate'
-
-const CardsPanel = () => {
-    const {manager} = useContext(DataContext);
-    let match = useRouteMatch();
-    const [cards, setCards] = useState(null);
-
-    useEffect(() => {
-        manager.getCards().then(data => setCards(data))
-    }, [manager]
-    )
-
-    return cards ?
-            (<div className={styles["board"]}>
-                <Link to={match.url + "/new"} className={styles["add-btn"]}> + </Link>
-                {cards.map(c => <CardPreview card={c} key={c.id} />)}
-                <Route path={match.path + "/new"} children={<CollectionCreate/>} />
-            </div> )
-            : 
-            (<div>Loading...</div>)
-}
-
-const CollectionsPanel = () => {
-    const {manager} = useContext(DataContext);
-    let match = useRouteMatch();
-    const [collections, setCollections] = useState(null);
-
-    useEffect(() => {
-        manager.getCollections().then(data => setCollections(data))
-    }, [manager])
-
-    return collections ?
-            (<div className={styles["board"]}>
-                <Link to={match.url + "/new"}  className={styles["add-btn"]}> + </Link>
-                    {collections.map(c => <CollectionPreview collection={c} key={c.id}/>)}
-                <Route path={match.path + "/new"} children={<CollectionCreate/>} />
-            </div>)
-            : 
-            (<div>Loading...</div>)
-}
-
-const Manager = ({match}) => {
-    //let match = useRouteMatch();
-    
+const Manager = () => {
     return (
         <section>
-            <nav className={styles["tabbar"]}>
-                <NavLink to={match.url + "/collections"} className={styles["tab"]} activeClassName={styles["tab-active"]} >Collections</NavLink>
-                <NavLink to={match.url + "/cards"}  className={styles["tab"]} activeClassName={styles["tab-active"]}>Cards</NavLink>
-            </nav>
+            <Tabbar>
+                <Tab url="/manage/collections" label="Collections"/>
+                <Tab url="/manage/cards" label="Cards"/>
+            </Tabbar>
             <Switch>
-                <Route path={match.path + "/collections"} children={<CollectionsPanel/>}/>
-                <Route path={match.path + "/cards"} children={<CardsPanel/>} />   
-                <Redirect to={match.path + "/collections"}/>
+                <Route path="/manage/collections" children={<CollectionsPanel/>}/>
+                <Route path="/manage/cards" children={<CardsPanel/>} />   
+                <Redirect to="/manage/collections"/>
             </Switch>
         </section>
     )
