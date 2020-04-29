@@ -11,9 +11,12 @@ export const Tab = ({url, label}) => {
 const Tabbar = ({children}) => 
 {
     return (
-        <nav className={styles["tabbar"]}>
-            {children}
-        </nav>
+        <div  className={styles["tabbar"]}>
+            <nav>
+                {children}
+            </nav>
+            <hr/>
+        </div>
     )
 }
 

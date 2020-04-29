@@ -10,6 +10,7 @@ import Auth from './views/Auth';
 import CardCreate from './views/CardCreate';
 import CardEdit from './views/CardEdit';
 import CollectionEditor from './views/CollectionEdit';
+import NotFound from './views/NotFound';
 
 
 
@@ -21,15 +22,14 @@ const App = () => {
                 <Switch>
                     <Route exact path='/' component={Landing}/>
                     <Route path='/auth' component={Auth}/>
-                    <PrivateRoute exact path='/home' component={Home}/>
+                    <PrivateRoute path='/home' component={Home}/>
                     <PrivateRoute path ='/manage' component={Manager}/> 
                     <PrivateRoute exact path='/session' component={Overview}/>
                     <PrivateRoute exact path='/session/:slug' component={Overview}/>
                     <PrivateRoute path='/card/new' component={CardCreate}/>
                     <PrivateRoute path='/card/:id' component={CardEdit}/>
-                    <PrivateRoute exact path='/collection/new' component={CollectionEditor}/>
-                    <PrivateRoute exact path='/collection/:slug' component={CollectionEditor}/>
-                    <Route component={Error}/> 
+                    <PrivateRoute path='/collection/:slug' component={CollectionEditor}/>
+                    <Route path="*" component={NotFound}/> 
                 </Switch>
             </div>
         </div>

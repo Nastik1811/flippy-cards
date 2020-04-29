@@ -1,7 +1,7 @@
 import React, { useContext, useState} from 'react'
 import {FirebaseContext} from '../../../firebase';
 import styles from '../Auth.module.scss'
-import {SubmitButton, InputField, } from '../../../components/FormElements'
+import {SubmitButton, InputField } from '../../../components/FormElements'
 
 
 const Signup = () => {
