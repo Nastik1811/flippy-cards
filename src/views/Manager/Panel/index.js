@@ -3,10 +3,11 @@ import styles from './Panel.module.scss'
 import { Link } from 'react-router-dom'
 import Loader from '../../../components/Loader'
 
-const Panel = ({children, pathToNew}) => {
-    return children ?
+const Panel = ({items, newItemUrl, children}) => {
+    return items ?
         <div className={styles["panel"]}>
-            <Link to={pathToNew}  className={styles["to_new"]}> + </Link>
+            <Link to={newItemUrl}  className={styles["to_new"]}> + </Link>
+            {items}
             {children}
         </div> : 
         <Loader/>
