@@ -83,8 +83,12 @@ class DataManger {
         }
     }
 
+    getCardDetail(id){
+        return this.cardsRef.doc(id).get().then(doc => ({...doc.data(), id: doc.id}))
+    }
+
     getCollection(id){
-        return this.collectionsRef.doc(id).get().then(doc => doc.data())
+        return this.collectionsRef.doc(id).get().then(doc => ({...doc.data(), id: doc.id}))
     }
 
     getCardsToRecall(collection_id){
@@ -118,7 +122,7 @@ class DataManger {
     reselectCards(cards) {
         const grouppedCards = {};
         cards.forEach(card => {
-            if(card.collection){
+            if(card.collection.id){
                 grouppedCards[card.collection.id] ? grouppedCards[card.collection.id].push(card) : grouppedCards[card.collection.id] = [card]
             }
         })

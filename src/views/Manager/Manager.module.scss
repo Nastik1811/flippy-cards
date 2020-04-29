@@ -1,9 +1,14 @@
 @import 'src/styles/_variables.scss';
 @import 'src/styles/_placeholders.scss';
 
+section{
+  width: 100%;
+}
 
 .tabbar{
+    margin: auto;
     margin-top: 10px;
+    padding-left: 20px;
     width: 800px;
   }
   
@@ -15,7 +20,8 @@ hr{
 
 .board{
   display: grid;
-  margin-top: 2rem;
+  margin: auto;
+  margin-top: 3rem;
   width: 90%;
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(250px, 270px));
@@ -23,18 +29,6 @@ hr{
   gap: 10px;
 }
 
-%tab{
-  margin-left: 20px;
-  display: inline;
-  text-decoration: none;
-  font-size: $text-medium ;
-  transition: all 300ms ease;
-  cursor: pointer;
-  
-  :hover{
-    color: rgb(24, 146, 190);
-  }
-}
 .tab{
   @extend %tab;
   color: $color-contrast-text;

@@ -45,20 +45,32 @@
 }
 
 %main-section{
-    width: 100%;
-    
-    header{
-        font-size: $text-medium;
-        padding: 1rem;
-        color: $color-regular-text;
-    }
-  }
+  width: 100%;
   
-
-  %outline-border{
-    position: absolute;
-    @extend %preview-container;
-    border: 1px solid $color-primary-dark;
-    left: 0.45rem;
-    bottom: 0.45rem;
+  header{
+      font-size: $text-medium;
+      padding: 1rem;
+      color: $color-regular-text;
   }
+}
+
+
+%outline-border{
+  position: absolute;
+  @extend %preview-container;
+  border: 1px solid $color-primary-dark;
+  left: 0.45rem;
+  bottom: 0.45rem;
+}
+
+%tab{
+  margin-right: 20px;
+  display: inline;
+  text-decoration: none;
+  font-size: $text-medium ;
+  transition: all 300ms ease;
+  cursor: pointer;  
+  &:hover{
+    color: rgb(24, 146, 190);
+  }
+}
