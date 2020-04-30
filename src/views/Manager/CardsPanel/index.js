@@ -8,19 +8,16 @@ const CardsPanel = () => {
     const [cards, setCards] = useState(null);
 
     useEffect(() => {
-        let isSubscribed = true;
-        manager.getCards().then(data => 
-            {
-                if(isSubscribed) setCards(data)}
-            )
-        return () => isSubscribed = false
+        let unsubscribe = manager.listenCards(setCards)
+        return unsubscribe;
     }, [manager]
     )
 
-    return (<Panel 
-                newItemUrl={"/card/new"}
-                items = {cards ? cards.map(c => <CardPreview card={c} key={c.id} />) : null}
-            />)
+    return(
+        <Panel 
+            newItemUrl={"/card/new"}
+            items = {cards ? cards.map(c => <CardPreview card={c} key={c.id} />) : null}
+        />)
 }
 
 
