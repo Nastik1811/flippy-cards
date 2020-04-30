@@ -10,11 +10,8 @@ const CollectionsPanel = () => {
     const [collections, setCollections] = useState(null);
 
     useEffect(() => {
-        let isSubscribed = true;
-        manager.getCollections().then(data => {
-            if(isSubscribed) setCollections(data)
-        })
-        return () => isSubscribed = false
+        let unsubscribe = manager.listenCollections(setCollections)
+        return (unsubscribe)
     }, [manager])
 
     return (

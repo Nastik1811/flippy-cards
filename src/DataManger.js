@@ -70,6 +70,29 @@ class DataManger {
         this.collectionsRef.add(collection);
     }
 
+    listenCollections(listener){
+        let unsubscribe = this.collectionsRef.orderBy("created", "desc").onSnapshot(
+            snapshot => {
+                let collections = [];
+                listener(snapshot.forEach(doc => collections.push({...doc.data(), id: doc.id})))
+                listener(collections)
+            }
+        )
+        return unsubscribe
+    }
+
+    listenCards(listener, collectionId){
+        let ref = collectionId ? this.cardsRef.where("collection.id", "==", collectionId) : this.cardsRef
+        return ref.onSnapshot(
+            snapshot => {
+                let cards = [];
+                snapshot.forEach(doc => cards.push({...doc.data(), id: doc.id}))
+                listener(cards)
+                console.log(snapshot.docChanges())
+            }
+        )
+    }
+
     getCollections(){
         return this.collectionsRef.get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
     }
