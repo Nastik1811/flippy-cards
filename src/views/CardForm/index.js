@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { DataContext } from '../../DataManger';
 import styles from './CardForm.module.scss'
-import {SubmitButton, CollectionSelect, ContentArea} from '../../components/FormElements'
+import {SubmitButton, CollectionSelect, ContentArea} from '../FormElements'
 
 const CardForm = ({initialDetails, collections, onSubmit}) => {
     const {manager} = useContext(DataContext);
@@ -17,6 +17,7 @@ const CardForm = ({initialDetails, collections, onSubmit}) => {
         onSubmit({content: cardContent, collection: cardCollection})
       }
     }
+  
     useEffect(() => {
     }, [manager])
   
