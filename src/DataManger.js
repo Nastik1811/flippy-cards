@@ -60,7 +60,17 @@ class DataManger {
         this.userRef.collection('cards').add(card);
     }
 
-    addCollection(name){
+    async addCollection(name){
+        if(name === "") throw Error("Name should not be empty.")
+        let isCollectionExist = await this.collectionsRef.where("name", "==", name).get().then(docs => !docs.empty)
+        if(isCollectionExist){
+            throw Error("Collection already exists.")  
+        } else{
+            this.createCollection(name)
+        }
+    }
+
+    createCollection(name){
         const date = firebase.firestore.Timestamp.fromDate(new Date());
         let collection = {
             name,

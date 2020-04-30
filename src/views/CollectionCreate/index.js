@@ -8,10 +8,13 @@ const CollectionCreate = ({history})  =>{
     const {manager} = useContext(DataContext);
     const [name, setName] = useState("");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if(name !== ""){
-            manager.addCollection(name);
+        try{
+            await manager.addCollection(name);
+        }
+        catch(e){
+            alert(e)
         }
         goBack();
     }
@@ -19,7 +22,7 @@ const CollectionCreate = ({history})  =>{
     const goBack = () => history.goBack();
     
     return(
-        <Popup onClose={goBack}>
+        <Popup onDismiss={goBack}>
              <form onSubmit={handleSubmit}>
                 <InputField
                     type="text" 
