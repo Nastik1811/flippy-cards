@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { DataContext } from '../../DataManger';
 import styles from './CardForm.module.scss'
-import {SubmitButton, CollectionSelect, ContentArea} from '../../components/FormElements'
+import {SubmitButton, CollectionSelect} from '../../components/FormElements'
 import SideView from './SideView';
 
 const CardForm = ({initialDetails, collections, onSubmit}) => {
@@ -24,21 +24,18 @@ const CardForm = ({initialDetails, collections, onSubmit}) => {
   
     return(
         <form onSubmit={handleSubmit} className={styles["form"]}>
+
           <section className={styles["content-section"]}>
-            <SideView caption="Front" className="front">
-              <ContentArea 
-                    className={styles["text-area"]}  
-                    value={cardContent.front}
-                    placeholder="Front side"
-                    onChange={front => setCardContent({...cardContent, front})}/>
-            </SideView>
-            <SideView caption="Back" className="back">    
-              <ContentArea 
-                  className={styles["text-area"]}  
-                  value={cardContent.back}
-                  onChange={back => setCardContent({...cardContent, back})}
-                  placeholder="Back side"/>  
-            </SideView>
+            <SideView 
+              side="front" 
+              value={cardContent.front}
+              onChange={front => setCardContent({...cardContent, front})}
+            />
+            <SideView 
+              side="back" 
+              value={cardContent.back}
+              onChange={back => setCardContent({...cardContent, back})}
+            />
           </section>
           <section className={styles["select-section"]}>
             <label> Set a collection 

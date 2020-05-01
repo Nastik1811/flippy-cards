@@ -3,20 +3,16 @@
 
 .panel{
     display: grid;
+    width: 100%;
     margin: auto;
-    margin-top: 3rem;
-    width: 90%;
     justify-items: center;
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(250px, 270px));
     grid-gap: 20px 10px;
     }
 
-
 .to_new{
-    @extend %preview-container;
-    position: relative;
-    cursor: pointer;
-    background-color: $color-primary;
+    @extend %panel-item;
     color: $color-light-text;
     font-size: 4rem;
     display: flex;
@@ -24,6 +20,11 @@
     align-items: center;
     }
     
+    
+.to_new:hover::before{
+    border-width: 1px;
+    border-color: rgb(55, 115, 145);
+    }
 .to_new::before{
     content: "";
     @extend %outline-border;
