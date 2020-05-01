@@ -14,7 +14,7 @@
   margin: 10px;
   border-radius: 8px;
 
-  box-shadow: $card-shadow ;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
   transform-style: preserve-3d;
 }
 
@@ -63,11 +63,11 @@
 .flipped-card{
   @extend %card;
   transform: rotateY(180deg);
-  transition: transform 5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 2s 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .flipped-card .card-caption{
-  transition: 0s 0.5s;
+  transition: 0s 0.1s;
   visibility: hidden;
 }
 

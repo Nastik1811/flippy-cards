@@ -3,15 +3,7 @@
 
 
 .collection-preview{
-  @extend %preview-container;
-  background-color: $color-primary ;
-
-  position: relative;
-}
-
-.collection-preview::before{
-  content: "";
-  @extend %outline-border;
+  @extend %panel-item;
 }
 
 .header{

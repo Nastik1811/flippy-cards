@@ -2,14 +2,14 @@ import React from 'react'
 import styles from './SideView.module.scss'
 import clsx from 'clsx';
 
-const SideView = ({caption, className, children}) => {
+const SideView = ({side, value, onChange}) => {
     return(
-      <div className={clsx(styles["container"], styles[className])}>
+      <div className={clsx(styles["container"], styles[side])}>
             <header className={styles["caption"]}>
-                <span>{caption}</span>
+                <span>{side}</span>
             </header>
             <section className={styles["content"]}>
-              {children}
+              <textarea value={value} placeholder={side} onChange={(e) => onChange(e.target.value)}/>
             </section>
         </div>
     )

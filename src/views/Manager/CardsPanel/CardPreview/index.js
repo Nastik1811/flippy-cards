@@ -1,20 +1,18 @@
 import React from 'react'
 import styles from './CardPreview.module.scss'
+import { Link } from 'react-router-dom';
 
 const CardPreview = ({card}) => {
     return(
-        <div className={styles["card-preview"]}>
-            <div className={styles["back"]}>
-                <p className={styles["detail"]}>
-                    {card.content.back}
-                </p> 
+        <Link to={`/card/${card.id}`}>
+            <div className={styles["card-preview"]}>
+                <div className={styles["detail"]}>
+                    <span >
+                        {card.content.front}
+                    </span> 
+                </div>
             </div>
-            <div className={styles["front"]}>
-                <p className={styles["detail"]}>
-                    {card.content.front}
-                </p> 
-            </div>
-        </div>
+        </Link>
         
     )
 }

@@ -29,25 +29,6 @@
   padding: 10px 20px;
 }
 
-.text-area{
-  resize: none;
-  height: 100%;
-  width: 100%;
-  padding: 10px;
-  margin: auto;
-  text-align: center;
-  background: transparent;
-  font-size:  $text-medium;
-  font-family: "Raleway";
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  border: none;
-}
-
-.text-area:focus {
-  outline: none;
-}
-
 label{
   font-family: "Raleway";
   font-weight: 300;
@@ -73,11 +54,6 @@ label{
   height: 80%;
   background-color:  $color-primary-light;
   text-align: center;
-}
-
-.edit-card-content textarea{
-  width: 70%;
-  height: 70%;
 }
 
 .select-section{

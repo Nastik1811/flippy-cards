@@ -30,15 +30,13 @@
   
   .buttons-panel button{
     cursor: pointer;
-    background-color: $color-accent;
+    background-color: white;
     font-family: "Raleway";
-    font-size: $text-medium;
-    border: 2px solid  rgba(0, 0, 0, 0.05);
+    font-size: $text-large;
+    border: 0 solid  rgba(0, 0, 0, 0.05);
     border-radius: 10%;
     padding: 25px;
     margin: 20px 40px;
-    box-shadow: inset 8px 8px 15px rgba(255, 255, 255, 0.4), 
-    0px 0px 15px rgba(0, 0, 0, 0.1), inset -8px -8px 15px rgba(0, 0, 0, 0.1);
   }
   
   .buttons-panel button:hover{

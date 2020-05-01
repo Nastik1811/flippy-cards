@@ -56,8 +56,8 @@
   position: absolute;
   @extend %preview-container;
   border: 1px solid $color-primary-dark;
-  left: 0.45rem;
-  bottom: 0.45rem;
+  left: 7px;
+  bottom: 7px;
 }
 
 %tab{
@@ -69,5 +69,25 @@
   cursor: pointer;  
   &:hover{
     color: rgb(24, 146, 190);
+  }
+}
+
+%panel-item{
+  @extend %preview-container;
+  background-color: $color-primary ;
+  position: relative;
+  box-sizing: border-box;
+
+  &:hover{
+    background-color: rgb(156, 216, 238);
+    box-shadow: 0px 0px 10px rgba(87, 139, 165, 0.582)
+  }
+  &::before{
+    content: "";
+    @extend %outline-border;
+  }
+  &:hover::before{
+    border-width: 1px;
+    border-color: rgb(55, 115, 145);
   }
 }

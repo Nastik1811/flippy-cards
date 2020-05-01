@@ -15,7 +15,7 @@ const Tabbar = ({children}) =>
             <nav>
                 {children}
             </nav>
-            <hr/>
+            <hr className={styles["hr"]}/>
         </div>
     )
 }

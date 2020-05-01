@@ -3,7 +3,6 @@ import styles from './EditorWindow.module.scss'
 
 const EditorWindow = ({caption, children}) => {
     return(
-      <div className={styles["window"]}>
         <div className={styles["editor"]}>
             <header className={styles["header"]}>
                 <span className={styles["caption"]}>{caption}</span>
@@ -14,7 +13,6 @@ const EditorWindow = ({caption, children}) => {
                 {children}
             </div>
         </div>
-      </div>
     )
   }
 

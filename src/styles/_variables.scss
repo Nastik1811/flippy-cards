@@ -1,4 +1,4 @@
-$color-primary: rgba(220, 240, 250, 1);
+$color-primary: var(--color-primary);
 $color-primary-light:rgba(220, 240, 250, 0.5);
 $color-primary-dark: rgba(150, 180, 200, 1);
 $color-overlay: rgba(130, 180, 205, 1);
@@ -25,19 +25,3 @@ $text-medium: 1.5rem;
 $text-small: 1rem;
 
 $preview-width: 250px; 
-
-
-@media(prefers-color-scheme: dark){
-    $color-primary: #376F89;
-    $color-primary-light:rgba(29, 183, 237, 0.5);
-    $color-primary-dark: rgba(150, 180, 200, 1);
-    $color-overlay: rgba(130, 180, 205, 1);
-    $color-secondary: rgba(29, 183, 237, 1);
-    $color-accent: rgba(255, 215, 112, 1);
-    $light-shadow: 0 0 8px rgba(0, 0, 0, 0.1);  
-    $card-shadow: 5px 5px 20px rgba(255, 255, 255, 0.4);
-
-    $color-contrast-text:  #fff ;
-    $color-regular-text: #fff;
-    $color-overlay-text: rgb(227, 242, 255);
-  }
