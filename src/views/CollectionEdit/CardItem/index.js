@@ -1,14 +1,14 @@
 import React from 'react'
 import styles from './CardItem.module.scss'
 
-const CardItem = ({front, back}) => {
+const CardItem = ({content}) => {
     return(
         <div className={styles["card-item"]}>
             <div className={styles["back"]}>
-                {back}
+                {content.back}
             </div>
             <div className={styles["front"]}>
-                {front}
+                {content.front}
             </div>
         </div>
     )

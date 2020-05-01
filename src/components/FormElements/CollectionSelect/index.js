@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CollectionSelect = ({collections, value, onChange}) => {
+const CollectionSelect = ({collections, value, onChange, className}) => {
 
     const handleChange = (e) => {
       const id = e.target.value;
@@ -16,13 +16,10 @@ const CollectionSelect = ({collections, value, onChange}) => {
     }
   
     return(
-      <label>
-          Set a collection: 
-          <select value={value.id ? value.id : ""} onChange={handleChange}>
+          <select value={value.id ? value.id : ""} onChange={handleChange} className={className}>
             <option value="">None</option>
             {collections.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
           </select>
-      </label>
     )
   }
 

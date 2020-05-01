@@ -1,0 +1,40 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 300px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px rgba($color: #000000, $alpha: 0.1);
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .caption{
+    font-family: "Raleway";
+    font-weight: 300;
+    font-size: 1.4rem;
+    text-align: left;
+  }
+  
+  .front .caption{
+    color: rgb(52, 121, 151);
+  }
+  
+  .front.container{
+    background-color: #D0F0FC;
+  }
+  
+  .back .caption{
+    color: rgb(155, 132, 69);
+  }
+  .back.container{
+    background-color: #FBE19F;
+  }
+  
+  .content{
+    overflow: scroll;
+    flex-grow: 2;
+  }
