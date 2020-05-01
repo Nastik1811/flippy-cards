@@ -17,9 +17,9 @@ import LinkButton from '../../components/LinkButton'
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        let cardsLoading = manager.getTotalRepeatNumber().then(data => setTotal(data));
-        let nameLoading = manager.getUserName().then(name => setUserName(name));
-        let collectionLoading = manager.getCollectionToRepeatPreviews().then(data => setCollections(data))
+        let cardsLoading = manager.getTotalRepeatNumber().then(setTotal);
+        let nameLoading = manager.getUserName().then(setUserName);
+        let collectionLoading = manager.getCollectionToRepeatPreviews().then(setCollections)
 
         Promise.all([cardsLoading, nameLoading, collectionLoading]).then(() => setIsLoading(false));
 

@@ -1,8 +1,9 @@
 import React, {useContext, useState, useEffect} from 'react'
 import {useParams, Redirect} from 'react-router-dom'
 import { DataContext } from '../../DataManger';
-import CardForm from '../../components/CardForm';
+import CardForm from '../CardForm';
 import Loader from '../../components/Loader';
+import EditorWindow from '../../components/EditorWindow';
 
 const CardEdit = () => {
     const {manager} = useContext(DataContext);
@@ -37,12 +38,14 @@ const CardEdit = () => {
 
     return ( 
       initialDetails && collections ? 
+      <EditorWindow>
         <CardForm 
               initialDetails={initialDetails} 
               collections={collections}
               onSubmit={onSubmit}/>
-               : 
-        <Loader/>
+      </EditorWindow>
+      : 
+      <Loader/>
     )
   
   }

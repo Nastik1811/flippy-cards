@@ -72,13 +72,13 @@
 }
 
 @media only screen and (max-width: 500px){
-  .card{
+  %card{
     width: 350px;
     height: 280px;
   }
 }
 @media only screen and (max-width: 1000px){
-  .card{
+  %card{
     width: 450px;
     height: 350px;
   }

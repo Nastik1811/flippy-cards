@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './Popup.module.scss'
 
-const Popup = ({children}) => {
+const Popup = ({children, className, onDismiss}) => {
     return(
         <div className={styles["window"]}>
-            <div className={styles["popup"]}>
+            <div className={className}>
                 {children}
             </div>
         </div>

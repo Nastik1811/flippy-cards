@@ -11,7 +11,7 @@ import Tabbar, { Tab } from './Tabbar';
 
 const Manager = () => {
     return (
-        <section>
+        <section className="full-size">
             <Tabbar>
                 <Tab url="/manage/collections" label="Collections"/>
                 <Tab url="/manage/cards" label="Cards"/>

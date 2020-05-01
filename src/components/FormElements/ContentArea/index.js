@@ -1,12 +1,10 @@
 import React from 'react'
 
-const ContentArea = ({label, value, onChange, className}) => {
+const ContentArea = ({placeholder, value, onChange, className}) => {
     return(
-      <div className={className}> 
-        <label>{label}
-          <textarea placeholder={label} value={value} onChange={(e) => onChange(e.target.value)}/>
-        </label>
-      </div>
+   
+          <textarea className={className} placeholder={placeholder} value={value} onChange={(e) => onChange(e.target.value)}/>
+     
     )
   }
 
