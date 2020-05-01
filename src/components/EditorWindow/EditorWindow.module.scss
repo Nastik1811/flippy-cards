@@ -1,0 +1,56 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.window{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    backdrop-filter: blur(2px);
+    z-index: 10;
+    padding: 80px 10vw 10px;
+}
+
+.editor{
+  width: 100%;
+  min-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  backdrop-filter: blur(10px);
+  background-color: rgba(233, 248, 255, 0.589);
+  box-shadow: 0 0 20px  rgba($color: #000000, $alpha: 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  
+}
+
+.content{
+    width: 95%;
+    height: auto;
+    flex-grow: 3;
+    overflow: scroll;
+}
+.header{
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 20px
+}
+
+.caption{
+    color: rgba($color: rgb(22, 72, 94), $alpha: 1);
+    font-family: "Raleway";
+    font-weight: 300;
+    font-size: 1.7rem;
+    text-align: left;
+    padding-left: 20px;
+}
+
+hr{
+    margin-top: 0.4rem;
+    width: 100%;
+    border: solid rgba($color: #4689A6, $alpha: 0.2);
+    border-width: 2px 0 0 0 ;
+  }

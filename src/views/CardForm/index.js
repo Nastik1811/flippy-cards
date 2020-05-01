@@ -1,7 +1,8 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { DataContext } from '../../DataManger';
 import styles from './CardForm.module.scss'
-import {SubmitButton, CollectionSelect, ContentArea} from '../FormElements'
+import {SubmitButton, CollectionSelect, ContentArea} from '../../components/FormElements'
+import SideView from './SideView';
 
 const CardForm = ({initialDetails, collections, onSubmit}) => {
     const {manager} = useContext(DataContext);
@@ -22,29 +23,35 @@ const CardForm = ({initialDetails, collections, onSubmit}) => {
     }, [manager])
   
     return(
-      <div className={styles["editor"]}>
-        <form onSubmit={handleSubmit} className={styles["card-editor-form"]}>
-          <div className={styles["row-flex-container"]}>
+        <form onSubmit={handleSubmit} className={styles["form"]}>
+          <section className={styles["content-section"]}>
+            <SideView caption="Front" className="front">
               <ContentArea 
-                label="front" 
-                className={styles["edit-container"]} 
-                value={cardContent.front}
-                onChange={(front) => setCardContent({...cardContent, front})}/>
+                    className={styles["text-area"]}  
+                    value={cardContent.front}
+                    placeholder="Front side"
+                    onChange={front => setCardContent({...cardContent, front})}/>
+            </SideView>
+            <SideView caption="Back" className="back">    
               <ContentArea 
-                label="back" 
-                className={styles["edit-container"]}  
-                value={cardContent.back}
-                onChange={(back) => setCardContent({...cardContent, back})}/>
-          </div>
-          <CollectionSelect 
-            collections={collections}
-            value={cardCollection} 
-            onChange={setCardCollection}
-          />
+                  className={styles["text-area"]}  
+                  value={cardContent.back}
+                  onChange={back => setCardContent({...cardContent, back})}
+                  placeholder="Back side"/>  
+            </SideView>
+          </section>
+          <section className={styles["select-section"]}>
+            <label> Set a collection 
+            <CollectionSelect 
+              collections={collections}
+              value={cardCollection} 
+              onChange={setCardCollection}
+              className={styles["select"]}  
+            />
+            </label>
+          </section> 
           <SubmitButton label="Save" className={styles["submit-btn"]} />
         </form>
-      </div>
     )
   }
-
   export default CardForm
