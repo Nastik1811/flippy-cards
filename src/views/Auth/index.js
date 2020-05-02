@@ -17,6 +17,7 @@ const Auth = ({match}) => {
             <nav className={styles["auth-tabs"]}>
                 <NavLink to={match.url + "/login"} className={styles["tab"]} activeClassName={styles["tab-active"]} >Login</NavLink>
                 <NavLink to={match.url + "/signup"}  className={styles["tab"]} activeClassName={styles["tab-active"]}>Signup</NavLink>
+                <hr className={styles["hr"]}/>
             </nav>
             <Switch>
                 <Route path={match.path + "/login"} children={<Login/>}/>

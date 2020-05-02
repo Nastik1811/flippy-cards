@@ -1,10 +1,11 @@
 import React from 'react'
 import styles from './Card.module.scss'
+import clsx from 'clsx'
 
 const Card = ({card, isFlipped, onClick}) => {
 
     return (
-        <div className={isFlipped? styles["flipped-card"] : styles["card"]} onClick={onClick}>
+        <div className={clsx(styles["card"], isFlipped && styles["flipped"], )} onClick={onClick}>
             
             <div className={styles["card-front"]}>{card.front}
             </div>

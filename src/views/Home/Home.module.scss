@@ -2,10 +2,9 @@
 @import 'src/styles/_placeholders.scss';
 
 .main-section{
-  @extend %main-section;
-  margin-top: 30px;
+  position: relative;
+  margin-top: 20px;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row-reverse;
   justify-content: space-around;
   align-items: flex-start;
@@ -21,4 +20,12 @@
 
 .add-btn::before{
   content: "+";
+}
+
+@media screen and (max-width: 1024px) {
+  .main-section{
+    flex-direction: column;
+    align-items: center;
+    padding: 0 ;
+  }
 }

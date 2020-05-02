@@ -1,0 +1,106 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.popup{
+    position: relative;
+  font-family: "Raleway";
+  color: $color-contrast-text;
+  width: 500px;
+  height: 300px;
+  padding: 30px;
+  border-radius: 15px;
+  background-color: $color-primary; 
+  box-shadow: 0 0 20px rgba(0, 61, 87, 0.425);
+  background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
+  
+  
+  /*box-shadow: 0 0 20px rgba(37, 109, 139, 0.425);*/
+}
+/*
+.popup::before{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%; background-color: rgba(129, 184, 204, 1);
+    box-shadow: 0 0 20px rgba(37, 109, 139, 0.425);
+    background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
+   
+    z-index: -1;
+    border-radius: 10px;
+    bottom: 10px;
+    left: 10px;
+}
+.popup::after{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+     background-color: rgba(129, 184, 204, 1);
+     box-shadow: 0 0 20px rgba(37, 109, 139, 0.425);
+    background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
+   
+    z-index: -4;
+    border-radius: 10px;
+    bottom: 20px;
+    left: 20px;
+}
+*/
+
+.save-btn{
+  position: absolute;
+  bottom: 0;
+  right: 30px;
+  padding: 10px;
+  height: 50px;
+  width: 50px;
+  font-size: 2rem;
+  font-weight: 500;
+  font-family: "Comfortaa";
+  line-height: 100%;
+  border-radius: 50%;
+  background-color: rgba(254, 255, 255, 0.411);
+  border: 3px solid rgba(11, 95, 131, 0.411);
+  color: rgb(11, 95, 131);
+}
+.save-btn:hover{
+    box-shadow: 3px 3px 10px rgba(46, 106, 146, 0.288)
+  
+  }
+
+.form{
+    position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form input{
+    font-size: 1.3rem;
+    background: rgba(255, 255, 255, 0);
+    width: 300px;
+    text-align: center;
+    border:none;
+    border-bottom: 2px dashed rgba(129, 184, 204, 0.6);
+    color: rgb(22, 72, 94);
+    
+}
+
+.form input::placeholder{
+    color: $color-primary-dark;
+}
+
+.form :focus{
+    outline: none;
+    border-color: rgba(129, 184, 204, 1);
+}
+
+.header{
+    display: inline-block;
+    font-family: "Raleway";
+    font-weight: 500;
+    font-size: 1.7rem;
+    margin-bottom: 40px;
+    color: rgb(22, 72, 94);
+}

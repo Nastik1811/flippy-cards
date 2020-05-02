@@ -6,8 +6,8 @@ import styles from './ReviewLinksBoard.module.scss'
 const ReviewLinksBoard = ({collections}) => {
     let isNotEmpty = collections.length > 0
     return isNotEmpty ?
-        <section className={styles["main-section"]}>
-                <header>You can also choose a collection:</header>
+        <section className={styles["collecions"]}>
+                <header>You can choose a collecion if you want</header>
                 <div className={styles["links-board"]}>
                     {collections.map(c => <ReviewLink slug={c.id} name={c.name} cards={c.amount} key={c.id}/>)}
                     <div className={styles["link-container"]}>

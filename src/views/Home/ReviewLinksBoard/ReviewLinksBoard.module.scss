@@ -13,16 +13,32 @@
   
 
 .links-board{
-    display: grid;
-    margin-top: 10px;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 270px)) ;
-    gap: 10px;
-    align-items: center;
-    justify-items: center;
-  }
-
-.main-section{
-  @extend %main-section;
-  margin-top: 50px;
+  display: grid;
+  margin-top: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 270px)) ;
+  grid-gap: 5px;
+  align-items: center;
+  justify-items: center;
 }
 
+.collecions{
+  margin-top: 30px;
+}
+
+.collecions header{
+  font-family: "Raleway";
+  font-weight: 400;
+  font-family: "Comfortaa";
+  font-weight: 300;
+  font-size: 1.6rem;
+  padding: 15px 30px;
+}
+
+@media screen and (max-width: 1024px) {
+  .links-board{
+    justify-content: center;
+  }
+  .collecions header{
+    text-align: center;
+  }
+}
