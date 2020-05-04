@@ -16,7 +16,7 @@ const ReviewLinksBoard = ({collections}) => {
                 </div>
         </section>
         :
-        null
+        <section className={styles["image"]}><span className={styles["no-cards"]}>Waiting for collections ... </span></section>
 }
 
 export default ReviewLinksBoard
