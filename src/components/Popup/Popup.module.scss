@@ -17,3 +17,21 @@
     z-index: 10;
 }
 
+.close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    border: none;
+    background-image: url('../../assets/icons/del.svg');
+    background-size: contain;
+    transition: 0.05s ease-in;
+    z-index: 1;
+}
+
+.close:hover{
+    transform: scale(1.1);
+}
+
