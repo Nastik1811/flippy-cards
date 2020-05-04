@@ -3,7 +3,8 @@
 
 .main-section{
   position: relative;
-  margin-top: 20px;
+  margin-top: 15px;
+  padding-right: 6vw;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-around;
@@ -26,6 +27,6 @@
   .main-section{
     flex-direction: column;
     align-items: center;
-    padding: 0 ;
+    padding-right: 0 ;
   }
 }
