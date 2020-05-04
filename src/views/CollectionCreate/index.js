@@ -32,7 +32,7 @@ const CollectionCreate = ({history})  =>{
                     value={name}
                     onChange={name => (setName(name))}
                 />
-                <SubmitButton label="+" className={styles["save-btn"]}/>
+                <SubmitButton className={styles["save-btn"]}/>
             </form>
         </Popup>        
     )
