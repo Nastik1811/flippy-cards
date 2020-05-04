@@ -1,24 +1,29 @@
 @import 'src/styles/_variables.scss';
 @import 'src/styles/_placeholders.scss';
 
+.msg{
+  margin: 2vw ;
+}
+
+
 .greeting-msg{
     font-size: $text-large;
     text-align: left;
     font-family: "Comfortaa";
     font-weight: 300;
-    margin: 2vw 3vw;
+    margin-bottom: 10px;
   }
   
 .invitation-msg{
-    margin: 2vw 3vw;
     font-family: "Roboto";
     font-weight: 300;
     font-size: 1.5rem;
   }
   
-.greeting{
+.invitation-container{
   border: 1px solid rgba(150, 180, 200, 1);
-  padding: 20px;
+  padding: 1vw;
+  margin-right: 30px;
   border-radius: 15px;
   font-size: $text-medium;
   width: 650px;
@@ -29,13 +34,16 @@
 .start-btn{
   @extend %accent-btn;
   bottom:10px;
-  width: 50%;
+  width: 40%;
+  margin-top: 20px;
   min-width: 10em;
+  font-size: 1.6rem;
 }
 
 @media screen and (max-width: 1024px) {
-  .greeting{
-    max-width: 100%;
+  .invitation-container{
+    width: 100%;
+    margin-right: 0;
     height:auto;
   }
 }

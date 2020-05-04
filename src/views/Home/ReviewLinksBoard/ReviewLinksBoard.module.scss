@@ -3,19 +3,19 @@
 
 .link-container{
     @extend %preview-container;
-    margin: 5px;
+
   }
 
 .manage-btn{
     @extend %accent-btn;
-    width: 90%;
+    margin: 15px;
   }
   
 
 .links-board{
   display: grid;
   margin-top: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 270px)) ;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 280px)) ;
   grid-gap: 5px;
   align-items: center;
   justify-items: center;
@@ -40,5 +40,11 @@
   }
   .collecions header{
     text-align: center;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .links-board{
+    grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
   }
 }

@@ -5,17 +5,15 @@ import styles from './ReviewLink.module.scss'
 
 const ReviewLink = ({slug, name, cards}) => {
     return(
-       
-        <div className={styles["link-container"]}>
-            <div className={styles["info-component"]}>
-                <span className={styles["link-title"]}>{name}</span>
-                <span className={styles["link-details"]}>{cards} cards to review</span>
+        <Link to={`/session/${slug}`}>
+        <div className={styles["link-component"]}>
+            <div className={styles["info"]}>
+                <span className={styles["title"]}>{name}</span>
+                <span className={styles["details"]}>{cards} cards to review</span>
             </div>
-
-            <Link to={`/session/${slug}`}>
-                <div className={styles["overlay-component"]}> Click to start </div>
-            </Link>    
+            <div className={styles["link"]}> Review <br/> collection</div>
         </div>
+        </Link> 
        
     )
 }
