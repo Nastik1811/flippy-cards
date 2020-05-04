@@ -21,7 +21,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: $text-medium;
+    font-size: 1.5rem;
   }
   
 .auth-form input{
@@ -43,7 +43,8 @@
   color: rgba(24, 146, 190, 0.5);
 }
 .hr{
-  border: 1px solid rgba(24, 146, 190, 0.5);
+  @extend %hr;
+  margin-bottom: 30px;
 }
 
 .submit-btn{
@@ -57,13 +58,11 @@
 
 .tab{
   @extend %tab;
-  color: #000;
   font-size: 1.6rem;
 } 
 
 .tab-active{
-  @extend %tab;
-  color: rgba(24, 146, 190, 1);
+  @extend %tab-active;
 }
 
 @media only screen and (max-width: 500px){
