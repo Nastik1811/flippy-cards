@@ -81,7 +81,7 @@ class DataManger {
     }
 
     listenCollections(listener){
-        let unsubscribe = this.collectionsRef.orderBy("created", "desc").onSnapshot(
+        let unsubscribe = this.collectionsRef.orderBy("last_edit", "desc").onSnapshot(
             snapshot => {
                 let collections = [];
                 listener(snapshot.forEach(doc => collections.push({...doc.data(), id: doc.id})))
@@ -116,10 +116,21 @@ class DataManger {
         }
     }
 
+    getCardsWithoutCollection(){
+        return this.cardsRef.where("collection.id", "==", null).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
+        }
+
     updateCard(id, newDetails){
         this.cardsRef.doc(id).update({
             content: newDetails.content,
             collection: newDetails.collection
+        })
+    }
+
+    updateCollection(id, newName){
+        this.collectionsRef.doc(id).update({
+            name: newName,
+            last_edit: firebase.firestore.Timestamp.fromDate(new Date())
         })
     }
 
@@ -128,7 +139,7 @@ class DataManger {
     }
 
     getCollection(id){
-        return this.collectionsRef.doc(id).get().then(doc => ({...doc.data(), id: doc.id}))
+        return this.collectionsRef.doc(id).get().then(doc => ({...doc.data(), id: doc.id, }))
     }
 
     getCardsToRecall(collection_id){
@@ -169,9 +180,6 @@ class DataManger {
         return grouppedCards;
     }
 
-    getCardsWithoutCollection(){
-    return this.cardsRef.where("collection", "==", null).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
-    }
 
     //overview logic
     updateCardProgress(card, mark){
@@ -214,7 +222,7 @@ class DataManger {
                 newInterval = 1;
                 break;
             case MARK.EXCELLENT:
-                newInterval = 24;
+                newInterval = 25;
                 break;
             default:
                 throw Error;
@@ -273,6 +281,10 @@ class DataManger {
         nextRecall.setDate(today.getDate() + newInterval);
 
         return [nextRecall, STATUS.LEARNED]  
+    }
+
+    isUserNew(){
+        return this.cardsRef.get().then(query => query.empty)
     }
   
   }
