@@ -10,30 +10,36 @@
   box-shadow: 5px 5px 10px rgba($color: hsl(0, 0%, 0%), $alpha: 0.1);
   padding: 10px 20px;
   margin-bottom: 20px;
+  background-image: url("https://www.transparenttextures.com/patterns/sandpaper.png");
   background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
+  background-image: url("https://www.transparenttextures.com/patterns/notebook.png");
+  
 }
 
 .caption{
   font-family: "Raleway";
-  font-weight: 300;
+  text-transform: capitalize;
+  font-weight: 400;
   font-size: 1.4rem;
   text-align: left;
   margin-bottom: 10px;
 }
 
 .front .caption{
-  color: rgb(52, 121, 151);
+  color: rgb(44, 101, 126);
 }
 
 .front.container{
   background-color: #D0F0FC;
+  background-color:rgb(176, 229, 248);
 }
 
 .back .caption{
-  color: rgb(155, 132, 69);
+  color: rgb(196, 144, 1);
 }
 .back.container{
   background-color: #FBE19F;
+  background-color: rgb(255, 221, 133);
 }
 
 .content{
@@ -49,7 +55,7 @@
   margin: auto;
   text-align: center;
   background: transparent;
-  font-size:  $text-medium;
+  font-size:  1.5rem;
   font-family: "Raleway";
   white-space: pre-wrap;
   overflow-wrap: break-word;
@@ -64,7 +70,7 @@
 
 .back textarea:focus {
   outline: none;
-  border: 2px dashed rgba(194, 176, 126, 0.5);
+  border: 2px dashed rgba(187, 154, 65, 0.5);
   border-radius: 10px;
 }
 
@@ -73,6 +79,6 @@
 }
 
 .back textarea::placeholder{
-  color:rgba(180, 142, 35, 0.5);
+  color:rgba(180, 136, 14, 0.5);
 }
 

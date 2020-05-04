@@ -7,7 +7,7 @@
 
 
 .greeting-msg{
-    font-size: $text-large;
+    font-size: 2rem;
     text-align: left;
     font-family: "Comfortaa";
     font-weight: 300;
@@ -17,7 +17,7 @@
 .invitation-msg{
     font-family: "Roboto";
     font-weight: 300;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
   
 .invitation-container{
@@ -25,7 +25,7 @@
   padding: 1vw;
   margin-right: 30px;
   border-radius: 15px;
-  font-size: $text-medium;
+  font-size: 1.5rem;
   width: 650px;
   text-align: center;
   color: $color-regular-text;

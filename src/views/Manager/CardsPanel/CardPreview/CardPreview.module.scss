@@ -8,13 +8,15 @@
 
 
 .detail{
-  margin: 10px 20px;
-  padding: 1rem 0.5rem;
   position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: $color-regular-text;
+  color: $dark-blue-text ;
   line-height: 3rem;
+  width: 100%;
+  top: 3rem;
+  font-size: 1.2rem;
+  text-align: center;
 }

@@ -29,3 +29,11 @@
     content: "";
     @extend %outline-border;
     }
+
+    
+
+@media only screen and (max-width: 700px){
+    .panel{
+        grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
+    }
+}

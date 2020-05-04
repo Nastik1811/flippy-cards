@@ -7,7 +7,7 @@
   align-items: center;
   width: 100%;
   height: auto;
-  justify-content: space-around;;
+  justify-content: space-around;
 }
 
 .content-section{
@@ -17,7 +17,7 @@
   height: auto;
   align-items: center;
   justify-content: space-around;
-  padding: 10px;
+  padding: 20px;
 }
 
 .caption{
@@ -63,19 +63,11 @@ label{
 }
 
 .submit-btn{
+  @extend %submit-btn;
   width: 180px;
-  height: 50px;
-  position: relative;
-  background: rgba(197, 238, 255, 0.445);
-  backdrop-filter: blur(20px);
-  font-family: "Raleway";
-  padding: 0.5rem;
-  font-size: 1.5rem;
+  height: 60px;
   margin-bottom: 20px;
-  border-radius: 10px;
-  border: 1px solid rgb(22, 72, 94);
-  margin-top: 10px;
-  color: rgb(22, 72, 94)
+  margin-top: 20px;
 }
 
 .submit-btn::before{
@@ -97,4 +89,22 @@ label{
     width: 90%;
     
   }
+}
+
+
+
+.add_new{
+  position: absolute;
+  right: 20px;
+  height: 40px;
+  width: 40px;
+  background-color: transparent;
+  border: none;
+  background-image: url('../../assets/icons/add.png');
+  background-size: contain;
+  transition: 0.05s ease-in;
+}
+
+.add_new:hover{
+  transform: scale(1.2)
 }
