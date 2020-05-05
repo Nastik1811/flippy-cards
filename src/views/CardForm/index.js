@@ -10,7 +10,8 @@ const CardForm = ({initialDetails, collections, onSubmit}) => {
     const [cardContent, setCardContent] = useState(initialDetails.content);
     const [cardCollection, setCardCollection] = useState(initialDetails.collection);
   
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+      event.preventDefault();
       if(cardContent.front === "" || cardContent.back === ""){
         alert("Please, fill both card sides first.")
       }

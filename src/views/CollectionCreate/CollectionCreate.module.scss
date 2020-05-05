@@ -51,7 +51,7 @@
 .form input{
     font-size: 1.5rem;
     background: rgba(255, 255, 255, 0);
-    width: 300px;
+    width: 60%;
     padding: 5px;
     text-align: center;
     border:none;
@@ -77,4 +77,24 @@
     margin-top: 10px;
     margin-bottom: 30px;
     color: rgb(20, 61, 77)
+}
+
+@media screen and (max-width: 600px) {
+  .popup{
+    position: relative;
+    font-family: "Raleway";
+    color: $color-contrast-text;
+    width: 90%;
+    height: 200px;
+    padding: 10px;
+  }
+  .header{
+    font-size: 1.5rem;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+  .save-btn{
+    height: 30px;
+    width: 30px;
+  }
 }
