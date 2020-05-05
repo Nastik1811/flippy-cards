@@ -17,10 +17,12 @@
 
 
   .title{
+    display: block;
     font-family: inherit;
     font-size: 2rem;
   }
   .left{
+    display: block;
     font-family: inherit;
     font-size: 1.2rem;
   }
@@ -31,38 +33,21 @@
 
   .session-info{
     width: 100%;
+    padding: 0 3vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     color: $color-contrast-text;
   }
-  .passed-time{
-    font-size: 1.5rem;
+
+  .time-container{
+    height: 100%;
+    width: auto;
   }
-  
-  .buttons-panel{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .buttons-panel-hidden{
-    visibility: hidden;
-  }
-  
-  .buttons-panel button{
-    cursor: pointer;
-    background-color: white;
-    font-family: "Raleway";
+
+  .time{
+    font-family: "Roboto";
     font-size: 2rem;
-    border: 0 solid  rgba(0, 0, 0, 0.05);
-    border-radius: 10%;
-    padding: 25px;
-    margin: 20px 20px;
-  }
-  
-  .buttons-panel button:hover{
-    outline: none;
-    transform: scale(1.1);
+    font-weight: 300;
   }
