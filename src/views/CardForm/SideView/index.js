@@ -6,7 +6,7 @@ const SideView = ({side, value, onChange}) => {
     return(
       <div className={clsx(styles["container"], styles[side])}>
             <header className={styles["caption"]}>
-                <span>{side}</span>
+                {side}
             </header>
             <section className={styles["content"]}>
               <textarea value={value} placeholder={side} onChange={(e) => onChange(e.target.value)}/>

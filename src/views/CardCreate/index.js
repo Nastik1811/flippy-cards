@@ -5,7 +5,7 @@ import CardForm from '../CardForm';
 import Loader from '../../components/Loader';
 import EditorWindow from '../../components/EditorWindow';
 
-const CardCreate = () => {
+const CardCreate = ({match}) => {
     const {manager} = useContext(DataContext);
     const [completed, setCompleted] = useState(false);
     const [collections, setCollections] = useState(null);
@@ -43,7 +43,8 @@ const CardCreate = () => {
         <CardForm 
             initialDetails={initialDetails} 
             collections={collections}
-            onSubmit={onSubmit}/>
+            onSubmit={onSubmit}
+            match={match}/>
       </EditorWindow> 
       : 
       <Loader/>)
