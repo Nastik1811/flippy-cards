@@ -44,6 +44,7 @@ const OverviewContainer = ({history}) => {
         }
         else{
             alert("That's all. Good job!");
+            manager.addUserProgress(time, cards.length);
             history.push('/home');
         }
     }

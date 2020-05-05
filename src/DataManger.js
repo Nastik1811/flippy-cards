@@ -41,6 +41,7 @@ class DataManger {
         this.userRef = this.db.collection("users").doc(uid);
         this.cardsRef = this.userRef.collection("cards");
         this.collectionsRef = this.userRef.collection("collections");
+        this.statisticsRef = this.userRef.collection("statistics");
     }
 
     getUserName(){
@@ -285,6 +286,17 @@ class DataManger {
 
     isUserNew(){
         return this.cardsRef.get().then(query => query.empty)
+    }
+
+    addUserProgress(duration, reivewAmount){
+        this.statisticsRef.add(
+            {
+                review_date: firebase.firestore.Timestamp.fromDate(new Date()),
+                review_duration: duration,
+                reviews_amount: reivewAmount,
+            }
+        )
+
     }
   
   }
