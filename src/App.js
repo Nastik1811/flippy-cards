@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import Landing from './views/Landing';
 import Manager from './views/Manager';
-import Overview from './views/Overview';
+import OverviewContainer from './views/Overview';
 import Home from './views/Home';
 import Auth from './views/Auth';
 import CardCreate from './views/CardCreate';
@@ -24,8 +24,8 @@ const App = () => {
                     <Route path='/auth' component={Auth}/>
                     <PrivateRoute path='/home' component={Home}/>
                     <PrivateRoute path ='/manage' component={Manager}/> 
-                    <PrivateRoute exact path='/session' component={Overview}/>
-                    <PrivateRoute exact path='/session/:slug' component={Overview}/>
+                    <PrivateRoute exact path='/session' component={OverviewContainer}/>
+                    <PrivateRoute exact path='/session/:slug' component={OverviewContainer}/>
                     <PrivateRoute path='/card/new' component={CardCreate}/>
                     <PrivateRoute path='/card/:id' component={CardEdit}/>
                     <PrivateRoute path='/collection/:slug' component={CollectionEditor}/>
