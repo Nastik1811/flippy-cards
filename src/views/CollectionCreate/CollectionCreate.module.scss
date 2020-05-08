@@ -3,7 +3,7 @@
 
 .popup{
   position: relative;
-  font-family: "Raleway";
+  font-family: $font-main;
   color: $color-contrast-text;
   width: 500px;
   height: 250px;
@@ -11,8 +11,6 @@
   border-radius: 10px;
   background-color: rgb(240, 251, 255);
   box-shadow: 0 0 20px rgba(0, 61, 87, 0.425);
-  background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
-  background-image: url("https://www.transparenttextures.com/patterns/debut-light.png");
   background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
   
   
@@ -71,7 +69,7 @@
 
 .header{
     display: inline-block;
-    font-family: "Raleway";
+    font-family: $font-main;
     font-weight: 500;
     font-size: 1.7rem;
     margin-top: 10px;
@@ -82,7 +80,7 @@
 @media screen and (max-width: 600px) {
   .popup{
     position: relative;
-    font-family: "Raleway";
+    font-family: $font-main;
     color: $color-contrast-text;
     width: 90%;
     height: 200px;

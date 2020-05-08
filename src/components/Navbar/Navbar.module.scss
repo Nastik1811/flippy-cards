@@ -3,7 +3,8 @@
 
 %link{
   color:   $color-contrast-text;
-  font-family: "Roboto";
+  font-family: $font-main;
+  font-weight: 500;
   z-index: 1;
   display: block;
   font-size: 1.15rem;
@@ -54,7 +55,7 @@
   }
   
 .active-link{
-    font-weight: 500;
+    font-weight: 600;
     color: #000;
   }
   
@@ -78,7 +79,7 @@
   
 .logo-container a{
     color:   $color-contrast-text ;
-    font-family: "Comfortaa";
+    font-family: $font-decorative;
     display: block;
     text-decoration: none;
     font-size: 2.2rem;

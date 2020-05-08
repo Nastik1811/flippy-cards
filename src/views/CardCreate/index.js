@@ -2,13 +2,12 @@ import React, {useContext, useState, useEffect} from 'react'
 import { DataContext } from '../../DataManger';
 import {Redirect} from 'react-router-dom'
 import CardForm from '../CardForm';
-import Loader from '../../components/Loader';
 import EditorWindow from '../../components/EditorWindow';
 
 const CardCreate = ({match}) => {
     const {manager} = useContext(DataContext);
     const [completed, setCompleted] = useState(false);
-    const [collections, setCollections] = useState(null);
+    const [collections, setCollections] = useState([]);
   
     const initialDetails = {
         content: {
@@ -38,16 +37,14 @@ const CardCreate = ({match}) => {
       return <Redirect to="/manage/cards"/>
     }
 
-    return (collections ? 
+    return (
       <EditorWindow caption="New card">
         <CardForm 
             initialDetails={initialDetails} 
             collections={collections}
             onSubmit={onSubmit}
             match={match}/>
-      </EditorWindow> 
-      : 
-      <Loader/>)
+      </EditorWindow> )
   }
 
   export default CardCreate
