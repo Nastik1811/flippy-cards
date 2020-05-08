@@ -30,7 +30,7 @@ const CollectionCreate = ({history})  =>{
                     type="text" 
                     placeholder="type here" 
                     value={name}
-                    onChange={name => (setName(name))}
+                    onChange={setName(name)}
                 />
                 <SubmitButton className={styles["save-btn"]}/>
             </form>

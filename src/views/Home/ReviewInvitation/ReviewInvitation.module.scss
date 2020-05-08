@@ -9,13 +9,13 @@
 .greeting-msg{
     font-size: 2rem;
     text-align: left;
-    font-family: "Comfortaa";
+    font-family: $font-decorative;
     font-weight: 300;
     margin-bottom: 10px;
   }
   
 .invitation-msg{
-    font-family: "Roboto";
+    font-family: $font-main;
     font-weight: 300;
     font-size: 1.6rem;
   }

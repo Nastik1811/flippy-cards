@@ -13,9 +13,9 @@
   width: 300px;
   height: 190px;
   border-radius: 8px;
-  color: $color-regular-text;
   background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
   line-height: 3rem;
+  padding: 10px;
 }
 
 .back{
@@ -23,7 +23,7 @@
   display: block;
   position: absolute;
   background-color:rgb(89, 165, 201);
-  color: $color-regular-text;
+  color: #000;
   text-align: center;
   padding-top: 40px;
   overflow: hidden;
@@ -32,7 +32,7 @@
 .front{
   @extend %component;
   position: relative;
-  color: $color-regular-text;
+  color: $dark-blue-text;
   background-color: rgb(212, 244, 255);
   background-color:rgb(184, 230, 247);
   display: flex;

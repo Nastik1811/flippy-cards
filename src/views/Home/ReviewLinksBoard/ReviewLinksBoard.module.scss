@@ -26,9 +26,7 @@
 }
 
 .collecions header{
-  font-family: "Raleway";
-  font-weight: 400;
-  font-family: "Comfortaa";
+  font-family: $font-decorative;
   font-weight: 300;
   font-size: 1.6rem;
   padding: 15px 30px;
@@ -44,7 +42,7 @@
 
 .no-cards{
   display: inline-block;
-  font-family: "Comfortaa";
+  font-family: $font-decorative;
   color: $dark-blue-text;
   font-size: 1.7rem;
   font-weight: 400;

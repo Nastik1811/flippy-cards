@@ -10,7 +10,7 @@ const CardEdit = () => {
     const {id} = useParams();
 
     const [initialDetails, setInitialDetails] = useState(null);
-    const [collections, setCollections] = useState(null);
+    const [collections, setCollections] = useState([]);
     const [completed, setCompleted] = useState(false);
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const CardEdit = () => {
     }
 
     return ( 
-      initialDetails && collections ? 
+      initialDetails ? 
       <EditorWindow caption="Card editor">
         <CardForm 
               initialDetails={initialDetails} 

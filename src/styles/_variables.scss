@@ -14,9 +14,9 @@ $hard-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
 $overlay-shadow: 0px -5px 3px rgba(0, 0, 0, 0.3);
 $card-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2), 0px 0px 40px rgba(0, 0, 0, 0.2);
 
-$color-contrast-text:  #000 ;
+$color-contrast-text:  var( --color-contrast-text);
 $color-light-text: #fff;
-$color-regular-text: #333;
+$color-regular-text: var(--color-regular-text);
 
 $hr-light:  rgb(139, 199, 224);
 
@@ -24,3 +24,8 @@ $dark-blue-text:  rgb(22, 72, 94);
 $dark-yellow: #000;
 $blue-border: #000;
 $yellow-border: #000;
+
+$font-basic: "Roboto";
+$font-main: "Raleway";
+$font-decorative: "Comfortaa";
+

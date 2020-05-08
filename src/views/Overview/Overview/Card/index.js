@@ -5,8 +5,7 @@ import clsx from 'clsx'
 const Card = ({card, isFlipped, onClick}) => {
 
     return (
-        <div className={clsx(styles["card"], isFlipped && styles["flipped"], )} onClick={onClick}>
-            
+        <div className={clsx(styles["card"], { [styles["flipped"]]: isFlipped })} onClick={onClick}>
             <div className={styles["card-front"]}>{card.front}
             </div>
             <div className={styles["card-back"]}>{card.back}

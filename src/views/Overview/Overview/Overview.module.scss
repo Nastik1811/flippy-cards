@@ -28,7 +28,7 @@
   }
 
   .details{
-    font-family: "Raleway";
+    font-family: $font-main;
   }
 
   .session-info{
@@ -47,7 +47,7 @@
   }
 
   .time{
-    font-family: "Roboto";
+    font-family: $font-basic;
     font-size: 2rem;
     font-weight: 300;
   }

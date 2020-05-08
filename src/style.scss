@@ -1,7 +1,3 @@
-/* 1. Use relative sizes
-   2. Remove duplications
-   3. define root font-size according to the screen size 
-   4. other sizes difine via rem*/
 @import 'src/styles/_variables.scss';
 @import 'src/styles/_placeholders.scss';
 
@@ -69,23 +65,13 @@
 
 @font-face{
   font-family: "Raleway";
-  font-style: italic;
-  font-weight: 400;
-  src: 
-    local("Raleway"),
-    url("./assets/fonts/Raleway-Italic.ttf") format('truetype');
-} 
-
-@font-face{
-  font-family: "Raleway";
-  font-style: italic;
+  font-style: normal;
   font-weight: 300;
   src: 
     local("Raleway"),
-    url("./assets/fonts/Raleway-LightItalic.ttf") format('truetype');
+    url("./assets/fonts/Raleway-Light.ttf") format('truetype');
 } 
 
-/*global*/
 
 * {
   margin: 0;
@@ -98,9 +84,18 @@
 a{
   text-decoration: none
 } 
+body, html {
+  height: 100%;
+}
 
-.app-container{
-  min-height: 100vh;
+#root {
+    min-height: 100%;
+    display: flex;
+}
+
+.app-container {
+    min-height: 100%;
+    width: 100%;
 }
 
 .cloud-background{
@@ -118,15 +113,10 @@ a{
   margin-top: 20px;
 }
 
-
 button{
   cursor: pointer;
 }
 
-
-.full-size{
-  height: 100%;
-}
 /*
 #d0edf9 primary
 #5A8EA1
@@ -157,9 +147,9 @@ button{
 
 @media(prefers-color-scheme: dark){
   :root{
-    --color-primary: #376F89;
+    --color-primary: rgb(82, 157, 192);
     --color-primary-light:rgba(29, 183, 237, 0.5);
-    --color-primary-dark: rgba(150, 180, 200, 1);
+    --color-primary-dark: rgb(27, 88, 129);
     --color-overlay: rgba(130, 180, 205, 1);
     --color-secondary: rgba(29, 183, 237, 1);
     --color-accent: rgba(255, 215, 112, 1);
