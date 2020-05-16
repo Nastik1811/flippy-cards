@@ -38,7 +38,7 @@ const CardEdit = () => {
 
     return ( 
       initialDetails ? 
-      <EditorWindow caption="Card editor">
+      <EditorWindow caption="Card editor" onReturn={() => setCompleted(true)}>
         <CardForm 
               initialDetails={initialDetails} 
               collections={collections}

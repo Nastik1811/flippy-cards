@@ -38,7 +38,7 @@ const CardCreate = ({match}) => {
     }
 
     return (
-      <EditorWindow caption="New card">
+      <EditorWindow caption="New card" onReturn={() => setCompleted(true)}>
         <CardForm 
             initialDetails={initialDetails} 
             collections={collections}
