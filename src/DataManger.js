@@ -18,6 +18,7 @@ export const STATUS = {
     LEARNED: 2
 }
 
+
 export const DataProvider = ({children}) => {
     const {app} = useContext(FirebaseContext);
     const {currentUser} = useContext(AuthContext);
@@ -94,12 +95,11 @@ class DataManger {
 
     listenCards(listener, collectionId){
         let ref = collectionId ? this.cardsRef.where("collection.id", "==", collectionId) : this.cardsRef
-        return ref.onSnapshot(
+        return ref.orderBy("created", "desc").onSnapshot(
             snapshot => {
                 let cards = [];
                 snapshot.forEach(doc => cards.push({...doc.data(), id: doc.id}))
                 listener(cards)
-                console.log(snapshot.docChanges())
             }
         )
     }
@@ -298,5 +298,29 @@ class DataManger {
         )
 
     }
+
+    deleteCard(id){
+        this.cardsRef.doc(id).delete()
+    }
   
+    async deleteCollection(id, withCards = true){
+        let batch = this.db.batch();
+        batch.delete(this.collectionsRef.doc(id))
+        if(withCards){
+            this.cardsRef.where("collection.id", "==", id).get()
+            .then(query => query.forEach(doc => batch.delete(this.cardsRef.doc(doc.id))))
+            .then(() => batch.commit())
+        }
+        else{
+            this.cardsRef.where("collection.id", "==", id).get()
+            .then(query => query.forEach(doc => batch.update(
+                this.cardsRef.doc(doc.id),
+                {collection: {
+                    id: null,
+                    name: ""
+                }}
+                )))
+            .then(() => batch.commit())
+        }
+    }
   }
