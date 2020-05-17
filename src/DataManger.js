@@ -121,6 +121,13 @@ class DataManger {
         return this.cardsRef.where("collection.id", "==", null).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
         }
 
+    getCardsForCollectionEdit(id){
+        let cardsInCollection = this.cardsRef.where("collection.id", "==", id).get()
+                                             .then(query => query.docs.map(doc => ({...doc.data(), id: doc.id, inCollection: true})))
+        let cardsOutCollection = this.cardsRef.where("collection.id", "==", null).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id, inCollection:false})))
+        return Promise.all([cardsInCollection, cardsOutCollection]).then(set => set[0].concat(set[1]))
+    }
+
     updateCard(id, newDetails){
         this.cardsRef.doc(id).update({
             content: newDetails.content,
@@ -128,11 +135,35 @@ class DataManger {
         })
     }
 
-    updateCollection(id, newName){
-        this.collectionsRef.doc(id).update({
-            name: newName,
-            last_edit: firebase.firestore.Timestamp.fromDate(new Date())
-        })
+    updateCollection(id, newName, cards){
+        const collection = {
+            id: id,
+            name: newName
+        }
+        const noCollection = {
+            id: null,
+            name: ""
+        }
+
+        let batch = this.db.batch()
+        batch.update(
+            this.collectionsRef.doc(id), 
+            {
+                name: newName,
+                last_edit: firebase.firestore.Timestamp.fromDate(new Date())
+            })
+            
+        for (id in cards){
+            if(cards[id]){
+                batch.update(this.cardsRef.doc(id), {collection})
+            }
+            else{
+                batch.update(this.cardsRef.doc(id), {collection: noCollection})
+            }
+        }
+
+        batch.commit();
+
     }
 
     getCardDetails(id){
