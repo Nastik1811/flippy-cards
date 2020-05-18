@@ -1,11 +1,9 @@
-import React, {useContext, useState, useEffect} from 'react'
-import { DataContext } from '../../DataManger';
+import React, {useState} from 'react'
 import styles from './CardForm.module.scss'
 import {SubmitButton, CollectionSelect} from '../../components/FormElements'
 import SideView from './SideView';
 
 const CardForm = ({initialDetails, collections, onSubmit}) => {
-    const {manager} = useContext(DataContext);
   
     const [cardContent, setCardContent] = useState(initialDetails.content);
     const [cardCollection, setCardCollection] = useState(initialDetails.collection);
@@ -16,12 +14,12 @@ const CardForm = ({initialDetails, collections, onSubmit}) => {
         alert("Please, fill both card sides first.")
       }
       else{
-        onSubmit({content: cardContent, collection: cardCollection})
+        onSubmit({
+          content: cardContent, 
+          collection: cardCollection
+        })
       }
     }
-  
-    useEffect(() => {
-    }, [manager])
   
     return(
         <form onSubmit={handleSubmit} className={styles["form"]}>

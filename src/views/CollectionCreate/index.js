@@ -9,10 +9,11 @@ const CollectionCreate = ({history})  =>{
     const {manager} = useContext(DataContext);
     const [name, setName] = useState("");
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         try{
-            await manager.addCollection(name);
+            manager.addCollection(name);
+            setName("")
         }
         catch(e){
             alert(e)
@@ -30,7 +31,7 @@ const CollectionCreate = ({history})  =>{
                     type="text" 
                     placeholder="type here" 
                     value={name}
-                    onChange={setName(name)}
+                    onChange={setName}
                 />
                 <SubmitButton className={styles["save-btn"]}/>
             </form>
