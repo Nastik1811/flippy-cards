@@ -7,7 +7,7 @@
     margin: auto;
     justify-items: center;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 270px));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 270px));
     grid-gap: 20px 10px;
     }
 
@@ -30,10 +30,3 @@
     @extend %outline-border;
     }
 
-    
-
-@media only screen and (max-width: 700px){
-    .panel{
-        grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
-    }
-}

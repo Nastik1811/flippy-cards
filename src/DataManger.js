@@ -42,7 +42,7 @@ class DataManger {
         this.userRef = this.db.collection("users").doc(uid);
         this.cardsRef = this.userRef.collection("cards");
         this.collectionsRef = this.userRef.collection("collections");
-        this.statisticsRef = this.userRef.collection("statistics");
+        this.statisticsRef = this.db.collection("statistics");
     }
 
     getUserName(){
@@ -152,7 +152,7 @@ class DataManger {
                 name: newName,
                 last_edit: firebase.firestore.Timestamp.fromDate(new Date())
             })
-            
+
         for (id in cards){
             if(cards[id]){
                 batch.update(this.cardsRef.doc(id), {collection})
@@ -213,7 +213,6 @@ class DataManger {
     }
 
 
-    //overview logic
     updateCardProgress(card, mark){
         let newStatus;
         let nextRecall;
@@ -319,12 +318,13 @@ class DataManger {
         return this.cardsRef.get().then(query => query.empty)
     }
 
-    addUserProgress(duration, reivewAmount){
+    addUserProgress(duration, score){
         this.statisticsRef.add(
             {
+                user_id: this.uid,
                 review_date: firebase.firestore.Timestamp.fromDate(new Date()),
                 review_duration: duration,
-                reviews_amount: reivewAmount,
+                score: score
             }
         )
 
