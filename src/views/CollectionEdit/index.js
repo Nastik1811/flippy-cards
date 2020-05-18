@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import CardItem from './CardItem'
-import { useParams, withRouter, Redirect } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import styles from './CollectionEditor.module.scss'
 import { DataContext } from '../../DataManger'
 import EditorWindow from '../../components/EditorWindow'
@@ -8,21 +8,20 @@ import Loader from '../../components/Loader'
 import {SubmitButton, InputField} from '../../components/FormElements'
 
 
-const CollectionEdit = ({history}) => {
-    let {slug} = useParams();
+const CollectionEdit = () => {
+    let {id} = useParams();
     const {manager} = useContext(DataContext);
 
     const [name, setName] = useState("");
     const [cards, setCards] = useState([]);
     const [cardStates, setCardStates] = useState({})
-    //const [uncheckedCards, setUncheckedCards] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [completed, setCompleted] = useState(false);
 
 
     useEffect(() => {
-        let nameLoad =  manager.getCollection(slug).then(data => setName(data.name));
-        let cardsLoad = manager.getCardsForCollectionEdit(slug).then(data => {
+        let nameLoad =  manager.getCollection(id).then(data => setName(data.name));
+        let cardsLoad = manager.getCardsForCollectionEdit(id).then(data => {
             setCards(data)
             let states = data.reduce((obj, item) => {
                 return {
@@ -33,11 +32,10 @@ const CollectionEdit = ({history}) => {
             setCardStates(states)
         })
         Promise.all([nameLoad, cardsLoad]).then(() => setIsLoading(false))
-    }, [manager, slug])
+    }, [manager, id])
 
     const handleSubmit = () => {
-        manager.updateCollection(slug, name, cardStates)
-        console.log(cardStates)
+        manager.updateCollection(id, name, cardStates)
         setCompleted(true);
     }
 
@@ -45,12 +43,12 @@ const CollectionEdit = ({history}) => {
         return <Redirect to="/manage/collections"/>
       }
   
-      const onCheck = id => {
-        setCardStates({
-            ...cardStates,
-            [id]: !cardStates[id]
-        })
-      }
+    const onCheck = card_id => {
+    setCardStates({
+        ...cardStates,
+        [card_id]: !cardStates[card_id]
+    })
+    }
 
     return (
         isLoading ? <Loader/> :
@@ -71,7 +69,5 @@ const CollectionEdit = ({history}) => {
     )
   
 }
-//update collection name
-//update all cards
 
-export default withRouter(CollectionEdit) 
+export default CollectionEdit

@@ -11,12 +11,8 @@ const Checkbox = ({isChecked}) => {
 const CardItem = ({card, isChecked, onClick}) => {
     return(
         <div className={clsx(styles["card-item"],  { [styles["checked"]]: isChecked })} onClick={onClick}>
-            <div className={styles["back"]}>
-                {card.content.back}
-            </div>
-            <div className={styles["front"]}>
-                {card.content.front}
-            </div>
+            <div className={styles["back"]} data-content={card.content.back}></div>
+            <div className={styles["front"]} data-content={card.content.front}></div>
             <Checkbox isChecked={isChecked} />
         </div>
     )

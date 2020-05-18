@@ -1,22 +1,75 @@
 @import 'src/styles/_variables.scss';
 @import 'src/styles/_placeholders.scss';
+@import 'src/styles/icons.scss';
+
 
 
 .card-preview{
   @extend %panel-item;
 }
 
+.card-preview:hover .edit, .card-preview:hover .delete{
+  visibility: visible;
+}
 
 .detail{
-  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 105px;
+  overflow: hidden;
+  margin: auto;
+  width: 90%;
+}
+
+.detail p{
+  font-family: $font-main;
+  font-weight: 500;
   color: $dark-blue-text ;
-  line-height: 3rem;
-  width: 100%;
-  top: 3rem;
   font-size: 1.2rem;
   text-align: center;
+  overflow: hidden;
+}
+
+.edit{
+  position: absolute;
+  right: 48px;
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  @extend %edit-icon;
+}
+
+.delete{
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  @extend %delete-icon;
+}
+
+.controls{
+  height: 30px;
+  position: relative;
+}
+
+.footer{
+  font-family: $font-decorative;
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+  font-size: 0.8rem;
+  text-align: center;
+  color: rgb(82, 148, 173);
+}
+
+@media only screen and (max-width: 700px){
+  .detail{
+    height: 70px;
+  }
+  .header{
+    height:20px
+  }
 }
