@@ -9,7 +9,7 @@ const ConfirmationDialog = ({isOpen, onConfirm, onDismiss, collection}) => {
         <Modal onDismiss={onDismiss}>
                 <ModalHeader title="Confirm deletion" onDismiss={onDismiss}/>
                 <ModalContent>
-                    <ModalMessage> You're gonna delete the <span>{collection.name}</span> collection. </ModalMessage>
+                    <ModalMessage> You're gonna delete the <span>{collection.name}</span> collection. Is that all right?</ModalMessage>
                     <ModalCheckbox 
                         checked={withCards} 
                         onChange={() => setWithCards(!withCards)}
@@ -17,8 +17,8 @@ const ConfirmationDialog = ({isOpen, onConfirm, onDismiss, collection}) => {
                         />
                 </ModalContent>
                 <ModalActions>
-                    <button onClick={() => onConfirm(collection.id, withCards)}>Delete</button>
-                    <button onClick={onDismiss}>Cancel</button>
+                    <button onClick={() => onConfirm(collection.id, withCards)}>Yep</button>
+                    <button onClick={onDismiss}>Nope</button>
                 </ModalActions>
         </Modal>
         :

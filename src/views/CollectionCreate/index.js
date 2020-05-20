@@ -23,7 +23,7 @@ const CollectionCreate = ({history})  =>{
         }
     }
 
-    const goBack = () => history.goBack();
+    const goBack = () => history.push("/manage/collections");
     
     return(
         <Modal onDismiss={goBack}>

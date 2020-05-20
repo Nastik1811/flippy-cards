@@ -42,8 +42,7 @@ const CardCreate = ({match}) => {
         <CardForm 
             initialDetails={initialDetails} 
             collections={collections}
-            onSubmit={onSubmit}
-            match={match}/>
+            onSubmit={onSubmit}/>
       </EditorWindow> )
   }
 

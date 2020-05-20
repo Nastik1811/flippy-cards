@@ -27,8 +27,8 @@
     flex-direction: column;
     font-family: $font-main;
     color: $color-contrast-text;
-    width: 570px;
-    height: 270px;
+    width: 580px;
+    height: auto;
     border-radius: 10px;
     background-color: rgb(240, 251, 255);
     box-shadow: 0 0 20px rgba(0, 61, 87, 0.425);
@@ -56,13 +56,19 @@
 }
 
 .content{
+    flex-grow: 2;
+    padding: 10px;
+}
+.container{
+    background-color: rgba(255, 255, 255, 0.5);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    flex-grow: 2;
-    margin: auto;
-    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px 0px;
+    height: auto;
+    width: 100%;
+
 }
 
 .message{
@@ -80,6 +86,7 @@
 }
 
 .actions{
+    margin-top: 5px;
     display: flex;
     justify-content: flex-end;
 }
@@ -130,9 +137,12 @@
         height: 240px;
     }
     .content{
-        padding: 0px;
+        padding: 5px;
     }
     .message{
         font-size: 1.4rem;
+    }
+    .checkbox label{
+        font-size: 1rem;
     }
   }
