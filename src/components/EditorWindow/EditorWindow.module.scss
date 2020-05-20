@@ -21,22 +21,53 @@ width: 100%;
 }
 
 .header{
+    position: relative;
     width: 100%;
     max-width: 1000px;
-    margin-bottom: 10px;
     padding: 10px 20px
 }
 
 .caption{
+    display: inline-block;
     color:  rgb(22, 72, 94);
     font-family: $font-decorative;
     font-weight: 400;
     font-size: 1.7rem;
     padding: 5px 25px;
+    margin-left: 20px;
+}
+
+.back{
+    display: inline-block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: none;
+    background: url("../../assets/icons/left2.png") no-repeat;
+    background-size: contain;
+    //transform: scale(-1);
+    border: none;
+    transition: 0.1s ease-in-out;
+}
+
+.back:hover{
+    transform: scale(1.1);
+}
+
+.back:focus{
+    outline: none;
+    transform: scale(1.1);
 }
 
 .hr{
     @extend %hr;
-    margin-top: 0.4rem;
+    margin-top: 0;
     border: 1px solid rgba(139, 199, 224, 0.2);
+  }
+
+  @media screen and (max-width: 700px) {
+  
+    .header{
+        padding: 10px 0px
+    }
   }

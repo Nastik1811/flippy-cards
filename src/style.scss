@@ -73,6 +73,16 @@
 } 
 
 
+@font-face{
+  font-family: "Raleway";
+  font-style: italic;
+  font-weight: 400;
+  src: 
+    local("Raleway"),
+    url("./assets/fonts/Raleway-Italic.ttf") format('truetype');
+} 
+
+
 * {
   margin: 0;
   padding: 0;

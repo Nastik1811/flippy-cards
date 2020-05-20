@@ -15,7 +15,7 @@
 .links-board{
   display: grid;
   margin-top: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 280px)) ;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 290px)) ;
   grid-gap: 5px;
   align-items: center;
   justify-items: center;
@@ -62,11 +62,8 @@
 }
 
 @media screen and (max-width: 700px) {
-  .links-board{
-    grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
-  }
   .image{
-    height: 400px;
+    background: none;
   }
 }
 

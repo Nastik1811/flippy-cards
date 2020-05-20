@@ -18,6 +18,7 @@ export const STATUS = {
     LEARNED: 2
 }
 
+
 export const DataProvider = ({children}) => {
     const {app} = useContext(FirebaseContext);
     const {currentUser} = useContext(AuthContext);
@@ -41,7 +42,7 @@ class DataManger {
         this.userRef = this.db.collection("users").doc(uid);
         this.cardsRef = this.userRef.collection("cards");
         this.collectionsRef = this.userRef.collection("collections");
-        this.statisticsRef = this.userRef.collection("statistics");
+        this.statisticsRef = this.db.collection("statistics");
     }
 
     getUserName(){
@@ -94,12 +95,11 @@ class DataManger {
 
     listenCards(listener, collectionId){
         let ref = collectionId ? this.cardsRef.where("collection.id", "==", collectionId) : this.cardsRef
-        return ref.onSnapshot(
+        return ref.orderBy("created", "desc").onSnapshot(
             snapshot => {
                 let cards = [];
                 snapshot.forEach(doc => cards.push({...doc.data(), id: doc.id}))
                 listener(cards)
-                console.log(snapshot.docChanges())
             }
         )
     }
@@ -121,6 +121,13 @@ class DataManger {
         return this.cardsRef.where("collection.id", "==", null).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
         }
 
+    getCardsForCollectionEdit(id){
+        let cardsInCollection = this.cardsRef.where("collection.id", "==", id).get()
+                                             .then(query => query.docs.map(doc => ({...doc.data(), id: doc.id, inCollection: true})))
+        let cardsOutCollection = this.cardsRef.where("collection.id", "==", null).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id, inCollection:false})))
+        return Promise.all([cardsInCollection, cardsOutCollection]).then(set => set[0].concat(set[1]))
+    }
+
     updateCard(id, newDetails){
         this.cardsRef.doc(id).update({
             content: newDetails.content,
@@ -128,11 +135,35 @@ class DataManger {
         })
     }
 
-    updateCollection(id, newName){
-        this.collectionsRef.doc(id).update({
-            name: newName,
-            last_edit: firebase.firestore.Timestamp.fromDate(new Date())
-        })
+    updateCollection(id, newName, cards){
+        const collection = {
+            id: id,
+            name: newName
+        }
+        const noCollection = {
+            id: null,
+            name: ""
+        }
+
+        let batch = this.db.batch()
+        batch.update(
+            this.collectionsRef.doc(id), 
+            {
+                name: newName,
+                last_edit: firebase.firestore.Timestamp.fromDate(new Date())
+            })
+
+        for (id in cards){
+            if(cards[id]){
+                batch.update(this.cardsRef.doc(id), {collection})
+            }
+            else{
+                batch.update(this.cardsRef.doc(id), {collection: noCollection})
+            }
+        }
+
+        batch.commit();
+
     }
 
     getCardDetails(id){
@@ -182,7 +213,6 @@ class DataManger {
     }
 
 
-    //overview logic
     updateCardProgress(card, mark){
         let newStatus;
         let nextRecall;
@@ -288,15 +318,40 @@ class DataManger {
         return this.cardsRef.get().then(query => query.empty)
     }
 
-    addUserProgress(duration, reivewAmount){
+    addUserProgress(duration, score){
         this.statisticsRef.add(
             {
+                user_id: this.uid,
                 review_date: firebase.firestore.Timestamp.fromDate(new Date()),
                 review_duration: duration,
-                reviews_amount: reivewAmount,
+                score: score
             }
         )
 
     }
+
+    deleteCard(id){
+        this.cardsRef.doc(id).delete()
+    }
   
+    async deleteCollection(id, withCards = true){
+        let batch = this.db.batch();
+        batch.delete(this.collectionsRef.doc(id))
+        if(withCards){
+            this.cardsRef.where("collection.id", "==", id).get()
+            .then(query => query.forEach(doc => batch.delete(this.cardsRef.doc(doc.id))))
+            .then(() => batch.commit())
+        }
+        else{
+            this.cardsRef.where("collection.id", "==", id).get()
+            .then(query => query.forEach(doc => batch.update(
+                this.cardsRef.doc(doc.id),
+                {collection: {
+                    id: null,
+                    name: ""
+                }}
+                )))
+            .then(() => batch.commit())
+        }
+    }
   }

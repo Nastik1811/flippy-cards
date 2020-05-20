@@ -2,17 +2,18 @@ import React from 'react'
 import styles from './CardPreview.module.scss'
 import { Link } from 'react-router-dom';
 
-const CardPreview = ({card}) => {
+const CardPreview = ({card, onDelete}) => {
     return(
-        <Link to={`/card/${card.id}`}>
             <div className={styles["card-preview"]}>
-                <div className={styles["detail"]}>
-                    <span >
-                        {card.content.front}
-                    </span> 
-                </div>
+                <header className={styles["controls"]}> 
+                    <Link to={`/card/${card.id}`} className={styles["edit"]}></Link> 
+                    <button className={styles["delete"]} onClick={onDelete}></button> 
+                </header>
+                <section className={styles["detail"]}>
+                        <p>{card.content.front}</p>
+                </section>
+                <footer className={styles["footer"]}></footer>
             </div>
-        </Link>
         
     )
 }

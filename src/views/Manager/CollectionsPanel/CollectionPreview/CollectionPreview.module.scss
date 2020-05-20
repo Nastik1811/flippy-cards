@@ -1,24 +1,10 @@
 @import 'src/styles/_variables.scss';
 @import 'src/styles/_placeholders.scss';
+@import 'src/styles/icons.scss';
 
 
 .collection-preview{
   @extend %panel-item;
-}
-
-.header{
-  width: 100%;
-  color: $dark-blue-text ;
-  position: absolute;
-  top: 3rem;
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-.details{
-  position: absolute;
-  width: 100%;
-  top: 3rem;
 }
 
 .footer{
@@ -28,4 +14,51 @@
   font-size: 0.8rem;
   text-align: center;
   color: $dark-blue-text;
+}
+
+.detail{
+  display: flex;
+  font-family: $font-main;
+  font-size: 1.4rem;
+  font-weight: 500;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $dark-blue-text ;
+  width: 100%;
+  height: 100px;
+  padding: 0px 15px;
+  text-align: center;
+}
+
+.edit{
+  position: absolute;
+  right: 48px;
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  @extend %edit-icon;
+}
+
+.delete{
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  @extend %delete-icon;
+}
+
+.controls{
+  height: 30px;
+  position: relative;
+}
+
+@media only screen and (max-width: 700px){
+  .detail{
+    height: 70px;
+  }
+  .header{
+    height:20px
+  }
 }

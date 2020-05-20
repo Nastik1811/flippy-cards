@@ -6,9 +6,15 @@ const Card = ({card, isFlipped, onClick}) => {
 
     return (
         <div className={clsx(styles["card"], { [styles["flipped"]]: isFlipped })} onClick={onClick}>
-            <div className={styles["card-front"]}>{card.front}
+            <div className={styles["card-front"]}>
+                <span className={styles["content"]} >
+                    {card.front}
+                </span>
             </div>
-            <div className={styles["card-back"]}>{card.back}
+            <div className={styles["card-back"]} >
+                <span className={styles["content"]} >
+                    {card.back}
+                </span>
             </div>
             <span className={styles["card-caption"]}>Click to flip</span>
         </div>

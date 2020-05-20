@@ -1,51 +1,67 @@
 import React, { useState, useContext, useEffect } from 'react'
 import CardItem from './CardItem'
-import { useParams, useHistory, withRouter } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import styles from './CollectionEditor.module.scss'
 import { DataContext } from '../../DataManger'
 import EditorWindow from '../../components/EditorWindow'
 import Loader from '../../components/Loader'
-import {SubmitButton} from '../../components/FormElements'
+import {SubmitButton, InputField} from '../../components/FormElements'
 
-const CheckablePreview = ({children}) => {
-    return(<div>
-        {children}
-    </div>)
-} 
 
-const CollectionEdit = ({history}) => {
-    let {slug} = useParams();
+const CollectionEdit = () => {
+    let {id} = useParams();
     const {manager} = useContext(DataContext);
 
     const [name, setName] = useState("");
-    const [checkedCards, setCheckedCards] = useState([]);
-    const [uncheckedCards, setUncheckedCards] = useState([]);
+    const [cards, setCards] = useState([]);
+    const [cardStates, setCardStates] = useState({})
     const [isLoading, setIsLoading] = useState(true);
+    const [completed, setCompleted] = useState(false);
+
 
     useEffect(() => {
-        let nameLoad = manager.getCards(slug).then(setCheckedCards);
-        let cardsLoad = manager.getCardsWithoutCollection().then(setUncheckedCards);
-        let otherCardsLoad = manager.getCollection(slug).then(data => setName(data.name));
-        Promise.all([nameLoad, cardsLoad, otherCardsLoad]).then(() => setIsLoading(false))
-    }, [manager, slug])
+        let nameLoad =  manager.getCollection(id).then(data => setName(data.name));
+        let cardsLoad = manager.getCardsForCollectionEdit(id).then(data => {
+            setCards(data)
+            let states = data.reduce((obj, item) => {
+                return {
+                    ...obj,
+                    [item.id]: item.inCollection
+                }
+            }, {})
+            setCardStates(states)
+        })
+        Promise.all([nameLoad, cardsLoad]).then(() => setIsLoading(false))
+    }, [manager, id])
 
     const handleSubmit = () => {
-        manager.updateCollection(slug, name);
-        history.push("/manage/collections");
+        manager.updateCollection(id, name, cardStates)
+        setCompleted(true);
+    }
+
+    if(completed){
+        return <Redirect to="/manage/collections"/>
+      }
+  
+    const onCheck = card_id => {
+    setCardStates({
+        ...cardStates,
+        [card_id]: !cardStates[card_id]
+    })
     }
 
     return (
         isLoading ? <Loader/> :
-        <EditorWindow caption="Collection editor">
+        <EditorWindow caption="Collection editor" onReturn={() => setCompleted(true)}>
             <form className={styles["content"]} onSubmit={handleSubmit}>
                 <header>
-                    <div className={styles["name_container"]} >
-                        <input className={styles["name"]} value={name} onChange={e => setName(e.target.value)}/>
+                    <div className={styles["name-container"]} >
+                        <InputField 
+                            className={styles["name"]} value={name} onChange={setName}/>
                     </div>
                 </header>
                 <div className={styles["cards"]}>
-                        {uncheckedCards.map(c => <CardItem content={c.content} key={c.id}/>)}
-                        {checkedCards.map(c => <CardItem content={c.content} key={c.id}/>)}
+                        {cards.map(c => <CardItem card={c} key={c.id} isChecked={cardStates[c.id]} onClick={() => onCheck(c.id)}/>)}
                 </div>
                 <SubmitButton label="Save" className={styles["save-btn"]} />
             </form>
@@ -53,7 +69,5 @@ const CollectionEdit = ({history}) => {
     )
   
 }
-//update collection name
-//update all cards
 
-export default withRouter(CollectionEdit) 
+export default CollectionEdit

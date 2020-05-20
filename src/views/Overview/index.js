@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useContext, useCallback} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import { DataContext } from '../../DataManger'
 import Loader from "../../components/Loader"
 import Overview from './Overview'
+import { MARK } from '../../DataManger'
 
 const OverviewContainer = ({history}) => {
     const {slug} = useParams();
@@ -14,6 +15,11 @@ const OverviewContainer = ({history}) => {
     const [currentCardIndex, setCardIndex] = useState(0);
     const [left, setLeft] = useState(0);
     const [time, setTime] = useState(0);
+    const [score, setScore] = useState({
+        [MARK.BAD]: 0,
+        [MARK.GOOD]: 0,
+        [MARK.EXCELLENT]: 0,
+    });
 
     useEffect(()=> {
         manager.getCardsToRecall(collection_id).then(data => {
@@ -37,14 +43,14 @@ const OverviewContainer = ({history}) => {
 
     const handleMarkClick = (mark) => {
         manager.updateCardProgress(cards[currentCardIndex], mark)
-
+        setScore({...score, [mark]: ++score[mark]})
         if(left !== 0 ){
             setLeft(left - 1);
             setCardIndex(currentCardIndex + 1);
         }
         else{
             alert("That's all. Good job!");
-            manager.addUserProgress(time, cards.length);
+            manager.addUserProgress(time, score);
             history.push('/home');
         }
     }

@@ -3,49 +3,85 @@
 
 
 .card-item{
+  position: relative;
   width: 300px;
   height: 190px;
   border-radius: 8px;
   overflow: hidden;
+  transition: all 200ms 100ms ease;
+  box-shadow: 0px 0px 10px rgba(84, 121, 131, 0.2)
 }
 
 %component{
   width: 300px;
   height: 190px;
   border-radius: 8px;
-  background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
   line-height: 3rem;
   padding: 10px;
+  font-size: 1.4rem;
+  font-family: $font-main;
+  font-weight: 500;
+  transition: all 200ms 100ms ease;
 }
 
 .back{
   @extend %component;
   display: block;
   position: absolute;
-  background-color:rgb(89, 165, 201);
-  color: #000;
+  background-color: #ffe89d;
+  background-image: url("https://www.transparenttextures.com/patterns/subtle-carbon.png");
   text-align: center;
   padding-top: 40px;
   overflow: hidden;
   }
 
+.back::after{
+  content: attr(data-content);
+  color: rgb(126, 94, 0);
+}
+.checked .back{
+  //background-color:rgb(21, 112, 155);
+  background-color: rgb(253, 211, 97);
+ }
+
 .front{
   @extend %component;
+  background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
+  //background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
   position: relative;
-  color: $dark-blue-text;
-  background-color: rgb(212, 244, 255);
-  background-color:rgb(184, 230, 247);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color:rgb(191, 234, 252);
+  color: $dark-blue-text;
 }
-.preview-info{
-    margin: 10px 20px;
-  }
-  
+
+.front::after{
+  content: attr(data-content);
+}
+
+.checked .front{
+  background-color:rgb(106, 183, 219);
+}
 .card-item:hover .front{
-    transform: translateY(80px) ;
-    transition: all 300ms ease;
-    box-shadow: 0px 0px 20px rgba(5, 51, 68, 0.5);
-  }
+  transform: translateY(80px) ;
+  box-shadow: 0px 0px 20px rgba(138, 114, 38, 0.5);
+}
+
+.card-item.checked{
+  box-shadow: 0px 0px 30px rgba(84, 121, 131, 0.2), 0px 3px 15px rgba(70, 115, 126, 0.4)
+}
+
+.checkbox{
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  right: 10px;
+  bottom: 10px;
+  background: url('../../../assets/icons/uncheck.svg') no-repeat;
+  z-index: 10;
+}
+.checkbox.checked{
+  background: url('../../../assets/icons/check.svg') no-repeat;
+}

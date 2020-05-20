@@ -11,7 +11,7 @@
   padding: 10px 20px;
   margin-bottom: 20px;
   background-image: url("https://www.transparenttextures.com/patterns/notebook.png");
-  
+  overflow: hidden;
 }
 
 .caption{
@@ -28,7 +28,7 @@
 }
 
 .front.container{
-  background-color: #D0F0FC;
+  //background-color: #D0F0FC;
   background-color:rgb(176, 229, 248);
 }
 
@@ -36,28 +36,26 @@
   color: rgb(196, 144, 1);
 }
 .back.container{
-  background-color: #FBE19F;
+  //background-color: #FBE19F;
   background-color: rgb(255, 221, 133);
 }
 
 .content{
-  overflow: scroll;
   flex-grow: 2;
 }
 
 .content textarea{
   resize: none;
-  height: 100%;
   width: 100%;
+  height: 100%;
   padding: 20px;
-  margin: auto;
   text-align: center;
   background: transparent;
   font-size:  1.5rem;
   font-family: $font-main;
   white-space: pre-wrap;
   overflow-wrap: break-word;
-  border: none;
+  border: 2px solid transparent;
 }
 
 .front textarea:focus {
