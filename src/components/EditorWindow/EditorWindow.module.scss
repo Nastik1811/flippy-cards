@@ -71,3 +71,14 @@ width: 100%;
         padding: 10px 0px
     }
   }
+
+  @media(prefers-color-scheme: dark){
+    .caption{
+        color:  #fff;
+        font-family: $font-decorative;
+        margin-left: 25px;
+    }
+    .hr{
+        border-color: rgba(255, 255, 255, 0.705);
+      }
+}

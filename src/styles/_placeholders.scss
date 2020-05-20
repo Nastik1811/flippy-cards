@@ -6,13 +6,14 @@
 }
 
 %outline-border{
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   border-radius: 8px;
   border: 1px solid $color-primary-dark;
-  left: 6px;
-  bottom: 6px;
+  left: 7px;
+  bottom: 7px;
 }
 
 %btn{
@@ -25,10 +26,9 @@
   border-radius: 10px;
   height: fit-content;
   border: 1px solid ;
-  background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
+  transition: 0.1s ease;
 
   &::after{
-    content: "";
     @extend %outline-border;
     border-radius: 10px;
     border: 1px solid ;
@@ -47,8 +47,8 @@
   text-align: center;
   padding: 0.8rem 1.5rem;
   height: fit-content;
-  transition: 0.1s ease;
   border: 1px solid rgba(226, 166, 0, 0.514);
+  background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
 
   &:hover{
     transform: scale(1.1); 
@@ -63,18 +63,20 @@
 %submit-btn{
   @extend %btn;
   padding: 0.5rem;
-  font-size: 1.5rem;
-  background-color:rgb(206, 239, 252);
+  background-color:rgba(206, 239, 252, 0.342);
   border-color:rgba(24, 146, 190, 0.5);
   color: $dark-blue-text;
-
-&:hover{
-  box-shadow: 0px 0px 20px rgba(108, 151, 180, 0.25)
+  font-size: 1.7rem;
+  font-weight: 500;
+  
+  &:hover{
+    transform: scale(1.1);
+    box-shadow: none;
   }
 
 &:focus{
   outline: none;
-  border-width: 3px;
+  border-width: 2px;
   box-shadow: 0px 0px 20px rgba(109, 137, 156, 0.3)
   }
 
@@ -90,12 +92,10 @@
   font-family: $font-main;
   font-weight: 500;
   text-decoration: none;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   transition: all 100ms ease;
   line-height: 100%;
-  padding: 10px 20px 7px;
-  //background-color: rgba(255, 255, 255, 0.856);
-  //border-radius: 10px 10px 0 0;
+  padding: 10px 20px 6px;
   cursor: pointer;  
   &:hover{
     color: rgb(22, 117, 151);
@@ -121,10 +121,8 @@
 
 %panel-item{
   @extend %preview-container;
-  //background-color: $color-primary ;
-  background-color: rgb(192, 234, 250);
-  background-color: rgb(203, 238, 252);
-  background-color: rgb(214, 240, 250);
+  background-color: rgb(206, 239, 252);
+  //background-color: rgb(214, 240, 250);
   background-image: url("https://www.transparenttextures.com/patterns/tex2res5.png");
   //box-shadow: 2px 2px 10px rgba(84, 121, 131, 0.1);
   //box-shadow: 2px 5px 10px rgba(104, 152, 165, 0.3);
@@ -136,7 +134,6 @@
     box-shadow: 0px 0px 15px rgba(45, 92, 116, 0.4)
   }
   &::before{
-    content: "";
     @extend %outline-border;
   }
   &:hover::before{
@@ -147,18 +144,31 @@
 
 
 @media(prefers-color-scheme: dark){
-  %panel-item{
-    box-shadow: none;
-  }
   %tab{
-    display: inline;
-    color:rgb(127, 183, 204);
+    color: rgb(240, 251, 255);
+    &:hover{
+      color:#fff;
+      border-color: #fff;
+    }
   }
   %tab-active{
-    color:rgb(214, 238, 247);
-    border-color: rgb(214, 238, 247);
+    color:rgb(0, 171, 214);
+    border-color:rgb(0, 170, 212);
+    &:hover{
+      color:rgb(0, 189, 236);
+      border-color:rgb(0, 170, 212);
+    }
   }
   %panel-item{
-    color: white;
+    background-color: rgb(152, 228, 255);
+    &:hover{
+      background-color:rgb(0, 170, 212);
+    }
+  }
+  %submit-btn{
+    background-color: transparent;
+    background: none;
+    color: #fff;
+    font-size: 1.6rem;
   }
 }

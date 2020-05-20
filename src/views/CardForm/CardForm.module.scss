@@ -29,13 +29,12 @@
   padding: 10px 20px;
 }
 
-label{
+.select-section label{
   font-family: $font-main;
   font-weight: 300;
   font-size: 1.5rem;
   height: 2.2rem;
   margin: 10px auto 20px ;
-
 }
 
 .select{
@@ -70,16 +69,6 @@ label{
   margin-top: 20px;
 }
 
-.submit-btn::before{
-  position: absolute;
-  z-index: -1;
-  width: 180px;
-  height: 50px;
-  border-radius: 10px;
-  border: 1px solid $color-primary-dark;
-  left: 5px;
-  bottom: 5px;
-}
 
 @media only screen and (max-width: 1000px){
   .editor{
@@ -92,19 +81,9 @@ label{
 }
 
 
-
-.add_new{
-  position: absolute;
-  right: 20px;
-  height: 40px;
-  width: 40px;
-  background-color: transparent;
-  border: none;
-  background-image: url('../../assets/icons/add.png');
-  background-size: contain;
-  transition: 0.05s ease-in;
-}
-
-.add_new:hover{
-  transform: scale(1.2)
+@media(prefers-color-scheme: dark){
+  .select-section label{
+    color: #fff;
+    font-weight: 500;
+  }
 }

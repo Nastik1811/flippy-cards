@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Modal.module.scss'
+import { InputField } from '../FormElements'
 
 
 const Modal = ({onDismiss, children}) => {
@@ -59,6 +60,19 @@ export const ModalCheckbox = ({label, onChange, checked}) => {
                 />
             <label htmlFor="ch"> {label}</label>
         </section>
+        
+    )
+}
+
+export const ModalInput = ({value, onChange, placeholder}) => {
+    return(
+        <div className={styles["input"]}>
+            <InputField
+                        type="text" 
+                        placeholder={placeholder} 
+                        value={value}
+                        onChange={onChange}/>
+        </div>
         
     )
 }

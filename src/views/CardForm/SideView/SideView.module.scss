@@ -78,3 +78,14 @@
   color:rgba(180, 136, 14, 0.5);
 }
 
+@media(prefers-color-scheme: dark){
+  
+.front.container{
+  background-color: rgb(103, 215, 255);
+}
+
+.back.container{
+  background-color: rgb(255, 210, 96);
+}
+
+}
