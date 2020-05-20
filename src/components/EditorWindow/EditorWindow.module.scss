@@ -28,22 +28,24 @@ width: 100%;
 }
 
 .caption{
+    display: inline-block;
     color:  rgb(22, 72, 94);
     font-family: $font-decorative;
     font-weight: 400;
     font-size: 1.7rem;
     padding: 5px 25px;
+    margin-left: 20px;
 }
 
 .back{
     display: inline-block;
     position: absolute;
-    right: 40px;
     width: 40px;
-    height: 35px;
-    background-color: white;
-    background: url("../../assets/icons/back-1.svg") no-repeat;
+    height: 40px;
+    background: none;
+    background: url("../../assets/icons/left2.png") no-repeat;
     background-size: contain;
+    //transform: scale(-1);
     border: none;
     transition: 0.1s ease-in-out;
 }
@@ -59,7 +61,7 @@ width: 100%;
 
 .hr{
     @extend %hr;
-    margin-top: 0.4rem;
+    margin-top: 0;
     border: 1px solid rgba(139, 199, 224, 0.2);
   }
 

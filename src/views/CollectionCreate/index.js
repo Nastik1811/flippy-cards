@@ -1,41 +1,49 @@
 import React, {useContext, useState } from 'react'
 import { DataContext } from '../../DataManger'
 import { withRouter } from 'react-router-dom';
-import { SubmitButton, InputField } from '../../components/FormElements';
-import Popup from '../../components/Popup';
+import { InputField } from '../../components/FormElements';
 import styles from './CollectionCreate.module.scss'
+import Modal, { ModalHeader, ModalContent, ModalMessage, ModalActions } from '../../components/Modal';
 
 const CollectionCreate = ({history})  =>{
     const {manager} = useContext(DataContext);
     const [name, setName] = useState("");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         try{
-            manager.addCollection(name);
-            setName("")
+            await manager.addCollection(name);
         }
         catch(e){
             alert(e)
         }
-        goBack();
+        finally{
+            setName("")
+            goBack();
+        }
     }
 
     const goBack = () => history.goBack();
     
     return(
-        <Popup onDismiss={goBack} className={styles["popup"]}>
-             <form className={styles["form"]} onSubmit={handleSubmit}>
-                <span className={styles["header"]}>Give a name for a collection!</span>
-                <InputField
-                    type="text" 
-                    placeholder="type here" 
-                    value={name}
-                    onChange={setName}
-                />
-                <SubmitButton className={styles["save-btn"]}/>
-            </form>
-        </Popup>        
+        <Modal onDismiss={goBack}>
+            <ModalHeader title="Create collection"/>
+            <ModalContent>
+                <ModalMessage>Please, give a name for a new collection.</ModalMessage>
+                <form className={styles["form"]} onSubmit={handleSubmit} id="collection_form">
+                    <InputField
+                        type="text" 
+                        placeholder="Collection name" 
+                        value={name}
+                        onChange={setName}
+                    />
+                </form>
+            </ModalContent>
+            <ModalActions>
+                    <button type="submit" form="collection_form">Create</button>
+                    <button onClick={goBack}>Back</button>
+                </ModalActions>
+        </Modal>        
     )
 }
 export default withRouter(CollectionCreate)

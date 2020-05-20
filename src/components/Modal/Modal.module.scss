@@ -1,0 +1,125 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.window{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.158);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+.background{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.modal{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: $font-main;
+    color: $color-contrast-text;
+    width: 570px;
+    height: 270px;
+    border-radius: 10px;
+    background-color: rgb(240, 251, 255);
+    box-shadow: 0 0 20px rgba(0, 61, 87, 0.425);
+    background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
+    padding: 15px 25px;
+}
+
+
+.header{
+    position: relative;
+    width: 100%;
+    height: 50px;
+}
+
+.title{
+    display: inline;
+    font-family: $font-decorative;
+    color: $dark-blue-text;
+    font-size: 1.6rem;
+}
+
+.hr{
+    @extend %hr;
+    border-color:  rgba(80, 132, 151, 0.589);
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 2;
+    margin: auto;
+    padding: 10px;
+}
+
+.message{
+    font-family: $font-basic;
+    font-weight: 300;
+    font-size: 1.6rem;
+    margin: 5px;
+    cursor: default;
+}
+
+.message span{
+    color: $dark-blue-text;
+    font-family: $font-main;
+    font-weight: 500;
+}
+
+.actions{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.actions button{
+    @extend %action-btn
+}
+
+%action-btn{
+    position: relative;
+    background-color: transparent;
+    color: #000;
+    font-family: $font-decorative;
+    color: $dark-blue-text;
+    font-size: 1.5rem;
+    margin-left: 20px;
+    border: none;
+
+    &:hover{
+        transform: scale(1.1);
+    }
+    &:focus{
+        outline: none;
+        transform: scale(1.1);
+    }
+}
+
+
+.checkbox input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.checkbox label{
+    font-family: $font-decorative;
+    font-weight: 300;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.checkbox{
+    text-align: left;
+    padding-left: 50px;
+}

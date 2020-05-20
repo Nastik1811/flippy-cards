@@ -1,42 +1,6 @@
 @import 'src/styles/_variables.scss';
 @import 'src/styles/_placeholders.scss';
 
-.popup{
-  position: relative;
-  font-family: $font-main;
-  color: $color-contrast-text;
-  width: 500px;
-  height: 250px;
-  padding: 30px;
-  border-radius: 10px;
-  background-color: rgb(240, 251, 255);
-  box-shadow: 0 0 20px rgba(0, 61, 87, 0.425);
-  background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
-  
-  
-  /*box-shadow: 0 0 20px rgba(37, 109, 139, 0.425);*/
-}
-
-.save-btn{
-  position: absolute;
-  bottom: 0;
-  right: 20px;
-  height: 40px;
-  width: 40px;
-  background-color: transparent;
-  border: none;
-  background-image: url('../../assets/icons/plus.svg');
-  background-size: contain;
-  transition: 0.05s ease-in;
-
-}
-
-.save-btn:hover{
-  background-color: transparent;
-  border: none;
-  transform: scale(1.2)
-}
-
 .form{
     position: relative;
   width: 100%;
@@ -47,9 +11,9 @@
 }
 
 .form input{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     background: rgba(255, 255, 255, 0);
-    width: 60%;
+    width: 50%;
     padding: 5px;
     text-align: center;
     border:none;
@@ -75,24 +39,4 @@
     margin-top: 10px;
     margin-bottom: 30px;
     color: rgb(20, 61, 77)
-}
-
-@media screen and (max-width: 600px) {
-  .popup{
-    position: relative;
-    font-family: $font-main;
-    color: $color-contrast-text;
-    width: 90%;
-    height: 200px;
-    padding: 10px;
-  }
-  .header{
-    font-size: 1.5rem;
-    margin-top: 30px;
-    margin-bottom: 10px;
-  }
-  .save-btn{
-    height: 30px;
-    width: 30px;
-  }
 }
