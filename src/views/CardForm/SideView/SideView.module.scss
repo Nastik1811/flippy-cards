@@ -41,23 +41,21 @@
 }
 
 .content{
-  //flex-grow: 4;
-  height: 230px;
+  flex-grow: 2;
 }
 
 .content textarea{
   resize: none;
-  height: 100%;
   width: 100%;
+  height: 100%;
   padding: 20px;
   text-align: center;
-  display: block;
   background: transparent;
   font-size:  1.5rem;
   font-family: $font-main;
   white-space: pre-wrap;
   overflow-wrap: break-word;
-  border: none;
+  border: 2px solid transparent;
 }
 
 .front textarea:focus {
