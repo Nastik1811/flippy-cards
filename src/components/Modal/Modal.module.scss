@@ -106,7 +106,7 @@
     text-align: center;
     border:none;
     border-bottom: 2px dashed rgba(129, 184, 204, 0.6);
-    color: rgb(48, 91, 107)
+    color: $dark-blue-text;
     
 }
 
@@ -182,7 +182,6 @@
   @media(prefers-color-scheme: dark){
     .modal{
         background-color: $color-accent;
-
     }
     .input input{
         border-bottom: 2px dashed rgba(245, 215, 85, 0.795);

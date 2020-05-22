@@ -29,7 +29,7 @@ width: 100%;
 
 .caption{
     display: inline-block;
-    color:  rgb(22, 72, 94);
+    color: $dark-blue-text;
     font-family: $font-decorative;
     font-weight: 400;
     font-size: 1.7rem;
@@ -45,7 +45,6 @@ width: 100%;
     background: none;
     background: url("../../assets/icons/left2.png") no-repeat;
     background-size: contain;
-    //transform: scale(-1);
     border: none;
     transition: 0.1s ease-in-out;
 }
@@ -80,5 +79,5 @@ width: 100%;
     }
     .hr{
         border-color: rgba(255, 255, 255, 0.705);
-      }
+    }
 }

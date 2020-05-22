@@ -43,7 +43,7 @@
   bottom: 8px;
   width: 30px;
   height: 30px;
-  background: url('../../assets/icons/edit-3.svg') no-repeat;
+  background: url('../../assets/icons/edit.svg') no-repeat;
   background-size: contain;
 }
 
@@ -75,6 +75,6 @@
     border-color: rgba(255, 255, 255, 0.705);
   } 
   .name-container::before{
-    background: url('../../assets/icons/edit-2.svg') no-repeat;
+    background: url('../../assets/icons/edit-dark.svg') no-repeat;
   }
 }

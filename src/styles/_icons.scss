@@ -1,12 +1,12 @@
 %edit-icon{
     display: inline-block;
-    background: url("../assets/icons/edit-2.svg") no-repeat;
+    background: url("../assets/icons/edit-1.svg") no-repeat;
     background-size: contain;
     border: none;
 
     &:hover{
         outline: none;
-        background: url("../assets/icons/edit-1.svg") no-repeat;
+        background: url("../assets/icons/edit-1-hover.svg") no-repeat;
         transform: scale(1.1);
     }
 
@@ -17,13 +17,13 @@
   
   %delete-icon{
     display: inline-block;
-    background: url("../assets/icons/trash-2.svg") no-repeat;
+    background: url("../assets/icons/trash.svg") no-repeat;
     background-size: contain;
     border: none;
 
     &:hover{
         outline: none;
-        background: url("../assets/icons/trash-1.svg") no-repeat;
+        background: url("../assets/icons/trash-hover.svg") no-repeat;
         transform: scale(1.1);
     }
 

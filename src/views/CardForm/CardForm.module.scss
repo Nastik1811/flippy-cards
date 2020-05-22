@@ -35,6 +35,7 @@
   font-size: 1.5rem;
   height: 2.2rem;
   margin: 10px auto 20px ;
+  color: $color-contrast-text;
 }
 
 .select{
@@ -45,14 +46,7 @@
   min-width: 250px;
   border-radius: 10px;
   height: 2.5rem;
-  border: 1px solid  $color-primary-dark;
-}
-
-.edit-card-content{
-  width: 80%;
-  height: 80%;
-  background-color:  $color-primary-light;
-  text-align: center;
+  border: 1px solid $dark-blue-text;
 }
 
 .select-section{
@@ -80,10 +74,3 @@
   }
 }
 
-
-@media(prefers-color-scheme: dark){
-  .select-section label{
-    color: #fff;
-    font-weight: 500;
-  }
-}
