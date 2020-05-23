@@ -1,10 +1,12 @@
 import React from 'react'
-import styles from './Loader.module.scss'
+import styles from './Loading.module.scss'
+import clsx from 'clsx'
 
-const Loader = () => {
+
+const FullScreenLoading = () => {
     return(
-        <div className={styles["container"]}>
-                 <div className={styles["animation-container"]}>
+        <div className={clsx(styles["window"], "cloud-background")}>
+            <div className={styles["animation-container"]}>
                 <div className={styles["animation-group"]}>
                     <span className={styles["component"]}></span>
                     <span className={styles["component"]}></span>
@@ -16,4 +18,4 @@ const Loader = () => {
     )
 }
 
-export default Loader;
+export default FullScreenLoading

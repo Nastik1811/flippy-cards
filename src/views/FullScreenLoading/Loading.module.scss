@@ -1,0 +1,78 @@
+@import 'src/styles/_variables.scss';
+@import 'src/styles/_placeholders.scss';
+
+.window{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    backdrop-filter: blur(3px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.animation-container{
+    width: 580px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.component{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin: 5px;
+    background-color: $color-primary;
+}
+
+.component{
+    animation-name: stretch;
+    animation-duration: 1.2s; 
+    animation-timing-function: linear; 
+    animation-direction: alternate;
+    animation-delay: 0.01s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+    animation-play-state: running; 
+}
+
+@for $i from 2 through 4 { 
+    .component:nth-of-type(#{$i}) {
+        animation-delay: #{$i * .1}s;
+    }
+  }
+
+@keyframes stretch {
+    0% {
+        background-color: $color-primary;
+    }
+    100% {
+        transform: scale(1.2) translateY(5px);
+        background-color: rgb(44, 144, 184)
+     
+    }
+}
+    
+@media(prefers-color-scheme: dark){
+    .component{
+        background-color: $color-accent;
+    }
+    @keyframes stretch {
+        0% {
+            transform: scale(0.8);
+            background-color: rgb(247, 195, 23);
+        }
+        100% {
+            transform: scale(1.2) translateY(5px);
+            background-color: #ffdc68;
+        }    
+    }
+}

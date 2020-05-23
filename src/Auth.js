@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { FirebaseContext } from './firebase'
+import FullScreenLoading from './views/FullScreenLoading';
 
 export const AuthContext = React.createContext();
 
@@ -11,9 +12,8 @@ export const AuthProvider = ({children}) => {
         app.onAuthStateChanged(setCurrentUser);
     }, [app])
 
-
     if(currentUser === 0){
-        return <div>Loading</div>
+        return <FullScreenLoading/>
     }
     return(
         <AuthContext.Provider value={{currentUser}}>
