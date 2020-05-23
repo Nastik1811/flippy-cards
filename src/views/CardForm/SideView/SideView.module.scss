@@ -8,7 +8,7 @@
   height: 300px;
   border-radius: 8px;
   box-shadow: 5px 5px 13px rgba(0,0,0,0.1);
-  padding: 10px 20px;
+  padding: 10px 20px 20px;
   margin-bottom: 20px;
   background-image: url("https://www.transparenttextures.com/patterns/notebook.png");
   overflow: hidden;
@@ -20,7 +20,7 @@
   font-weight: 400;
   font-size: 1.4rem;
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .front .caption{
@@ -58,14 +58,14 @@
 
 .front textarea:focus {
   outline: none;
-  border: 2px dashed rgba(129, 184, 204, 0.6);
-  border-radius: 10px;
+  border: 2px dashed rgba(42, 142, 179, 0.5);
+  border-radius: 5px;
 }
 
 .back textarea:focus {
   outline: none;
-  border: 2px dashed rgba(187, 154, 65, 0.5);
-  border-radius: 10px;
+  border: 2px dashed rgba(219, 171, 37, 0.5);
+  border-radius: 5px;
 }
 
 .front textarea::placeholder{

@@ -5,6 +5,7 @@ import ReviewInvitation from './ReviewInvitation'
 import styles from './Home.module.scss'
 import { DataContext } from '../../DataManger'
 import LinkButton from '../../components/LinkButton'
+import Loader from '../../components/Loader'
 
 
  const Home = () => { 
@@ -36,7 +37,7 @@ import LinkButton from '../../components/LinkButton'
             <ReviewLinksBoard collections={collections}/>
             <Statistics/>
         </> :
-        <div>Loading...</div>
+        <Loader/>
     ;
 }
 

@@ -134,7 +134,6 @@
     @extend %outline-border;
   }
   &:hover::before{
-    border-width: 1px;
     border-color: rgb(55, 115, 145);
   }
 }
@@ -158,12 +157,12 @@
     }
   }
   %panel-item{
-    background-color: rgb(152, 228, 255);
+    background-color: rgb(128, 216, 248);
     &:hover{
-      background-color:rgb(0, 170, 212);
+      background-color:rgb(55, 186, 226);
     }
     &::before{
-      border-color: rgb(212, 244, 255);
+      border: 2px dashed rgb(201, 241, 255);
     }
   }
   %submit-btn{
