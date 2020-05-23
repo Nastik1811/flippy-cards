@@ -21,13 +21,13 @@ const Overview = ({name, left, currentCard, onMarkClick , time, onTick}) => {
 
     const handleMarkClick = (mark) => {
         setIsNew(true)
-        onMarkClick(mark);
         setVisible(false)
         setTimeout(() => 
-        {
+            {
+            onMarkClick(mark);
             setFlipped(false)
             setIsNew(false)}
-            , 1000)
+            , 600)
     }
 
     return (

@@ -28,8 +28,8 @@
     display: inline-block;
     width: 40px;
     height: 40px;
-    border-radius: 10px;
-    margin: 5px;
+    border-radius: 50%;
+    margin: 4px;
     background-color: $color-primary;
 }
 
@@ -52,11 +52,12 @@
 
 @keyframes stretch {
     0% {
+        transform: scale(1);
         background-color: $color-primary;
     }
     100% {
-        transform: scale(1.2) translateY(5px);
-        background-color: rgb(44, 144, 184)
+        transform: scale(.5) translateY(5px);
+        background-color: rgb(11, 142, 194)
      
     }
 }
@@ -67,11 +68,11 @@
     }
     @keyframes stretch {
         0% {
-            transform: scale(0.8);
+            transform: scale(1);
             background-color: rgb(247, 195, 23);
         }
         100% {
-            transform: scale(1.2) translateY(5px);
+            transform: scale(.5) translateY(5px);
             background-color: #ffdc68;
         }    
     }

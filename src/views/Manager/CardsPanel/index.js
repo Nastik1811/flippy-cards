@@ -3,10 +3,13 @@ import CardPreview from './CardPreview'
 import { DataContext } from '../../../DataManger'
 import Panel from '../Panel'
 import ConfirmationDialog from './ConfirmationDialog'
+import ItemsGrid from '../ItemsGrid'
+
 
 const CardsPanel = () => {
     const {manager} = useContext(DataContext);
     const [cards, setCards] = useState(null);
+   
     const [confirmationDetails, setConfirmationDetails] = useState({
         isOpen: false,
         card: null
@@ -39,19 +42,19 @@ const CardsPanel = () => {
         )
     }
 
-    return(<>
-            <Panel newItemUrl={"/card/new"}> 
+    return(<Panel>
+            <ItemsGrid newItemUrl={"/card/new"}> 
                 {cards ? 
                     cards.map(c => <CardPreview card={c} key={c.id} onDelete={() => confirmDelete(c)}/>) 
                     : null}
-            </Panel>
+            </ItemsGrid>
             <ConfirmationDialog 
                 isOpen={confirmationDetails.isOpen} 
                 collection={confirmationDetails.card} 
                 onDismiss={closeConfirmation} 
                 onConfirm={handleDelete} 
             />
-        </>
+        </Panel>
         )
 }
 

@@ -40,13 +40,18 @@
 
 .select{
   display: inline-block;
-  background-color:  #fff;
+  background-color:  transparent;
   font-size: 1.3rem;
   margin-left: 15px;
+  padding: 10px;
   min-width: 250px;
   border-radius: 10px;
-  height: 2.5rem;
-  border: 1px solid $dark-blue-text;
+  height: 3rem;
+  border: 2px solid $color-primary-dark;
+}
+.select:focus{
+  outline: none;
+  border-color:$color-secondary;
 }
 
 .select-section{
@@ -71,6 +76,12 @@
   .edit-container{
     width: 90%;
     
+  }
+}
+
+@media(prefers-color-scheme: dark){
+  .select{
+    color: white;
   }
 }
 
