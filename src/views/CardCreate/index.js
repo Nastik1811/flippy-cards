@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom'
 import CardForm from '../CardForm';
 import EditorWindow from '../../components/EditorWindow';
 
-const CardCreate = ({match}) => {
+const CardCreate = () => {
     const {manager} = useContext(DataContext);
     const [completed, setCompleted] = useState(false);
     const [collections, setCollections] = useState([]);

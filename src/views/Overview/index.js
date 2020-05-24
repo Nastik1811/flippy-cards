@@ -1,13 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, Redirect} from 'react-router-dom'
 import { DataContext } from '../../DataManger'
 import Loader from "../../components/Loader"
 import Overview from './Overview'
-import { MARK } from '../../DataManger'
+import Modal, { ModalMessage, ModalContent, ModalActions } from '../../components/Modal'
 
-const OverviewContainer = ({history}) => {
+const OverviewContainer = () => {
     const {slug} = useParams();
     const {manager} = useContext(DataContext);
+
 
     const collection_id = slug ? slug : null;
 
@@ -15,11 +16,8 @@ const OverviewContainer = ({history}) => {
     const [currentCardIndex, setCardIndex] = useState(0);
     const [left, setLeft] = useState(0);
     const [time, setTime] = useState(0);
-    const [score, setScore] = useState({
-        [MARK.BAD]: 0,
-        [MARK.GOOD]: 0,
-        [MARK.EXCELLENT]: 0,
-    });
+    const [isOver, setIsOver] = useState(false);
+    const [showCongrats, setShowCongrats] = useState(false);
 
     useEffect(()=> {
         manager.getCardsToRecall(collection_id).then(data => {
@@ -33,9 +31,9 @@ const OverviewContainer = ({history}) => {
         .then(data => setLeft(data.length - 1))
         .catch(() => {
             alert("There is no cards to repeat.");
-            history.push('/home');
+            setIsOver(true)
         })
-    }, [manager, collection_id, history])
+    }, [manager, collection_id])
 
     useEffect(() =>{
         setInterval(() => setTime(c => c + 1), 1000);
@@ -43,19 +41,23 @@ const OverviewContainer = ({history}) => {
 
     const handleMarkClick = (mark) => {
         manager.updateCardProgress(cards[currentCardIndex], mark)
-        setScore({...score, [mark]: ++score[mark]})
         if(left !== 0 ){
             setLeft(left - 1);
             setCardIndex(currentCardIndex + 1);
         }
         else{
-            alert("That's all. Good job!");
-            manager.addUserProgress(time, score);
-            history.push('/home');
+            setShowCongrats(true)
         }
     }
 
-    return cards?
+    if(isOver){
+        return <Redirect to="/home"/>
+    }
+
+    if(!cards){
+        return <Loader/>
+    }
+    return !showCongrats?
             <Overview
                 name={collection_id ? cards[0].collection.name : "All cards"}
                 currentCard = {cards[currentCardIndex]}
@@ -64,8 +66,15 @@ const OverviewContainer = ({history}) => {
                 time = {time}
                 onTick = {setTime}
             />
-            :
-            <Loader/>
+            : <Modal onDismiss={() => setIsOver(true)}>
+                <ModalContent>
+                    <ModalMessage>That's all. Good job!</ModalMessage>
+                </ModalContent>
+                <div className="session-over-img"></div>
+                <ModalActions>
+                    <button onClick={() => setIsOver(true)}>Got it!</button>
+                </ModalActions>
+            </Modal>
         
 }
 

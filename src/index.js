@@ -13,14 +13,13 @@ import App from './App'
 import { AuthProvider } from './Auth';
 import { FirebaseProvider } from './firebase'
 import { DataProvider } from './DataManger';
-
 ReactDOM.render(
     <FirebaseProvider>
         <AuthProvider>
             <DataProvider>
-                <Router>
-                    <App/>
-                </Router>
+                    <Router>
+                        <App/>
+                    </Router>
             </DataProvider>
         </AuthProvider>
     </FirebaseProvider>,
