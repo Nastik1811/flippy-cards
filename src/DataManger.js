@@ -82,20 +82,20 @@ class DataManger {
         this.collectionsRef.add(collection);
     }
 
-    listenCollections(listener){
-        let unsubscribe = this.collectionsRef.orderBy("last_edit", "desc").onSnapshot(
+    listenCollections(listener, order="desc"){
+        let unsubscribe = this.collectionsRef.orderBy("last_edit", order).onSnapshot(
             snapshot => {
                 let collections = [];
-                listener(snapshot.forEach(doc => collections.push({...doc.data(), id: doc.id})))
+                snapshot.forEach(doc => collections.push({...doc.data(), id: doc.id}))
                 listener(collections)
             }
         )
         return unsubscribe
     }
 
-    listenCards(listener, collectionId){
-        let ref = collectionId ? this.cardsRef.where("collection.id", "==", collectionId) : this.cardsRef
-        return ref.orderBy("created", "desc").onSnapshot(
+    listenCards(listener, collectionName, order="desc"){
+        let ref = collectionName ? this.cardsRef.where("collection.name", "==", collectionName) : this.cardsRef
+        return ref.orderBy("created", order).onSnapshot(
             snapshot => {
                 let cards = [];
                 snapshot.forEach(doc => cards.push({...doc.data(), id: doc.id}))
@@ -108,18 +108,12 @@ class DataManger {
         return this.collectionsRef.get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
     }
 
-    getCards(collection_id){
-        if(collection_id){
-            return this.cardsRef.where("collection.id", "==", collection_id).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
-        }
-        else{
-            return this.cardsRef.get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
-        }
-    }
+    getCards(collectionId){
+        let ref = collectionId ? this.cardsRef.where("collection.id", "==", collectionId) : this.cardsRef
 
-    getCardsWithoutCollection(){
-        return this.cardsRef.where("collection.id", "==", null).get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
-        }
+        return ref.get().then(query => query.docs.map(doc => ({...doc.data(), id: doc.id})))
+     
+    }
 
     getCardsForCollectionEdit(id){
         let cardsInCollection = this.cardsRef.where("collection.id", "==", id).get()
@@ -319,22 +313,21 @@ class DataManger {
     }
 
     addUserProgress(duration, score){
-        this.statisticsRef.add(
-            {
-                user_id: this.uid,
-                review_date: firebase.firestore.Timestamp.fromDate(new Date()),
-                review_duration: duration,
-                score: score
-            }
-        )
-
+        // this.statisticsRef.add(
+        //     {
+        //         user_id: this.uid,
+        //         review_date: firebase.firestore.Timestamp.fromDate(new Date()),
+        //         review_duration: duration,
+        //         score: score
+        //     }
+        // )
     }
 
     deleteCard(id){
         this.cardsRef.doc(id).delete()
     }
   
-    async deleteCollection(id, withCards = true){
+    async deleteCollection(id, withCards = false){
         let batch = this.db.batch();
         batch.delete(this.collectionsRef.doc(id))
         if(withCards){
@@ -346,7 +339,8 @@ class DataManger {
             this.cardsRef.where("collection.id", "==", id).get()
             .then(query => query.forEach(doc => batch.update(
                 this.cardsRef.doc(doc.id),
-                {collection: {
+                {
+                    collection: {
                     id: null,
                     name: ""
                 }}

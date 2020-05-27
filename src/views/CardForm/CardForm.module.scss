@@ -29,31 +29,29 @@
   padding: 10px 20px;
 }
 
-label{
+.select-section label{
   font-family: $font-main;
   font-weight: 300;
   font-size: 1.5rem;
   height: 2.2rem;
   margin: 10px auto 20px ;
-
+  color: $color-contrast-text;
 }
 
 .select{
   display: inline-block;
-  background-color:  #fff;
+  //background-color:  transparent;
   font-size: 1.3rem;
   margin-left: 15px;
+  padding: 10px;
   min-width: 250px;
   border-radius: 10px;
-  height: 2.5rem;
-  border: 1px solid  $color-primary-dark;
+  height: 3rem;
+  border: 2px solid $color-primary-dark;
 }
-
-.edit-card-content{
-  width: 80%;
-  height: 80%;
-  background-color:  $color-primary-light;
-  text-align: center;
+.select:focus{
+  outline: none;
+  border-color:$color-secondary;
 }
 
 .select-section{
@@ -70,16 +68,6 @@ label{
   margin-top: 20px;
 }
 
-.submit-btn::before{
-  position: absolute;
-  z-index: -1;
-  width: 180px;
-  height: 50px;
-  border-radius: 10px;
-  border: 1px solid $color-primary-dark;
-  left: 5px;
-  bottom: 5px;
-}
 
 @media only screen and (max-width: 1000px){
   .editor{
@@ -89,22 +77,4 @@ label{
     width: 90%;
     
   }
-}
-
-
-
-.add_new{
-  position: absolute;
-  right: 20px;
-  height: 40px;
-  width: 40px;
-  background-color: transparent;
-  border: none;
-  background-image: url('../../assets/icons/add.png');
-  background-size: contain;
-  transition: 0.05s ease-in;
-}
-
-.add_new:hover{
-  transform: scale(1.2)
 }

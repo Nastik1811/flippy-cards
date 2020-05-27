@@ -1,6 +1,7 @@
 @import 'src/styles/_variables.scss';
 @import 'src/styles/_placeholders.scss';
 
+
 .window{
     position: fixed;
     top: 0;
@@ -9,33 +10,29 @@
     right: 0;
     backdrop-filter: blur(3px);
     background-color: rgba(0, 0, 0, 0.158);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     z-index: 10;
-}
-.background{
-    position: absolute;
-    width: 100%;
-    height: 100%;
 }
 
 .modal{
     position: relative;
+    margin: auto;
+    margin-top: 10%;
     display: flex;
     flex-direction: column;
     font-family: $font-main;
     color: $color-contrast-text;
-    width: 570px;
-    height: 270px;
+    width: 580px;
+    height: auto;
+    min-height: 270px;
     border-radius: 10px;
     background-color: rgb(240, 251, 255);
     box-shadow: 0 0 20px rgba(0, 61, 87, 0.425);
     background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
     padding: 15px 25px;
 }
-
+.modal{
+    animation: transition .4s cubic-bezier(.02,.48,.66,.76) 0s 1;
+}
 
 .header{
     position: relative;
@@ -56,19 +53,26 @@
 }
 
 .content{
+    flex-grow: 2;
+    padding: 10px;
+}
+.container{
+    background-color: rgba(255, 255, 255, 0.5);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    flex-grow: 2;
-    margin: auto;
-    padding: 10px;
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px 0px;
+    height: auto;
+    width: 100%;
+
 }
 
 .message{
     font-family: $font-basic;
     font-weight: 300;
     font-size: 1.6rem;
+    color: #000;
     margin: 5px;
     cursor: default;
 }
@@ -80,12 +84,34 @@
 }
 
 .actions{
+    margin-top: 5px;
     display: flex;
     justify-content: flex-end;
 }
 
 .actions button{
     @extend %action-btn
+}
+
+.input input{
+    font-size: 1.7rem;
+    background: rgba(255, 255, 255, 0);
+    width: 50%;
+    padding: 5px;
+    text-align: center;
+    border:none;
+    border-bottom: 2px dashed rgba(129, 184, 204, 0.6);
+    color: $dark-blue-text;
+    
+}
+
+.input input::placeholder{
+    color: rgba(129, 184, 204, 0.795);
+}
+
+.input input:focus{
+    outline: none;
+    border-color: rgb(117, 170, 189);
 }
 
 %action-btn{
@@ -116,6 +142,7 @@
     font-family: $font-decorative;
     font-weight: 300;
     font-size: 1.2rem;
+    color: #000;
     cursor: pointer;
 }
 
@@ -124,15 +151,62 @@
     padding-left: 50px;
 }
 
+
+
 @media screen and (max-width: 600px) {
     .modal{
         width: 350px;
-        height: 240px;
     }
     .content{
-        padding: 0px;
+        padding: 5px;
     }
     .message{
         font-size: 1.4rem;
     }
+    .checkbox label{
+        font-size: 1rem;
+    }
+    .input input{
+        font-size: 1.6rem;
+        background: rgba(255, 255, 255, 0);
+        width: 80%;
+    }
+  }
+
+  @media(prefers-color-scheme: dark){
+    .modal{
+        background-color: $color-accent;
+    }
+    .input input{
+        border-bottom: 2px dashed rgba(245, 215, 85, 0.795);
+    }
+    
+    .input input::placeholder{
+        color: rgba(216, 176, 0, 0.795);
+    }
+    
+    .input input:focus{
+        border-color: rgba(199, 162, 0, 0.795);
+    }
+    .hr{
+        border-color: rgba(255, 255, 255, 0.4);
+        border-width: 3px;
+    }
+    .title, %action-btn, input{
+        color: rgb(0, 0, 0)
+    }
+    .window{
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+  }
+
+
+  @keyframes transition{
+      0%{
+          transform: translateY(-500px);
+      }
+      50%{
+        transform: translateY(50px);
+      }
   }

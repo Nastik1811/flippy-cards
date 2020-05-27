@@ -3,8 +3,6 @@
 
 .board{
     margin: auto;
-    padding: 30px 5px;
-    margin: 10px;
     margin-top: 10px;
     border-radius: 20px;
     min-height: 80vh;
@@ -14,7 +12,7 @@
     padding: 20px 10px;
     width: 100%;
     background: url("../../assets/images/blur.png") no-repeat;
-    background-size: contain;
+    background-size: cover;
     border-radius: 20px;
 }
 

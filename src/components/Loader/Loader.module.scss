@@ -8,3 +8,51 @@
     align-items: center;
     justify-content: center;
 }
+
+.animation-group{
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.component{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    border-radius: 50%;
+    opacity: 70%;
+}
+
+.component{
+    animation-name: stretch;
+    animation-duration: 1.2s; 
+    animation-timing-function: linear; 
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-fill-mode: none;
+}
+
+@for $i from 2 through 4 { 
+    .component:nth-of-type(#{$i}) {
+        animation-delay: #{$i * .05}s;
+    }
+  }
+
+@keyframes stretch {
+0% {
+    transform: scale(1);
+    background-color: $color-primary;
+}
+100% {
+    opacity: 100%;
+    background-color: $dark-blue-text;
+    transform: scale(.5) ;
+}
+}
+
+@media(prefers-color-scheme: dark){
+
+}

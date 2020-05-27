@@ -1,33 +1,50 @@
-%edit-icon{
-    display: inline-block;
-    background: url("../assets/icons/edit-2.svg") no-repeat;
+%icon-btn{
+    background: none;
+    background-color: none;
     background-size: contain;
     border: none;
-
+    background-repeat: no-repeat;
+    display: inline-block;
+    transition: transform .2s ease;
     &:hover{
+        transform: scale(1.1);
+    }
+    &:focus{
         outline: none;
-        background: url("../assets/icons/edit-1.svg") no-repeat;
         transform: scale(1.1);
     }
 
-    &:focus{
-        outline: none;
+}
+
+%collapse-icon{
+    @extend %icon-btn;
+    background-image: url("../assets/icons/left.png");
+}
+
+%filter-icon{
+    @extend %icon-btn;
+    background-image: url("../assets/icons/filter.svg");
+}
+
+%sort-icon{
+    @extend %icon-btn;
+    background-image: url("../assets/icons/sort-up.svg");
+}
+
+
+%edit-icon{
+    @extend %icon-btn;
+    background-image: url("../assets/icons/edit-1.svg");
+    &:hover{
+        background: url("../assets/icons/edit-1-hover.svg");
     }
+
   }
   
   %delete-icon{
-    display: inline-block;
-    background: url("../assets/icons/trash-2.svg") no-repeat;
-    background-size: contain;
-    border: none;
-
+    @extend %icon-btn;
+    background-image: url("../assets/icons/trash.svg");
     &:hover{
-        outline: none;
-        background: url("../assets/icons/trash-1.svg") no-repeat;
-        transform: scale(1.1);
-    }
-
-    &:focus{
-        outline: none;
+        background: url("../assets/icons/trash-hover.svg");
     }
   }

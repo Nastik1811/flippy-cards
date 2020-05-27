@@ -1,5 +1,6 @@
 ## Flippy ##
 
-[**Flippy** app link](https://flippy-c2572.web.app) 
+The web application for better memorisation.
 
-**NOTE:** Please turn off the dark mode if it is on. The application is only partially adapted for it, so it's really far from satisfactory looking.
+The app is available [here](https://flippy-c2572.web.app) 
+

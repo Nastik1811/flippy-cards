@@ -5,6 +5,7 @@ import Panel from '../Panel'
 import CollectionCreate from '../../CollectionCreate'
 import { Route } from 'react-router-dom'
 import ConfirmationDialog from './ConfirmationDialog'
+import ItemsGrid from '../ItemsGrid'
 
 const CollectionsPanel = () => {
     const {manager} = useContext(DataContext);
@@ -42,14 +43,14 @@ const CollectionsPanel = () => {
     }
 
     return (
-        <>
-            <Panel newItemUrl={"/manage/collections/new"}>
+        <Panel>
+            <ItemsGrid newItemUrl={"/manage/collections/new"}>
                 {collections ? 
                     collections.map(c =>
                          <CollectionPreview collection={c} key={c.id} onDelete={() => confirmDelete(c)} />) 
                     : null
                     }
-            </Panel>
+            </ItemsGrid>
             <Route path='/manage/collections/new' render={CollectionCreate}/>
             <ConfirmationDialog 
                 isOpen={confirmationDetails.isOpen} 
@@ -57,7 +58,7 @@ const CollectionsPanel = () => {
                 onDismiss={closeConfirmation} 
                 onConfirm={handleDelete} 
                 />
-        </>
+        </Panel>
         )
 }
 

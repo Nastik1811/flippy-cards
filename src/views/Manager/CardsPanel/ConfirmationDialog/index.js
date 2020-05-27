@@ -12,8 +12,8 @@ const ConfirmationDialog = ({isOpen, onConfirm, onDismiss}) => {
                     <ModalMessage> You're gonna delete the card. Are you sure?</ModalMessage>
                 </ModalContent>
                 <ModalActions>
-                    <button onClick={onConfirm}>Delete</button>
-                    <button onClick={onDismiss}>Cancel</button>
+                    <button onClick={onConfirm}>Yep</button>
+                    <button onClick={onDismiss}>Nope</button>
                 </ModalActions>
         </Modal>
         :

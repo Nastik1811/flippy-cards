@@ -6,6 +6,7 @@
     padding: 20px 10px;
   }
 
+
   .container{
     width: 100%;
     max-width: 600px;
@@ -15,25 +16,25 @@
     margin: auto;
   }
 
-
   .title{
-    display: block;
-    font-family: inherit;
+    display: inline-block;
+    color: $dark-blue-text;
+    font-family: $font-decorative;
     font-size: 2rem;
+    font-weight: 400;
+    line-height: 2rem;
+    margin: auto;
   }
   .left{
     display: block;
-    font-family: inherit;
     font-size: 1.2rem;
-  }
-
-  .details{
-    font-family: $font-main;
+    font-family: $font-decorative;
+    color: rgb(69, 98, 110);
   }
 
   .session-info{
     width: 100%;
-    padding: 0 3vw;
+    padding: 0 2vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -50,4 +51,13 @@
     font-family: $font-basic;
     font-size: 2rem;
     font-weight: 300;
+  }
+
+  @media(prefers-color-scheme: dark){
+    .caption{color: rgba(255, 255, 255,1);}
+    .hr{
+        border-color: rgba(255, 255, 255, 0.705);
+    }
+    .title{color:#fff}
+    .left{color: rgba(218, 245, 255, 0.623);}
   }

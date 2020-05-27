@@ -46,7 +46,8 @@
   color: $dark-blue-text;
   font-size: 1.7rem;
   font-weight: 400;
-  margin-top: 25px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -64,6 +65,15 @@
 @media screen and (max-width: 700px) {
   .image{
     background: none;
+  }
+}
+
+@media(prefers-color-scheme: dark){
+  .no-cards{
+    color: #fff;
+  }
+  .collecions header{
+    color: #fff;
   }
 }
 
