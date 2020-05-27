@@ -69,8 +69,9 @@ const OverviewContainer = () => {
             : <Modal onDismiss={() => setIsOver(true)}>
                 <ModalContent>
                     <ModalMessage>That's all. Good job!</ModalMessage>
-                </ModalContent>
                 <div className="session-over-img"></div>
+
+                </ModalContent>
                 <ModalActions>
                     <button onClick={() => setIsOver(true)}>Got it!</button>
                 </ModalActions>
