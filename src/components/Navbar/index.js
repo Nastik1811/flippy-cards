@@ -1,13 +1,11 @@
 import React, { useContext } from 'react';
 import {NavLink, Link} from 'react-router-dom';
-import {FirebaseContext} from '../../firebase';
-import { AuthContext } from '../../Auth';
 import styles from './Navbar.module.scss'
+import { useAuth } from '../../hooks/auth.hook';
 
 
 const Navbar = () => {
-    const {currentUser} = useContext(AuthContext);
-    const {app} = useContext(FirebaseContext);
+    const {logout, token} = useAuth()
     
     return (
         <header className={styles["header"]}>
@@ -15,11 +13,11 @@ const Navbar = () => {
                 <NavLink to='/home'>Flippy</NavLink>
             </div>
             <nav className={styles["navbar"]}>
-                    {!!currentUser ? (
+                    {!!token ? (
                         <>
                             <NavLink className={styles["nav-link"]} activeClassName={styles["active-link"]} to='/home' >Home</NavLink>
                             <NavLink className={styles["nav-link" ]} activeClassName={styles["active-link"]} to='/manage'>Manage</NavLink>
-                            <Link to='/' className={styles["auth-link"]} onClick={() => app.signOut()}>Sign out</Link>
+                            <Link to='/' className={styles["auth-link"]} onClick={logout}>Sign out</Link>
                         </>
                     ) : (
                         <>
