@@ -1,17 +1,16 @@
-import React, { useContext, useState} from 'react'
-import {FirebaseContext} from '../../../firebase';
+import React, {useState} from 'react'
 import styles from '../Auth.module.scss'
 import {SubmitButton, InputField } from '../../../components/FormElements'
 
 
 const Signup = () => {
-  const {app} = useContext(FirebaseContext);
+  const {request} = useHttp()
   const [data, setData] = useState({ email: "", password: "", name: "" })
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-        await app.createUser(data);
+        await request('/api/auth/signup', 'POST', {...form})
       } catch (error) {
         alert(error);
         setData({ email: "", password: "", name: ""})

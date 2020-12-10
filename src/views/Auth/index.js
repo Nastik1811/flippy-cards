@@ -1,14 +1,14 @@
-import React, {useContext} from 'react'
-import { AuthContext } from '../../Auth';
+import React from 'react'
 import {Redirect, NavLink, Route, Switch} from 'react-router-dom'
 import styles from './Auth.module.scss'
 import Login from './Login';
 import Signup from './Signup';
+import { useAuth } from '../../hooks/auth.hook';
 
 const Auth = ({match}) => {
-    const {currentUser} = useContext(AuthContext);
+    const {token} = useAuth();
 
-    if(!!currentUser){
+    if(!!token){
         return <Redirect to="/home" />
     }
 

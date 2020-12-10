@@ -1,16 +1,18 @@
 import React, {useContext, useState} from 'react'
-import {FirebaseContext} from '../../../firebase';
 import styles from '../Auth.module.scss'
 import {SubmitButton, InputField, } from '../../../components/FormElements'
+import { useAuth } from '../../../hooks/auth.hook'
 
 const Login = () => {
-    const {app} = useContext(FirebaseContext);
+    const {request} = useHttp()
+    const {login} = useAuth()
     const [data, setData] = useState({ email: "", password: "" });
 
     const handleLogin = async (event) => {
       event.preventDefault();
       try {
-        await app.login(data);
+        const res = await request('/api/auth/login', 'POST', {...data})
+        login(res.token, res.userId);
       } catch (error) {
         alert(error);
         setData({ email: "", password: "" })
