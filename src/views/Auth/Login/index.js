@@ -1,11 +1,11 @@
 import React, {useContext, useState} from 'react'
 import styles from '../Auth.module.scss'
 import {SubmitButton, InputField, } from '../../../components/FormElements'
-import { useAuth } from '../../../hooks/auth.hook'
+import { AuthContext } from '../../../context/AuthContext'
 
 const Login = () => {
     const {request} = useHttp()
-    const {login} = useAuth()
+    const {login} = useContext(AuthContext)
     const [data, setData] = useState({ email: "", password: "" });
 
     const handleLogin = async (event) => {

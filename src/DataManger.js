@@ -1,8 +1,4 @@
 import React, {useContext, useMemo} from 'react'
-import 'firebase/firestore';
-import * as firebase from 'firebase/app';
-import { FirebaseContext } from './firebase'
-import { AuthContext } from './Auth';
 
 export const DataContext = React.createContext();
 
@@ -13,11 +9,10 @@ export const MARK = {
 }
 
 export const STATUS = {
-    NEW: 0,
-    IN_PROGRESS: 1,
-    LEARNED: 2
+    NEW: 'new',
+    LEARNING: 'learning',
+    REVIEW: 'review'
 }
-
 
 export const DataProvider = ({children}) => {
     const {app} = useContext(FirebaseContext);
@@ -34,10 +29,11 @@ export const DataProvider = ({children}) => {
         </DataContext.Provider>
     )
 }
-
+//user id, 
 class DataManger {
     constructor(app, uid) {
         this.db = app.firestore;
+
         this.uid = uid;
         this.userRef = this.db.collection("users").doc(uid);
         this.cardsRef = this.userRef.collection("cards");
@@ -50,16 +46,17 @@ class DataManger {
     }
 
     addCard(data){
-        const date = firebase.firestore.Timestamp.fromDate(new Date());
+        // this logic is moved to the server :)
+        // const date = firebase.firestore.Timestamp.fromDate(new Date());
 
-        let card = {
-            ...data,
-            created: date,
-            next_recall: date,
-            status: STATUS.NEW
-        }
+        // let card = {
+        //     ...data,
+        //     created: date,
+        //     next_recall: date,
+        //     status: STATUS.NEW
+        // }
 
-        this.userRef.collection('cards').add(card);
+        // this.userRef.collection('cards').add(card);
     }
 
     async addCollection(name){

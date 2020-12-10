@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import {NavLink, Link} from 'react-router-dom';
 import styles from './Navbar.module.scss'
-import { useAuth } from '../../hooks/auth.hook';
+import { AuthContext } from '../../context/AuthContext';
 
 
 const Navbar = () => {
-    const {logout, token} = useAuth()
+    const {logout, token} = useContext(AuthContext)
     
     return (
         <header className={styles["header"]}>

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Redirect } from 'react-router-dom'
 import styles from './Landing.module.scss'
 import LinkButton from '../../components/LinkButton'
-import { useAuth } from '../../hooks/auth.hook'
+import { AuthContext } from '../../context/AuthContext'
 
 const Landing = () => {
-    const {token} = useAuth()
+    const {token} = useContext(AuthContext)
     if(!!token){
         return <Redirect to="/home" />
     }
