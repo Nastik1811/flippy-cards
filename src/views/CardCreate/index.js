@@ -6,11 +6,13 @@ import { CollectionSelect } from '../../components/FormElements';
 import styles from './CardForm.module.scss'
 import SideView from './SideView'
 import SubmitButton from '../../components/FormElements/SubmitButton'
+import { useHistory } from 'react-router-dom';
 
 
 const CardCreate = () => {
     const {token} = useContext(AuthContext)
-    const {request} = useHttp(token)
+    const {request, error} = useHttp(token)
+    const history = useHistory()
 
     const [collections, setCollections] = useState([])
 
@@ -30,12 +32,13 @@ const CardCreate = () => {
         getCollections()
       }, [])
 
-    const handleSubmit = async () => {
-        try{
-          await request('/api/card', 'PUSH',  JSON.stringify(cardDetail))
-          //setCompleted(true)
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      try{
+          await request('/api/cards', 'POST', cardDetail)
+          history.push('/manage/cards')
         }catch(e){
-          alert(e)
+          console.log(e)
         }
       }
 
