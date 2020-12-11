@@ -1,10 +1,20 @@
 import React, {useContext} from 'react'
+import { useAuth } from '../hooks/auth.hook';
 import FullScreenLoading from '../views/FullScreenLoading';
 
-export const AuthContext = React.createContext();
+
+function noop() {}
+
+export const AuthContext = React.createContext({
+  token: null,
+  userId: null,
+  login: noop,
+  logout: noop,
+  isAuthenticated: false
+})
 
 export const AuthProvider = ({children}) => {
-    const {login, token, userId, logout, ready} = useContext(AuthContext)
+    const {login, token, userId, logout, ready} = useAuth()
     const isAuthenticated = !!token
 
     if(!ready){
@@ -12,6 +22,7 @@ export const AuthProvider = ({children}) => {
             <FullScreenLoading/>
         )
     }
+
     return(
         <AuthContext.Provider value={{
             token, login, logout, userId, isAuthenticated

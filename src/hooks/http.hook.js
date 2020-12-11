@@ -12,7 +12,7 @@ export const useHttp = (token) => {
                 headers['Content-Type'] = 'application/json'
               }
             if(token){
-                headers['Authorisation'] = `Bearer ${token}`
+                headers['Authorization'] = `Bearer ${token}`
             }
             const res = await fetch(url, {method, body, headers})
             const data = await res.json()

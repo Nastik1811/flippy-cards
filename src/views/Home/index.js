@@ -3,14 +3,11 @@ import Statistics from './Statistics'
 import ReviewLinksBoard from './ReviewLinksBoard'
 import ReviewInvitation from './ReviewInvitation'
 import styles from './Home.module.scss'
-import { DataContext } from '../../DataManger'
 import LinkButton from '../../components/LinkButton'
 import Loader from '../../components/Loader'
 
 
  const Home = () => { 
-    const {manager} = useContext(DataContext);
-
     const [userName, setUserName] = useState(null);
     const [isUserNew, setIsUserNew] = useState(true);
     const [total, setTotal] = useState(0)
@@ -19,14 +16,14 @@ import Loader from '../../components/Loader'
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        let cardsLoading = manager.getTotalRepeatNumber().then(setTotal);
-        let nameLoading = manager.getUserName().then(setUserName);
-        let collectionLoading = manager.getCollectionToRepeatPreviews().then(setCollections);
-        let statusLoading = manager.isUserNew().then(setIsUserNew);
+        // let cardsLoading = manager.getTotalRepeatNumber().then(setTotal);
+        // let nameLoading = manager.getUserName().then(setUserName);
+        // let collectionLoading = manager.getCollectionToRepeatPreviews().then(setCollections);
+        // let statusLoading = manager.isUserNew().then(setIsUserNew);
 
-        Promise.all([cardsLoading, nameLoading, collectionLoading, statusLoading]).then(() => setIsLoading(false));
+        // Promise.all([cardsLoading, nameLoading, collectionLoading, statusLoading]).then(() => setIsLoading(false));
 
-    }, [manager])
+    }, [])
 
     return !isLoading ?
         <>

@@ -2,6 +2,11 @@ import React, {useContext, useState, useEffect, useCallback} from 'react'
 import EditorWindow from '../../components/EditorWindow';
 import { useHttp } from '../../hooks/http.hook';
 import { AuthContext } from '../../context/AuthContext';
+import { CollectionSelect } from '../../components/FormElements';
+import styles from './CardForm.module.scss'
+import SideView from './SideView'
+import SubmitButton from '../../components/FormElements/SubmitButton'
+
 
 const CardCreate = () => {
     const {token} = useContext(AuthContext)
@@ -16,7 +21,7 @@ const CardCreate = () => {
     })
 
     useEffect(() => {
-        getCollections = async () => {
+        const getCollections = async () => {
           try{
             const data = await request('/api/collection')
             setCollections(data)
@@ -25,17 +30,17 @@ const CardCreate = () => {
         getCollections()
       }, [])
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         try{
-          await request('/api/card', 'PUSH', cardDetail)
-          setCompleted(true)
+          await request('/api/card', 'PUSH',  JSON.stringify(cardDetail))
+          //setCompleted(true)
         }catch(e){
-          alert(error)
+          alert(e)
         }
       }
 
     return (
-      <EditorWindow caption="New card" onReturn={() => setCompleted(true)}>
+      <EditorWindow caption="New card" onReturn={() => {}}>
         <form onSubmit={handleSubmit} className={styles["form"]}>
           <section className={styles["content-section"]}>
               <SideView 

@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react'
 import CardPreview from './CardPreview'
-import { DataContext } from '../../../DataManger'
 import Panel from '../Panel'
 import ConfirmationDialog from './ConfirmationDialog'
 import ItemsGrid from '../ItemsGrid'
+import { useHttp } from '../../../hooks/http.hook'
+import { AuthContext } from '../../../context/AuthContext'
+import Loader from '../../../components/Loader'
 
 
 const CardsPanel = () => {
-    const {manager} = useContext(DataContext);
     const [cards, setCards] = useState(null);
+    const {token} = useContext(AuthContext)
+    const {request, loading} = useHttp(token)
    
     const [confirmationDetails, setConfirmationDetails] = useState({
         isOpen: false,
@@ -16,21 +19,32 @@ const CardsPanel = () => {
     })
 
     useEffect(() => {
-        let unsubscribe = manager.listenCards(setCards)
-        return unsubscribe;
-    }, [manager]
+        const fetchCards = async () => {
+            try{
+                const data = await request('/api/cards')
+                setCards(data.cards)
+            }catch(e){
+                console.error(e)
+            }
+        }
+        fetchCards()
+        // let unsubscribe = manager.listenCards(setCards)
+        // return unsubscribe;
+    }, []
     )
 
     const confirmDelete = card => {
-        setConfirmationDetails({
-            isOpen:true, 
-            card
-        })
+
+        // setConfirmationDetails({
+        //     isOpen:true, 
+        //     card
+        // })
     }
 
     const handleDelete = () => {
-        manager.deleteCard(confirmationDetails.card.id)
-        closeConfirmation()
+        console.log('delete')
+        // manager.deleteCard(confirmationDetails.card.id)
+        // closeConfirmation()
     }
 
     const closeConfirmation = () => {
@@ -41,7 +55,11 @@ const CardsPanel = () => {
             }
         )
     }
-
+    if(loading){
+        return(
+            <Loader/>
+        )
+    }
     return(<Panel>
             <ItemsGrid newItemUrl={"/card/new"}> 
                 {cards ? 

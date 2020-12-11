@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import CollectionPreview from './CollectionPreview'
-import { DataContext } from '../../../DataManger'
 import Panel from '../Panel'
 import CollectionCreate from '../../CollectionCreate'
 import { Route } from 'react-router-dom'
@@ -8,7 +7,6 @@ import ConfirmationDialog from './ConfirmationDialog'
 import ItemsGrid from '../ItemsGrid'
 
 const CollectionsPanel = () => {
-    const {manager} = useContext(DataContext);
     const [collections, setCollections] = useState(null);
 
     const [confirmationDetails, setConfirmationDetails] = useState({
@@ -17,9 +15,9 @@ const CollectionsPanel = () => {
     })
 
     useEffect(() => {
-        let unsubscribe = manager.listenCollections(setCollections)
-        return (unsubscribe)
-    }, [manager])
+        //let unsubscribe = manager.listenCollections(setCollections)
+        //return (unsubscribe)
+    }, [])
 
     const confirmDelete = collection => {
         setConfirmationDetails({
@@ -29,7 +27,7 @@ const CollectionsPanel = () => {
     }
 
     const handleDelete = (id, withCards) => {
-        manager.deleteCollection(id, withCards)
+        //manager.deleteCollection(id, withCards)
         closeConfirmation()
     }
 

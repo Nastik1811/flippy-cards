@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react'
 import CardItem from './CardItem'
 import { useParams, Redirect } from 'react-router-dom'
 import styles from './CollectionEditor.module.scss'
-import { DataContext } from '../../DataManger'
 import EditorWindow from '../../components/EditorWindow'
 import Loader from '../../components/Loader'
 import {SubmitButton, InputField} from '../../components/FormElements'
@@ -10,7 +9,6 @@ import {SubmitButton, InputField} from '../../components/FormElements'
 
 const CollectionEdit = () => {
     let {id} = useParams();
-    const {manager} = useContext(DataContext);
 
     const [name, setName] = useState("");
     const [cards, setCards] = useState([]);
@@ -20,22 +18,22 @@ const CollectionEdit = () => {
 
 
     useEffect(() => {
-        let nameLoad =  manager.getCollection(id).then(data => setName(data.name));
-        let cardsLoad = manager.getCardsForCollectionEdit(id).then(data => {
-            setCards(data)
-            let states = data.reduce((obj, item) => {
-                return {
-                    ...obj,
-                    [item.id]: item.inCollection
-                }
-            }, {})
-            setCardStates(states)
-        })
-        Promise.all([nameLoad, cardsLoad]).then(() => setIsLoading(false))
-    }, [manager, id])
+        // let nameLoad =  manager.getCollection(id).then(data => setName(data.name));
+        // let cardsLoad = manager.getCardsForCollectionEdit(id).then(data => {
+        //     setCards(data)
+        //     let states = data.reduce((obj, item) => {
+        //         return {
+        //             ...obj,
+        //             [item.id]: item.inCollection
+        //         }
+        //     }, {})
+        //     setCardStates(states)
+        // })
+        // Promise.all([nameLoad, cardsLoad]).then(() => setIsLoading(false))
+    }, [ id])
 
     const handleSubmit = () => {
-        manager.updateCollection(id, name, cardStates)
+        //manager.updateCollection(id, name, cardStates)
         setCompleted(true);
     }
 

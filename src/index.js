@@ -9,16 +9,13 @@ import './assets/fonts/Roboto-Medium.ttf';
 import './assets/fonts/Comfortaa-Regular.ttf';
 import './assets/images/Clouds.png';
 import App from './App'
-import { AuthProvider } from './Auth';
-import { DataProvider } from './DataManger';
+import { AuthProvider } from './context/AuthContext';
 
 ReactDOM.render(
         <AuthProvider>
-            <DataProvider>
-                    <Router>
-                        <App/>
-                    </Router>
-            </DataProvider>
+            <Router>
+                <App/>
+            </Router>
         </AuthProvider>,
      document.getElementById('root'));
 

@@ -1,15 +1,17 @@
 import React, {useContext, useState } from 'react'
-import { DataContext } from '../../DataManger'
 import { withRouter } from 'react-router-dom';
 import Modal, { ModalHeader, ModalContent, ModalMessage, ModalActions, ModalInput } from '../../components/Modal';
+import { useHttp } from '../../hooks/http.hook';
+import { AuthContext } from '../../context/AuthContext';
 
 const CollectionCreate = ({history})  =>{
-    const {manager} = useContext(DataContext);
-    const [name, setName] = useState("");
+    const [name, setName] = useState("")
+    const {token} = useContext(AuthContext)
+    const {request} = useHttp(token)
 
     const handleSubmit = async (event) => {
         try{
-            await manager.addCollection(name);
+            await request('/api/collection', 'POST', {name})
         }
         catch(e){
             alert(e)

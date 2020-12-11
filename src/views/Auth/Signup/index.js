@@ -1,19 +1,20 @@
 import React, {useState} from 'react'
 import styles from '../Auth.module.scss'
 import {SubmitButton, InputField } from '../../../components/FormElements'
+import { useHttp } from '../../../hooks/http.hook'
 
 
 const Signup = () => {
   const {request} = useHttp()
-  const [data, setData] = useState({ email: "", password: "", name: "" })
+  const [data, setData] = useState({ email: "", password: "", username: "" })
 
   const handleSignUp = async (event) => {
     event.preventDefault();
     try {
-        await request('/api/auth/signup', 'POST', {...form})
+        await request('/api/auth/signup', 'POST', {...data})
       } catch (error) {
         alert(error);
-        setData({ email: "", password: "", name: ""})
+        //setData({ email: "", password: "", name: ""})
       }
     }
 
@@ -21,8 +22,8 @@ const Signup = () => {
       <form onSubmit={handleSignUp} className={styles["auth-form"]}>
         <InputField type="text" 
           placeholder="name" 
-          value={data.name}
-          onChange={name => (setData({...data, name}))}
+          value={data.username}
+          onChange={username => (setData({...data, username}))}
           />
         <InputField
           type="email" 

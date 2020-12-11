@@ -1,13 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useParams, Redirect} from 'react-router-dom'
-import { DataContext } from '../../DataManger'
 import Loader from "../../components/Loader"
 import Overview from './Overview'
 import Modal, { ModalMessage, ModalContent, ModalActions } from '../../components/Modal'
 
 const OverviewContainer = () => {
     const {slug} = useParams();
-    const {manager} = useContext(DataContext);
 
 
     const collection_id = slug ? slug : null;
@@ -20,34 +18,34 @@ const OverviewContainer = () => {
     const [showCongrats, setShowCongrats] = useState(false);
 
     useEffect(()=> {
-        manager.getCardsToRecall(collection_id).then(data => {
-            if(data.length !== 0){
-                setCards(data);
-                return data;
-            } else{
-                throw Error;
-            }
-        })
-        .then(data => setLeft(data.length - 1))
-        .catch(() => {
-            alert("There is no cards to repeat.");
-            setIsOver(true)
-        })
-    }, [manager, collection_id])
+        // manager.getCardsToRecall(collection_id).then(data => {
+        //     if(data.length !== 0){
+        //         setCards(data);
+        //         return data;
+        //     } else{
+        //         throw Error;
+        //     }
+        // })
+        // .then(data => setLeft(data.length - 1))
+        // .catch(() => {
+        //     alert("There is no cards to repeat.");
+        //     setIsOver(true)
+        // })
+    }, [ collection_id])
 
     useEffect(() =>{
         setInterval(() => setTime(c => c + 1), 1000);
     }, [])
 
     const handleMarkClick = (mark) => {
-        manager.updateCardProgress(cards[currentCardIndex], mark)
-        if(left !== 0 ){
-            setLeft(left - 1);
-            setCardIndex(currentCardIndex + 1);
-        }
-        else{
-            setShowCongrats(true)
-        }
+        // manager.updateCardProgress(cards[currentCardIndex], mark)
+        // if(left !== 0 ){
+        //     setLeft(left - 1);
+        //     setCardIndex(currentCardIndex + 1);
+        // }
+        // else{
+        //     setShowCongrats(true)
+        // }
     }
 
     if(isOver){

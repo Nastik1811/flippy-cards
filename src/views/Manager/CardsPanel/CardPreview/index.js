@@ -10,7 +10,7 @@ const CardPreview = ({card, onDelete}) => {
                     <button className={styles["delete"]} onClick={onDelete}></button> 
                 </header>
                 <section className={styles["detail"]}>
-                        <p>{card.content.front}</p>
+                        <p>{card.front}</p>
                 </section>
                 <footer className={styles["footer"]}></footer>
             </div>
