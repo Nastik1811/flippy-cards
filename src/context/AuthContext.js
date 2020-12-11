@@ -1,4 +1,4 @@
-import React, {useContext, useMemo} from 'react'
+import React, {useContext} from 'react'
 import FullScreenLoading from '../views/FullScreenLoading';
 
 export const AuthContext = React.createContext();

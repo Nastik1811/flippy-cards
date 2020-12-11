@@ -1,49 +1,71 @@
-import React, {useContext, useState, useEffect} from 'react'
-import { DataContext } from '../../DataManger';
-import {Redirect} from 'react-router-dom'
-import CardForm from '../CardForm';
+import React, {useContext, useState, useEffect, useCallback} from 'react'
 import EditorWindow from '../../components/EditorWindow';
+import { useHttp } from '../../hooks/http.hook';
+import { AuthContext } from '../../context/AuthContext';
 
 const CardCreate = () => {
-    const {manager} = useContext(DataContext);
-    const [completed, setCompleted] = useState(false);
-    const [collections, setCollections] = useState([]);
-  
-    const initialDetails = {
-        content: {
-          front: "", 
-          back: ""
-        },
-        collection: {
-          id: null,
-          name: ""
+    const {token} = useContext(AuthContext)
+    const {request} = useHttp(token)
+
+    const [collections, setCollections] = useState([])
+
+    const [cardDetail, setCardDetail] = useState({
+      front: "",
+      back: "",
+      collection_id: null
+    })
+
+    useEffect(() => {
+        getCollections = async () => {
+          try{
+            const data = await request('/api/collection')
+            setCollections(data)
+          }catch(e){}
+        }     
+        getCollections()
+      }, [])
+
+    const handleSubmit = () => {
+        try{
+          await request('/api/card', 'PUSH', cardDetail)
+          setCompleted(true)
+        }catch(e){
+          alert(error)
         }
       }
-  
-    useEffect(() => {
-        manager.getCollections().then(data => setCollections(data))
-      }, [manager])
-
-    const onSubmit = async (newDetails) => {
-      try {
-        await manager.addCard(newDetails);
-        setCompleted(true)
-      } catch (error) {
-        alert(error);
-      }
-    }
-  
-    if(completed){
-      return <Redirect to="/manage/cards"/>
-    }
 
     return (
       <EditorWindow caption="New card" onReturn={() => setCompleted(true)}>
-        <CardForm 
-            initialDetails={initialDetails} 
-            collections={collections}
-            onSubmit={onSubmit}/>
-      </EditorWindow> )
+        <form onSubmit={handleSubmit} className={styles["form"]}>
+          <section className={styles["content-section"]}>
+              <SideView 
+                side="front" 
+                value={cardDetail.front}
+                onChange={front => setCardDetail(details => ({...details, front}))}
+              />
+              <SideView 
+                side="back" 
+                value={cardDetail.back}
+                onChange={back => setCardDetail(details => ({...details, back}))}
+              />
+            </section>
+
+            <section className={styles["select-section"]}>
+              <label> Set a collection 
+                <CollectionSelect
+                  collections={collections}
+                  value={cardDetail.collection_id} 
+                  onChange={collection_id => setCardDetail(details => ({...details, collection_id}))}
+                  className={styles["select"]}  
+                />
+              </label>
+            </section> 
+
+            <SubmitButton label="Save" className={styles["submit-btn"]} />
+          
+          </form>
+      </EditorWindow> 
+      )
   }
 
   export default CardCreate

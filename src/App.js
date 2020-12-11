@@ -8,7 +8,6 @@ import OverviewContainer from './views/Overview';
 import Home from './views/Home';
 import Auth from './views/Auth';
 import CardCreate from './views/CardCreate';
-import CardEdit from './views/CardEdit';
 import CollectionEditor from './views/CollectionEdit';
 import NotFound from './views/NotFound';
 
@@ -27,7 +26,6 @@ const App = () => {
                     <PrivateRoute exact path='/session' component={OverviewContainer}/>
                     <PrivateRoute exact path='/session/:slug' component={OverviewContainer}/>
                     <PrivateRoute path='/card/new' component={CardCreate}/>
-                    <PrivateRoute path='/card/:id' component={CardEdit}/>
                     <PrivateRoute path='/collection/:id' component={CollectionEditor}/>
                     <Route path="*" component={NotFound}/> 
                 </Switch>
