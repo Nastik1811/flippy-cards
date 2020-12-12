@@ -13,7 +13,7 @@ const Login = () => {
       event.preventDefault();
       try {
         const res = await request('/api/auth/login', 'POST', {...data})
-        login(res.token, res.userId);
+        login(res.token, res.userId, res.username);
       } catch (error) {
         alert(error);
         setData({ email: "", password: "" })

@@ -34,17 +34,22 @@ const CardsPanel = () => {
     )
 
     const confirmDelete = card => {
-
-        // setConfirmationDetails({
-        //     isOpen:true, 
-        //     card
-        // })
+        setConfirmationDetails({
+            isOpen:true, 
+            card
+        })
     }
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
         console.log('delete')
-        // manager.deleteCard(confirmationDetails.card.id)
-        // closeConfirmation()
+        try{
+            //await???
+            request(`/api/cards/${confirmationDetails.card.id}`, 'DELETE')
+        }catch(e){
+            alert(e)
+        }finally{
+            closeConfirmation()
+        }
     }
 
     const closeConfirmation = () => {

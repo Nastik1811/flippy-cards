@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import CollectionPreview from './CollectionPreview'
 import Panel from '../Panel'
 import CollectionCreate from '../../CollectionCreate'
-import { Route } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 import ConfirmationDialog from './ConfirmationDialog'
 import ItemsGrid from '../ItemsGrid'
 import { useHttp } from '../../../hooks/http.hook'
@@ -18,6 +18,7 @@ const CollectionsPanel = () => {
         isOpen: false,
         collection: null
     })
+
 
     useEffect(() => {
         const fetchCollections = async () => {
@@ -40,8 +41,8 @@ const CollectionsPanel = () => {
         })
     }
 
-    const handleDelete = (id, withCards) => {
-        //manager.deleteCollection(id, withCards)
+    const handleDelete = async (id, withCards) => {
+        await request(`/api/collections/${id}`, 'DELETE')
         closeConfirmation()
     }
 
@@ -53,6 +54,7 @@ const CollectionsPanel = () => {
             }
         )
     }
+
     if(loading){
         return <Loader/>
     }
@@ -64,7 +66,7 @@ const CollectionsPanel = () => {
                     collections.map(c =>
                          <CollectionPreview collection={c} key={c.id} onDelete={() => confirmDelete(c)} />) 
                     : null
-                    }
+                }
             </ItemsGrid>
             <Route path='/manage/collections/new'>
                 <CollectionCreate/>

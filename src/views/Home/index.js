@@ -5,37 +5,39 @@ import ReviewInvitation from './ReviewInvitation'
 import styles from './Home.module.scss'
 import LinkButton from '../../components/LinkButton'
 import Loader from '../../components/Loader'
+import { AuthContext } from '../../context/AuthContext'
+import { useHttp } from '../../hooks/http.hook'
 
 
  const Home = () => { 
-    const [userName, setUserName] = useState(null);
-    const [isUserNew, setIsUserNew] = useState(true);
-    const [total, setTotal] = useState(0)
-    const [collections, setCollections] = useState(null);
+    const {username, token} = useContext(AuthContext)
+    const {request} = useHttp(token)
 
-    const [isLoading, setIsLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
+    const [total, setTotal] = useState(0)
+    const [collections, setCollections] = useState(null)
 
     useEffect(() => {
-        // let cardsLoading = manager.getTotalRepeatNumber().then(setTotal);
-        // let nameLoading = manager.getUserName().then(setUserName);
-        // let collectionLoading = manager.getCollectionToRepeatPreviews().then(setCollections);
-        // let statusLoading = manager.isUserNew().then(setIsUserNew);
+        const collectionsRequest = request('/api/collections/needReview').then(setCollections)
+        const cardsnRequest = request('/api/cards/count').then(res => setTotal(res.count))
+        Promise.all([cardsnRequest, collectionsRequest]).then(() => setLoading(false))
+    }, [request])
 
-        // Promise.all([cardsLoading, nameLoading, collectionLoading, statusLoading]).then(() => setIsLoading(false));
+    if(loading){
+        return(
+            <Loader/>
+        )
+    }
 
-    }, [])
-
-    return !isLoading ?
+    return (
         <>
             <section className={styles["main-section"]}>
                 <LinkButton url="/card/new" className={styles["add-btn"]} label="Add card"/>
-                <ReviewInvitation userName={userName} total={total} isUserNew={isUserNew}/>
+                <ReviewInvitation username={username} total={total} />
             </section>
             <ReviewLinksBoard collections={collections}/>
             <Statistics/>
-        </> :
-        <Loader/>
-    ;
+        </> ) 
 }
 
 

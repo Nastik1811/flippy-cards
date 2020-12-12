@@ -9,7 +9,7 @@ const ReviewLinksBoard = ({collections}) => {
         <section className={styles["collecions"]}>
                 <header>You can choose a collecion if you want</header>
                 <div className={styles["links-board"]}>
-                    {collections.map(c => <ReviewLink slug={c.id} name={c.name} cards={c.amount} key={c.id}/>)}
+                    {collections.map(c => <ReviewLink slug={c.id} name={c.name} cards={c.cards_number} key={c.id}/>)}
                     <div className={styles["link-container"]}>
                         <Link to="/manage" className={styles["manage-btn"]}>Manage <wbr/> collections</Link>
                     </div>

@@ -16,15 +16,11 @@ const CollectionCreate = ()  =>{
         }
         catch(e){
             alert(e)
-        }
-        finally{
-            setName("")
-            goBack();
+        }finally{
+            goBack()
         }
     }
-
-    const goBack = () => history.push("/manage/collections");
-    
+    const goBack = () => history.push("/manage/collections");    
     return(
         <Modal onDismiss={goBack}>
             <ModalHeader title="Create collection"/>
