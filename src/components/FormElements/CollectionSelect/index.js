@@ -14,7 +14,7 @@ const CollectionSelect = ({collections, value, onChange, className}) => {
     return(
           <select value={value ? value : ""} onChange={handleChange} className={className}>
             <option value="">None</option>
-            {collections.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
+            {collections.length && collections.map(c => <option value={c.id} key={c.id}>{c.name}</option>)}
           </select>
     )
   }

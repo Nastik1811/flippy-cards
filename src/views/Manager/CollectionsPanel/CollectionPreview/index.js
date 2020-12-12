@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './CollectionPreview.module.scss'
 const CollectionPreview = ({collection, onDelete}) => {
-    const edited = collection.last_edit.toDate().toLocaleDateString('en-EN', {year: 'numeric', month: 'long', day: 'numeric' });
+    const created = collection.created;
 
     return(
             <div className={styles["collection-preview"]}>
@@ -13,7 +13,7 @@ const CollectionPreview = ({collection, onDelete}) => {
             <section className={styles["detail"]}>
                 {collection.name}
             </section>
-            <footer className={styles["footer"]}>{edited}</footer>
+            <footer className={styles["footer"]}>{created}</footer>
         </div>
         
     )

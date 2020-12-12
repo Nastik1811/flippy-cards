@@ -25,8 +25,8 @@ const CardCreate = () => {
     useEffect(() => {
         const getCollections = async () => {
           try{
-            const data = await request('/api/collection')
-            setCollections(data)
+            const data = await request('/api/collections')
+            setCollections(data.collections)
           }catch(e){}
         }     
         getCollections()

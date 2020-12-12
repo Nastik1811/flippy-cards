@@ -4,12 +4,11 @@ import Loader from '../../../components/Loader'
 import LinkButton from '../../../components/LinkButton'
 
 const ItemsGrid = ({newItemUrl, children}) => {
-    return children ?
+    return(
         <div className={styles["panel"]}>
             <LinkButton url={newItemUrl}  className={styles["to_new"]} label="+"/>
             {children}
-        </div> : 
-        <Loader/>
+        </div>)
     
 }
 

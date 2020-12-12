@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import CollectionPreview from './CollectionPreview'
 import Panel from '../Panel'
 import CollectionCreate from '../../CollectionCreate'
 import { Route } from 'react-router-dom'
 import ConfirmationDialog from './ConfirmationDialog'
 import ItemsGrid from '../ItemsGrid'
+import { useHttp } from '../../../hooks/http.hook'
+import { AuthContext } from '../../../context/AuthContext'
+import Loader from '../../../components/Loader'
 
 const CollectionsPanel = () => {
-    const [collections, setCollections] = useState(null);
+    const [collections, setCollections] = useState(null)
+    const {token} = useContext(AuthContext)
+    const {request, loading} = useHttp(token)
 
     const [confirmationDetails, setConfirmationDetails] = useState({
         isOpen: false,
@@ -15,6 +20,15 @@ const CollectionsPanel = () => {
     })
 
     useEffect(() => {
+        const fetchCollections = async () => {
+            try{
+                const data = await request('/api/collections')
+                setCollections(data.collections)
+            }catch(e){
+                console.error(e)
+            }
+        }
+        fetchCollections()
         //let unsubscribe = manager.listenCollections(setCollections)
         //return (unsubscribe)
     }, [])
@@ -39,6 +53,9 @@ const CollectionsPanel = () => {
             }
         )
     }
+    if(loading){
+        return <Loader/>
+    }
 
     return (
         <Panel>
@@ -49,7 +66,9 @@ const CollectionsPanel = () => {
                     : null
                     }
             </ItemsGrid>
-            <Route path='/manage/collections/new' render={CollectionCreate}/>
+            <Route path='/manage/collections/new'>
+                <CollectionCreate/>
+            </Route>
             <ConfirmationDialog 
                 isOpen={confirmationDetails.isOpen} 
                 collection={confirmationDetails.collection} 
