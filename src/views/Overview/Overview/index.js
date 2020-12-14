@@ -43,7 +43,7 @@ const Overview = ({name, left, currentCard, onMarkClick , time, onTick}) => {
                     </div>
 
                     <Card 
-                        card={currentCard.content} 
+                        card={currentCard} 
                         onClick={() => {
                             setFlipped(true)
                             setVisible(true)

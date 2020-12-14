@@ -19,7 +19,7 @@ import { useHttp } from '../../hooks/http.hook'
 
     useEffect(() => {
         const collectionsRequest = request('/api/collections/needReview').then(setCollections)
-        const cardsnRequest = request('/api/cards/count').then(res => setTotal(res.count))
+        const cardsnRequest = request('/api/cards?needReview=true').then(res => setTotal(res.cards.length))
         Promise.all([cardsnRequest, collectionsRequest]).then(() => setLoading(false))
     }, [request])
 
