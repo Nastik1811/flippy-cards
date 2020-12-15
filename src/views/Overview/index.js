@@ -25,18 +25,21 @@ const OverviewContainer = () => {
 
     useEffect(()=> {
         const fetchCards = async () => {
-            const data = await request(`/api/cards?needReview=true&collection_id=${slug ? slug : ""}`)
-            if(data.length){
-                throw new Error({message: "There is no cards to repeat."})
+            try{
+                const data = await request(`/api/cards?needReview=true&collection_id=${slug ? slug : ""}`)
+                
+                if(!data.cards.length){
+                    throw new Error("There is no cards to repeat.")
+                }
+                setCards(data.cards)
+            }catch(e){
+                alert(e.message);
+                throw e
             }
-            setCards(data.cards)
-            
         }
-        try{
-            fetchCards()
-        }catch(e){
-            alert(e.message);
-        }
+        
+        fetchCards().catch(e => history.push('/home'))
+
     }, [slug])
 
     useEffect(() =>{
@@ -44,21 +47,25 @@ const OverviewContainer = () => {
         return clearInterval
     }, [])
 
-    const handleMarkClick = async (mark) => {
-        request('/api/cards', PUT, {})
-        // manager.updateCardProgress(cards[currentCardIndex], mark)
+    const handleMarkClick = (mark) => {
+        //updateCardProgress()
+        request('/api/cards/progress', 'PUT', {card: cards[currentCardIndex], mark}).then(
+            console.log
+        )
         if(currentCardIndex !== cards.length - 1){
-            setCardIndex(currentCardIndex + 1);
+            setCardIndex(i => i + 1);
         }
         else{
             setShowCongrats(true)
         }
     }
 
+
+
     const updateCardProgress = async (id, newStatus, nextReviewDate) => {
-        request(`/api/cards/${id}`, PUT, {
-            newStatus, nextReviewDate
-        })
+        // request(`/api/cards/${id}/progress`, PUT, {
+        //     newStatus, nextReviewDate
+        // })
     }
 
     const finishReview = () => history.push('/home')
@@ -66,6 +73,7 @@ const OverviewContainer = () => {
     if(!cards){
         return <Loader/>
     }
+
     if(showCongrats){
         return(
             <Modal onDismiss={finishReview}>

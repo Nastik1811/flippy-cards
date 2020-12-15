@@ -41,9 +41,19 @@ const CollectionsPanel = () => {
         })
     }
 
-    const handleDelete = async (id, withCards) => {
-        await request(`/api/collections/${id}`, 'DELETE')
-        closeConfirmation()
+    const handleDelete = async (id, includeCards) => {
+        try{
+            if(includeCards){
+                await request(`/api/cards?collectionId=${id}`, 'DELETE')
+            }
+            await request(`/api/collections/${id}`, 'DELETE')
+            setCollections(data => data.filter(c => c.id !== id))
+        }catch(e){
+            alert(e.message)
+        }finally{
+            closeConfirmation()
+        }
+        
     }
 
     const closeConfirmation = () => {
@@ -69,7 +79,7 @@ const CollectionsPanel = () => {
                 }
             </ItemsGrid>
             <Route path='/manage/collections/new'>
-                <CollectionCreate/>
+                <CollectionCreate onCreate={(collection) => setCollections(data => [...data, collection])}/>
             </Route>
             <ConfirmationDialog 
                 isOpen={confirmationDetails.isOpen} 

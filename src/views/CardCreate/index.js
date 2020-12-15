@@ -35,15 +35,18 @@ const CardCreate = () => {
     const handleSubmit = async (e) => {
       e.preventDefault()
       try{
+          if(!cardDetail.front || !cardDetail.back){
+            throw new Error("Both side of a card should contain some text!")
+          }
           await request('/api/cards', 'POST', cardDetail)
           history.push('/manage/cards')
         }catch(e){
-          console.log(e)
+          alert(e)
         }
       }
 
     return (
-      <EditorWindow caption="New card" onReturn={() => {}}>
+      <EditorWindow caption="New card" onReturn={() => {history.goBack()}}>
         <form onSubmit={handleSubmit} className={styles["form"]}>
           <section className={styles["content-section"]}>
               <SideView 

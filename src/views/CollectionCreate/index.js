@@ -4,7 +4,7 @@ import Modal, { ModalHeader, ModalContent, ModalMessage, ModalActions, ModalInpu
 import { useHttp } from '../../hooks/http.hook';
 import { AuthContext } from '../../context/AuthContext';
 
-const CollectionCreate = ()  =>{
+const CollectionCreate = ({onCreate})  =>{
     const [name, setName] = useState("")
     const {token} = useContext(AuthContext)
     const {request} = useHttp(token)
@@ -12,7 +12,8 @@ const CollectionCreate = ()  =>{
 
     const handleSubmit = async () => {
         try{
-            await request('/api/collections', 'POST', {name})
+            const {collection} = await request('/api/collections', 'POST', {name})
+            onCreate(collection)
         }
         catch(e){
             alert(e)

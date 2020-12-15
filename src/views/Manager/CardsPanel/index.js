@@ -41,10 +41,10 @@ const CardsPanel = () => {
     }
 
     const handleDelete = async () => {
-        console.log('delete')
         try{
-            //await???
-            request(`/api/cards/${confirmationDetails.card.id}`, 'DELETE')
+            const {id} = await request(`/api/cards/${confirmationDetails.card.id}`, 'DELETE')
+            console.log(id)
+            setCards(data => data.filter(c => c.id !== id))
         }catch(e){
             alert(e)
         }finally{
