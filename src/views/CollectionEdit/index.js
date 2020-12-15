@@ -16,7 +16,6 @@ const CollectionEdit = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [completed, setCompleted] = useState(false);
 
-
     useEffect(() => {
         // let nameLoad =  manager.getCollection(id).then(data => setName(data.name));
         // let cardsLoad = manager.getCardsForCollectionEdit(id).then(data => {

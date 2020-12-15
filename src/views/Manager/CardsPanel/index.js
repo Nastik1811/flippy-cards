@@ -66,7 +66,7 @@ const CardsPanel = () => {
         )
     }
     return(<Panel>
-            <ItemsGrid newItemUrl={"/card/new"}> 
+            <ItemsGrid newItemUrl={"/card"}> 
                 {cards ? 
                     cards.map(c => <CardPreview card={c} key={c.id} onDelete={() => confirmDelete(c)}/>) 
                     : null}

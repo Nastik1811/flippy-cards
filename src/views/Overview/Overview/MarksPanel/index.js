@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './MarksPanel.module.scss'
-import { MARK } from '../../../../DataManger'
+import { MARK } from '../..'
 
 const MarksPanel = ({onClick}) => {
     return(

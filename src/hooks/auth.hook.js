@@ -32,7 +32,7 @@ export const useAuth = () => {
     }
 
     if (data && data.token) {
-        login(data.token, data.userId)
+        login(data.token, data.userId, data.username)
     }
     setReady(true)
   }, [login])

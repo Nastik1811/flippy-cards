@@ -16,6 +16,7 @@ export const useHttp = (token) => {
             }
             const res = await fetch(url, {method, body, headers})
             const data = await res.json()
+
             
             if(!res.ok){
                 throw new Error(data.message || "Something went wrong")

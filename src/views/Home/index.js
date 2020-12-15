@@ -32,7 +32,7 @@ import { useHttp } from '../../hooks/http.hook'
     return (
         <>
             <section className={styles["main-section"]}>
-                <LinkButton url="/card/new" className={styles["add-btn"]} label="Add card"/>
+                <LinkButton url="/card" className={styles["add-btn"]} label="Add card"/>
                 <ReviewInvitation username={username} total={total} />
             </section>
             <ReviewLinksBoard collections={collections}/>

@@ -6,20 +6,21 @@ import { CollectionSelect } from '../../components/FormElements';
 import styles from './CardForm.module.scss'
 import SideView from './SideView'
 import SubmitButton from '../../components/FormElements/SubmitButton'
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 
 const CardCreate = () => {
     const {token} = useContext(AuthContext)
-    const {request, error} = useHttp(token)
+    const {id} = useParams()
+    const {request} = useHttp(token)
     const history = useHistory()
 
     const [collections, setCollections] = useState([])
-
+    
     const [cardDetail, setCardDetail] = useState({
       front: "",
       back: "",
-      collection_id: null
+      collection_id: ""
     })
 
     useEffect(() => {
@@ -31,6 +32,20 @@ const CardCreate = () => {
         }     
         getCollections()
       }, [])
+    
+    useEffect(() => {
+      const getCard = async () => {
+        try{
+          const data = await request(`/api/cards/${id}`)
+          setCardDetail({front: data.card.front, back: data.card.back, collection_id: data.card.collection_id || ""})
+        }catch(e){
+          alert(e.message)
+          history.goBack()
+        }
+      }
+         
+      id && getCard()
+    }, [id])
 
     const handleSubmit = async (e) => {
       e.preventDefault()
@@ -38,7 +53,7 @@ const CardCreate = () => {
           if(!cardDetail.front || !cardDetail.back){
             throw new Error("Both side of a card should contain some text!")
           }
-          await request('/api/cards', 'POST', cardDetail)
+          id ?  await request(`/api/cards/${id}`, 'PUT', cardDetail) : await request('/api/cards', 'POST', cardDetail)
           history.push('/manage/cards')
         }catch(e){
           alert(e)

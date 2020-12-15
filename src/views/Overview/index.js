@@ -36,8 +36,7 @@ const OverviewContainer = () => {
                 alert(e.message);
                 throw e
             }
-        }
-        
+        }    
         fetchCards().catch(e => history.push('/home'))
 
     }, [slug])

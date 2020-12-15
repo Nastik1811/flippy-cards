@@ -19,7 +19,6 @@ const CollectionsPanel = () => {
         collection: null
     })
 
-
     useEffect(() => {
         const fetchCollections = async () => {
             try{
@@ -30,8 +29,6 @@ const CollectionsPanel = () => {
             }
         }
         fetchCollections()
-        //let unsubscribe = manager.listenCollections(setCollections)
-        //return (unsubscribe)
     }, [])
 
     const confirmDelete = collection => {

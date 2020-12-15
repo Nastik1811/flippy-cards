@@ -10,8 +10,7 @@ import Auth from './views/Auth';
 import CardCreate from './views/CardCreate';
 import CollectionEditor from './views/CollectionEdit';
 import NotFound from './views/NotFound';
-
-
+import SnowOverlay from './components/SnowOverlay';
 
 const App = () => {
     return (
@@ -23,13 +22,13 @@ const App = () => {
                     <Route path='/auth' component={Auth}/>
                     <PrivateRoute path='/home' component={Home}/>
                     <PrivateRoute path ='/manage' component={Manager}/> 
-                    <PrivateRoute exact path='/session' component={OverviewContainer}/>
-                    <PrivateRoute exact path='/session/:slug' component={OverviewContainer}/>
-                    <PrivateRoute path='/card/new' component={CardCreate}/>
+                    <PrivateRoute exact path='/session/:slug?' component={OverviewContainer}/>
+                    <PrivateRoute path='/card/:id?' component={CardCreate}/>
                     <PrivateRoute path='/collection/:id' component={CollectionEditor}/>
                     <Route path="*" component={NotFound}/> 
                 </Switch>
             </div>
+            <SnowOverlay/>
         </div>
     )
 }
